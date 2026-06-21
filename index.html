@@ -140,6 +140,36 @@
     color: var(--blue);
   }
 
+  /* ── FILTROS CIDADE ── */
+  .filters-row {
+    padding: 0 48px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .filters-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-sep {
+    width: 100%;
+    height: 1px;
+    background: rgba(20,168,244,0.06);
+    margin: 2px 0;
+  }
+  .filter-btn-cidade {
+    background: rgba(0,183,255,0.06);
+    border-color: rgba(0,183,255,0.18);
+    color: var(--muted);
+  }
+  .filter-btn-cidade:hover, .filter-btn-cidade.active {
+    background: rgba(0,183,255,0.15);
+    border-color: var(--elec);
+    color: var(--elec);
+  }
+
   /* ── STATS ── */
   .stats {
     padding: 0 48px 40px;
@@ -454,7 +484,7 @@
   }
 
   @media (max-width: 640px) {
-    header, .hero, .filters, .stats, .gallery-section, footer { padding-left: 20px; padding-right: 20px; }
+    header, .hero, .filters-row, .stats, .gallery-section, footer { padding-left: 20px; padding-right: 20px; }
     .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     .stats { gap: 16px; }
   }
@@ -493,14 +523,21 @@
   </div>
 </div>
 
-<div class="filters" id="filters-bar">
-  <span class="filter-label">Filtrar:</span>
-  <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Todos</button>
-  <button class="filter-btn" data-filter="blog" onclick="setFilter('blog', this)">Blog</button>
-  <button class="filter-btn" data-filter="evento" onclick="setFilter('evento', this)">Evento</button>
-  <button class="filter-btn" data-filter="palestrante" onclick="setFilter('palestrante', this)">Palestrante</button>
-  <button class="filter-btn" data-filter="patrocinador" onclick="setFilter('patrocinador', this)">Patrocinador</button>
-  <button class="filter-btn" data-filter="cidade" onclick="setFilter('cidade', this)">Cidade</button>
+<div class="filters-row" id="filters-bar">
+  <div class="filters-group" id="filters-tipo">
+    <span class="filter-label">Tipo:</span>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Todos</button>
+    <button class="filter-btn" data-filter="blog" onclick="setFilter('blog', this)">Blog</button>
+    <button class="filter-btn" data-filter="evento" onclick="setFilter('evento', this)">Evento</button>
+    <button class="filter-btn" data-filter="palestrante" onclick="setFilter('palestrante', this)">Palestrante</button>
+    <button class="filter-btn" data-filter="patrocinador" onclick="setFilter('patrocinador', this)">Patrocinador</button>
+    <button class="filter-btn" data-filter="cidade" onclick="setFilter('cidade', this)">Cidade</button>
+  </div>
+  <div class="filter-sep"></div>
+  <div class="filters-group" id="filters-cidade" style="display:none">
+    <span class="filter-label">🏙️ Cidade:</span>
+    <button class="filter-btn filter-btn-cidade active" data-cidade="all" onclick="setCidadeFilter('all', this)">Todas</button>
+  </div>
 </div>
 
 <section class="gallery-section">
@@ -544,6 +581,7 @@
 <script>
 let allArtes = [];
 let currentFilter = 'all';
+let currentCidade = 'all';
 
 const TIPO_LABELS = {
   blog: 'Blog',
@@ -560,10 +598,42 @@ async function loadArtes() {
     allArtes = await res.json();
     allArtes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     renderStats();
+    renderCidadeFilters();
     renderGrid(allArtes);
   } catch(e) {
     console.warn('artes.json não encontrado ainda.');
   }
+}
+
+function renderCidadeFilters() {
+  const cidades = [...new Set(allArtes.map(a => a.cidade).filter(c => c && c.trim() !== ''))].sort();
+  const bar = document.getElementById('filters-cidade');
+  if (cidades.length === 0) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  // remove botões velhos exceto o "Todas"
+  [...bar.querySelectorAll('[data-cidade]:not([data-cidade="all"])')].forEach(b => b.remove());
+  cidades.forEach(cidade => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn filter-btn-cidade';
+    btn.dataset.cidade = cidade;
+    btn.textContent = cidade;
+    btn.onclick = () => setCidadeFilter(cidade, btn);
+    bar.appendChild(btn);
+  });
+}
+
+function setCidadeFilter(cidade, btn) {
+  currentCidade = cidade;
+  document.querySelectorAll('[data-cidade]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  let filtered = allArtes;
+  if (currentFilter !== 'all') filtered = filtered.filter(a => a.tipo === currentFilter);
+  if (currentCidade !== 'all') filtered = filtered.filter(a => a.cidade === currentCidade);
+  renderGrid(filtered);
 }
 
 function renderStats() {
@@ -611,10 +681,13 @@ function renderGrid(artes) {
 
 function setFilter(tipo, btn) {
   currentFilter = tipo;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = tipo === 'all' ? allArtes : allArtes.filter(a => a.tipo === tipo);
-  renderGrid(filtered);
+  // mostrar filtro de cidade só quando tipo 'cidade' selecionado, ou sempre se tiver cidades
+  const cidadeBar = document.getElementById('filters-cidade');
+  const temCidades = allArtes.some(a => a.cidade && a.cidade.trim() !== '');
+  if (temCidades) cidadeBar.style.display = 'flex';
+  applyFilters();
 }
 
 function openModal(slug, arte) {
