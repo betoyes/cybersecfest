@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CybersecFEST — Galeria de Artes</title>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1007,7 +1008,7 @@ function openModal(slug, arte) {
   document.getElementById('modal-actions').innerHTML = `
     <a class="btn-action btn-view" href="artes/${slug}/" target="_blank">↗ Página da arte</a>
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ HTML</a>
-    ${arte.image_path ? `<a class="btn-action btn-dl" href="${arte.image_path}" download="cybersecfest_${slug}.png">↓ PNG</a>` : ''}
+    <button class="btn-action btn-dl" id="btn-download-png" onclick="downloadArtePNG('${slug}')">↓ PNG</button>
   `;
   const metaEl = document.getElementById('modal-meta');
   const rows = [];
@@ -1039,6 +1040,42 @@ function copyCaption() {
     btn.classList.add('copied'); btn.textContent = '✓ Copiado!';
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘ Copiar'; }, 2000);
   });
+}
+
+async function downloadArtePNG(slug) {
+  const btn = document.getElementById('btn-download-png');
+  const original = btn.textContent;
+  btn.textContent = '⏳ Gerando...';
+  btn.disabled = true;
+
+  try {
+    const iframe = document.getElementById('modal-iframe');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    const artCanvas = iframeDoc.querySelector('.art-canvas');
+
+    if (!artCanvas) throw new Error('Canvas não encontrado');
+
+    const canvas = await html2canvas(artCanvas, {
+      useCORS: true,
+      allowTaint: true,
+      scale: 2,
+      backgroundColor: '#02050A',
+      logging: false,
+    });
+
+    const link = document.createElement('a');
+    link.download = `cybersecfest_${slug}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    console.warn('html2canvas falhou, usando fallback:', e);
+    // fallback: abre arte.html em nova aba para salvar manualmente
+    window.open(`artes/${slug}/arte.html`, '_blank');
+    alert('Para salvar: clique com botão direito na arte e "Salvar imagem como".');
+  } finally {
+    btn.textContent = original;
+    btn.disabled = false;
+  }
 }
 
 function closeModal(e) {
