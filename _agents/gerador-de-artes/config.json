@@ -1,0 +1,116 @@
+{
+  "id": "3ae0829d-a05d-471a-aace-7af889c28ccb",
+  "name": "CybersecFEST — Gerador de Artes",
+  "description": "Gera posts para feed do CybersecFEST com imagem IA + HTML final + legenda + upload GitHub. v2.2: validação em duas etapas (pré + pós) para rastreamento de erros, rotação inteligente de layouts e score automático de legenda.",
+  "formFields": [
+    {
+      "id": "tipo_post",
+      "type": "select",
+      "options": [
+        {
+          "label": "Conteúdo / Blog",
+          "value": "blog"
+        },
+        {
+          "label": "Campanha / Evento",
+          "value": "evento"
+        },
+        {
+          "label": "Palestrante / Embaixador",
+          "value": "palestrante"
+        },
+        {
+          "label": "Patrocinador",
+          "value": "patrocinador"
+        },
+        {
+          "label": "Cidade / Localidade",
+          "value": "cidade"
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": "logo_position",
+      "type": "select",
+      "options": [
+        {
+          "label": "Acima da headline (padrão editorial)",
+          "value": "above_headline"
+        },
+        {
+          "label": "Topo esquerdo (posição clássica)",
+          "value": "top_left"
+        }
+      ],
+      "required": true,
+      "default_value": "above_headline"
+    },
+    {
+      "id": "headline",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "id": "subtitulo",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "id": "palavras_azuis",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "nome_palestrante",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "cargo_empresa",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "contexto_visual",
+      "type": "textarea",
+      "required": true
+    },
+    {
+      "id": "referencias",
+      "type": "files",
+      "required": false
+    },
+    {
+      "id": "formato",
+      "type": "select",
+      "options": [
+        {
+          "label": "Feed Vertical — 1080×1350 (Instagram)",
+          "value": "feed_vertical"
+        },
+        {
+          "label": "Feed Quadrado — 1080×1080",
+          "value": "feed_quadrado"
+        },
+        {
+          "label": "LinkedIn Horizontal — 1200×628",
+          "value": "linkedin"
+        }
+      ],
+      "required": true,
+      "default_value": "feed_vertical"
+    },
+    {
+      "id": "cidade",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "categoria_patrocinador",
+      "type": "string",
+      "required": false
+    }
+  ],
+  "persistFields": []
+}
