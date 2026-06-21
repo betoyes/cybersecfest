@@ -1,5 +1,20 @@
 # CybersecFEST — Changelog dos Agentes
 
+## [gallery-fix] — 2026-06-21 — Galeria (index.html)
+### Corrigido
+- thumb.png diagnosticado: contém só o fundo da IA (sem texto/overlay)
+- Adicionado suporte a modo embed em todos os arte.html:
+  - ?embed na URL esconde #topbar e .ep via classe CSS 'embed' no <html>
+  - CSS inline: .embed #topbar, .embed .ep {display:none}, #ca sem padding
+  - Script inline no <head> detecta URL e aplica classe antes do render
+- index.html: iframes criados programaticamente (onload ANTES do src)
+  - Sem loading=lazy para garantir disparo do evento
+  - scaleCardFrame() escala iframe 540px→largura do card
+  - Modal também usa iframe?embed com scaleModalArt() no onload
+### Pendente
+- Gerador de Artes: corrigir geração de thumb.png para capturar .art-canvas
+  completo via dom-to-image (fundo + overlay + texto + logos)
+
 ## [2.6.0] — 2026-06-21 — Gerador de Artes (Editor Visual)
 ### Adicionado
 - Editor Visual embutido em todos os arte.html gerados
