@@ -175,15 +175,102 @@
     margin-top: 12px; font-size: 9px;
     color: #94A0B8; letter-spacing: 0.1em; text-align: center;
   }
+
+/* ═══ EDITOR VISUAL v2.6 ════════════════════════════════════════════════════ */
+#canvas-col {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 40px 24px 40px 40px; flex-shrink: 0;
+}
+#editor-panel {
+  width: 260px; min-width: 260px; min-height: 100vh;
+  background: #0c0c18; border-left: 1px solid rgba(255,255,255,.07);
+  padding: 0; overflow-y: auto; display: flex; flex-direction: column;
+  font-family: 'Montserrat', sans-serif; flex-shrink: 0;
+}
+.ep-header {
+  background: #070710; padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.ep-logo { color: #14A8F4; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.ep-badge {
+  background: rgba(20,168,244,.12); border: 1px solid rgba(20,168,244,.25);
+  color: #14A8F4; font-size: 9px; font-weight: 700; letter-spacing: .08em;
+  padding: 3px 8px; text-transform: uppercase;
+}
+.ep-section { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.ep-section-title {
+  font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.3); margin-bottom: 13px;
+}
+.ep-control { margin-bottom: 13px; }
+.ep-control:last-child { margin-bottom: 0; }
+.ep-control label {
+  display: block; font-size: 10.5px; color: rgba(255,255,255,.45);
+  margin-bottom: 5px; font-weight: 600; letter-spacing: .02em;
+}
+.ep-row { display: flex; align-items: center; gap: 8px; }
+.ep-control input[type=range] { width: 100%; accent-color: #14A8F4; cursor: pointer; }
+.ep-val { font-size: 10px; color: rgba(255,255,255,.35); min-width: 34px; text-align: right; flex-shrink: 0; }
+.ep-toggle-row { display: flex; align-items: center; justify-content: space-between; }
+.ep-btn-toggle {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.4); font-size: 10px; font-weight: 700;
+  padding: 4px 14px; cursor: pointer; border-radius: 4px; font-family: inherit;
+  letter-spacing: .05em; transition: all .15s;
+}
+.ep-btn-toggle.active { background: rgba(20,168,244,.18); border-color: rgba(20,168,244,.45); color: #14A8F4; }
+.ep-color-row { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+.ep-color-row input[type=color] {
+  width: 36px; height: 30px; border: 1px solid rgba(255,255,255,.12);
+  border-radius: 4px; background: none; cursor: pointer; padding: 2px; flex-shrink: 0;
+}
+.ep-color-row input[type=text] {
+  flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  color: #F6F8FF; padding: 5px 8px; font-size: 12px; font-family: monospace;
+  border-radius: 4px; outline: none;
+}
+.ep-color-row input[type=text]:focus { border-color: #14A8F4; }
+.ep-select {
+  width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  color: #F6F8FF; padding: 6px 8px; font-size: 11px; font-family: inherit;
+  border-radius: 4px; cursor: pointer; outline: none;
+}
+.ep-select:focus { border-color: #14A8F4; }
+.ep-seg { display: flex; gap: 4px; margin-top: 6px; }
+.ep-seg-btn {
+  flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.4); font-size: 10.5px; font-weight: 700; padding: 6px 4px;
+  cursor: pointer; border-radius: 4px; font-family: inherit; transition: all .15s; text-align: center;
+}
+.ep-seg-btn.active { background: rgba(20,168,244,.18); border-color: rgba(20,168,244,.45); color: #14A8F4; }
+.ep-seg-btn:hover:not(.active) { background: rgba(255,255,255,.09); color: rgba(255,255,255,.7); }
+.ep-actions { display: flex; gap: 8px; flex-direction: column; padding: 16px 18px 28px; margin-top: auto; }
+.ep-btn {
+  width: 100%; padding: 10px; font-family: inherit; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all .15s;
+}
+.ep-btn-sec { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.5); }
+.ep-btn-sec:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); }
+.ep-btn-pri { background: rgba(20,168,244,.15); border: 1px solid rgba(20,168,244,.4); color: #14A8F4; }
+.ep-btn-pri:hover { background: rgba(20,168,244,.28); }
+@media print {
+  #editor-panel { display: none !important; }
+  #canvas-col { padding: 0 !important; }
+  body { flex-direction: column !important; align-items: center !important; }
+}
 </style>
 </head>
-<body>
+<body style="flex-direction:row!important;align-items:flex-start!important;padding:0!important;">
+<div id="canvas-col">
+
 
 <div class="label">Arte Final — Aguardando Aprovação</div>
 
 <div class="art-canvas">
-  <img class="art-bg" src="premium_social_media_post_for_cybersecfe_2246b567.png" alt="Arte">
-  <div class="art-overlay"></div>
+  <img id="art-bg" class="art-bg" src="premium_social_media_post_for_cybersecfe_2246b567.png" alt="Arte">
+  <div id="art-overlay" class="art-overlay"></div>
   <div class="art-content">
 
     <div style="height:8px"></div>
@@ -221,6 +308,254 @@
   <button class="btn btn-secondary" onclick="window.print()">🖨 Imprimir / PDF</button>
 </div>
 <div class="info">Arte Final · CybersecFEST 2026 · Feed Vertical 1080×1350px</div>
+</div>
 
+<div id="editor-panel">
+  <div class="ep-header">
+    <span class="ep-logo">⚡ Editor Visual</span>
+    <span class="ep-badge">v2.6</span>
+  </div>
+
+  <div class="ep-section">
+    <div class="ep-section-title">🖼 Imagem de Fundo</div>
+
+    <div class="ep-control">
+      <label>Posição ←→</label>
+      <div class="ep-row">
+        <input type="range" id="bgPosX" min="0" max="100" value="50">
+        <span class="ep-val" id="bgPosX-val">50%</span>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Posição ↑↓</label>
+      <div class="ep-row">
+        <input type="range" id="bgPosY" min="0" max="100" value="50">
+        <span class="ep-val" id="bgPosY-val">50%</span>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Zoom</label>
+      <div class="ep-row">
+        <input type="range" id="bgZoom" min="100" max="300" value="100">
+        <span class="ep-val" id="bgZoom-val">100%</span>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Opacidade da imagem</label>
+      <div class="ep-row">
+        <input type="range" id="bgOpacity" min="0" max="100" value="100">
+        <span class="ep-val" id="bgOpacity-val">100%</span>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <div class="ep-toggle-row">
+        <label style="margin:0">Espelhar horizontalmente</label>
+        <button id="btnFlip" class="ep-btn-toggle">OFF</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ep-section">
+    <div class="ep-section-title">🎨 Overlay e Fundo</div>
+
+    <div class="ep-control">
+      <label>Opacidade do overlay</label>
+      <div class="ep-row">
+        <input type="range" id="overlayOpacity" min="0" max="100" value="100">
+        <span class="ep-val" id="overlayOpacity-val">100%</span>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Cor de fundo</label>
+      <div class="ep-color-row">
+        <input type="color" id="bgColor" value="#02050A">
+        <input type="text"  id="bgColorHex" value="#02050A" maxlength="7" placeholder="#02050A">
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Estilo do overlay</label>
+      <select id="overlayStyle" class="ep-select">
+        <option value="original">Original (gerado)</option>
+        <option value="dark">Escuro uniforme</option>
+        <option value="light">Vinheta clara</option>
+        <option value="accent">Acento azul</option>
+        <option value="none">Sem overlay</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="ep-section">
+    <div class="ep-section-title">✏️ Tipografia</div>
+
+    <div class="ep-control">
+      <label>Peso da fonte (headline)</label>
+      <div class="ep-seg" id="fontWeightSeg">
+        <button class="ep-seg-btn" data-val="400">400</button>
+        <button class="ep-seg-btn" data-val="500">500</button>
+        <button class="ep-seg-btn active" data-val="700">700</button>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Alinhamento do texto</label>
+      <div class="ep-seg" id="textAlignSeg">
+        <button class="ep-seg-btn active" data-val="left">◀ Esq</button>
+        <button class="ep-seg-btn" data-val="center">— Ctr</button>
+        <button class="ep-seg-btn" data-val="right">Dir ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ep-actions">
+    <button id="btnReset" class="ep-btn ep-btn-sec">↺ Resetar tudo</button>
+    <button id="btnPrint" class="ep-btn ep-btn-pri">🖨 Exportar / PDF</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var bg     = document.getElementById('art-bg');
+  var ol     = document.getElementById('art-overlay');
+  var canvas = document.querySelector('.art-canvas');
+  var content= document.querySelector('.art-content');
+
+  var state = {
+    posX:50, posY:50, zoom:100, opacity:100, flip:false,
+    overlayOpacity:100, bgColor:'#02050A',
+    overlayStyle:'original', fontWeight:'700', textAlign:'left'
+  };
+
+  var OL_STYLES = {
+    'original': null,
+    'dark'    : 'rgba(2,5,10,0.92)',
+    'light'   : 'radial-gradient(ellipse at center,rgba(255,255,255,0.08) 0%,rgba(2,5,10,0.80) 100%)',
+    'accent'  : 'linear-gradient(135deg,rgba(20,168,244,0.40) 0%,rgba(2,5,10,0.85) 100%)',
+    'none'    : 'rgba(0,0,0,0)'
+  };
+
+  function updateBg(){
+    if(!bg) return;
+    bg.style.objectPosition = state.posX+'% '+state.posY+'%';
+    bg.style.transform = 'scaleX('+(state.flip?-1:1)+') scale('+(state.zoom/100)+')';
+    bg.style.transformOrigin = 'center center';
+    bg.style.opacity = state.opacity/100;
+  }
+
+  function updateOverlay(){
+    if(!ol) return;
+    ol.style.opacity = state.overlayOpacity/100;
+    if(state.overlayStyle==='original'){ ol.style.background=''; }
+    else { ol.style.background = OL_STYLES[state.overlayStyle]||''; }
+  }
+
+  function updateCanvas(){
+    if(canvas) canvas.style.backgroundColor = state.bgColor;
+  }
+
+  function updateText(){
+    var targets = document.querySelectorAll('.headline,.art-content h1,.art-content h2,.title');
+    targets.forEach(function(el){
+      el.style.fontWeight = state.fontWeight;
+      el.style.textAlign  = state.textAlign;
+    });
+    if(content) content.style.textAlign = state.textAlign;
+  }
+
+  function syncAll(){ updateBg(); updateOverlay(); updateCanvas(); updateText(); }
+
+  function bindRange(id, key, suffix){
+    var el = document.getElementById(id);
+    var vl = document.getElementById(id+'-val');
+    if(!el) return;
+    el.addEventListener('input',function(){
+      state[key]=parseFloat(this.value);
+      if(vl) vl.textContent=this.value+suffix;
+      syncAll();
+    });
+  }
+
+  bindRange('bgPosX','posX','%');
+  bindRange('bgPosY','posY','%');
+  bindRange('bgZoom','zoom','%');
+  bindRange('bgOpacity','opacity','%');
+  bindRange('overlayOpacity','overlayOpacity','%');
+
+  var btnFlip = document.getElementById('btnFlip');
+  if(btnFlip) btnFlip.addEventListener('click',function(){
+    state.flip=!state.flip;
+    this.textContent=state.flip?'ON':'OFF';
+    this.classList.toggle('active',state.flip);
+    updateBg();
+  });
+
+  var bgColorEl  = document.getElementById('bgColor');
+  var bgColorHex = document.getElementById('bgColorHex');
+  if(bgColorEl) bgColorEl.addEventListener('input',function(){
+    state.bgColor=this.value;
+    if(bgColorHex) bgColorHex.value=this.value;
+    updateCanvas();
+  });
+  if(bgColorHex) bgColorHex.addEventListener('input',function(){
+    var v=this.value.trim();
+    if(/^#[0-9a-fA-F]{6}$/.test(v)){
+      state.bgColor=v;
+      if(bgColorEl) bgColorEl.value=v;
+      updateCanvas();
+    }
+  });
+
+  var olSel = document.getElementById('overlayStyle');
+  if(olSel) olSel.addEventListener('change',function(){
+    state.overlayStyle=this.value; updateOverlay();
+  });
+
+  document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      state.fontWeight=this.getAttribute('data-val');
+      updateText();
+    });
+  });
+
+  document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      state.textAlign=this.getAttribute('data-val');
+      updateText();
+    });
+  });
+
+  var btnReset = document.getElementById('btnReset');
+  if(btnReset) btnReset.addEventListener('click',function(){
+    state={posX:50,posY:50,zoom:100,opacity:100,flip:false,overlayOpacity:100,
+           bgColor:'#02050A',overlayStyle:'original',fontWeight:'700',textAlign:'left'};
+    var defs={bgPosX:50,bgPosY:50,bgZoom:100,bgOpacity:100,overlayOpacity:100};
+    Object.keys(defs).forEach(function(id){
+      var el=document.getElementById(id); if(el) el.value=defs[id];
+      var vl=document.getElementById(id+'-val'); if(vl) vl.textContent=defs[id]+'%';
+    });
+    if(btnFlip){btnFlip.textContent='OFF';btnFlip.classList.remove('active');}
+    if(bgColorEl) bgColorEl.value='#02050A';
+    if(bgColorHex) bgColorHex.value='#02050A';
+    if(olSel) olSel.value='original';
+    document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-val')==='700');});
+    document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-val')==='left');});
+    syncAll();
+  });
+
+  var btnPrint = document.getElementById('btnPrint');
+  if(btnPrint) btnPrint.addEventListener('click',function(){ window.print(); });
+
+  syncAll();
+})();
+</script>
 </body>
 </html>
