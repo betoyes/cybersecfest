@@ -1193,12 +1193,32 @@ function renderGrid(artes) {
   requestAnimationFrame(scaleAllCardIframes);
 }
 
+const EMBED_CSS = '.ep,.badge-layout,.ci,.toolbar{display:none!important}body,html{overflow:hidden;background:transparent}';
+
+function hideEditorPanel(iframe) {
+  try {
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    if (!doc || !doc.head) return;
+    if (doc.querySelector('#__embed_css')) return;
+    const s = doc.createElement('style');
+    s.id = '__embed_css';
+    s.textContent = EMBED_CSS;
+    doc.head.appendChild(s);
+  } catch(e) {}
+}
+
 function scaleAllCardIframes() {
   document.querySelectorAll('[data-card-thumb]').forEach(thumb => {
     const iframe = thumb.querySelector('iframe');
     if (!iframe) return;
     const w = thumb.offsetWidth || thumb.getBoundingClientRect().width;
     if (w > 0) iframe.style.transform = `scale(${w / 540})`;
+    // injetar CSS se já carregou
+    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+      hideEditorPanel(iframe);
+    } else {
+      iframe.addEventListener('load', () => { hideEditorPanel(iframe); const ww = thumb.offsetWidth || thumb.getBoundingClientRect().width; if (ww>0) iframe.style.transform=`scale(${ww/540})`; }, { once: true });
+    }
   });
 }
 
@@ -1349,7 +1369,8 @@ function openModal(slug, arte) {
 
   // Carregar arte.html composto no modal
   iframe.src = '';
-  setTimeout(() => { iframe.src = 'artes/' + slug + '/arte.html'; scaleModalArt(); }, 10);
+  iframe.onload = () => { hideEditorPanel(iframe); scaleModalArt(); };
+  setTimeout(() => { iframe.src = 'artes/' + slug + '/arte.html'; }, 10);
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
