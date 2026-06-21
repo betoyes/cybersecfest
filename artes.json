@@ -38,5 +38,19 @@
     "image_path": "artes/blog-1782058741657/thumb.png",
     "html_path": "artes/blog-1782058741657/arte.html",
     "created_at": "2026-06-21T00:00:00Z"
+  },
+  {
+    "slug": "blog-1782058840735",
+    "tipo": "blog",
+    "headline": "A conversa que não cabe em reunião.",
+    "palavras_azuis": "CONVERSA",
+    "subtitulo": "Benchmarking real. Entre quem realmente decide.",
+    "cidade": "BH e SP",
+    "formato": "feed_vertical",
+    "layout": "C",
+    "legenda": "Tem perguntas que você não faz em reunião de board.\nTem decisões que só ganham clareza quando você conversa com quem já passou por isso.\n\nÉ pra isso que existe o CybersecFEST.\nNão é painel de especialistas falando para plateia.\nÉ confraria — onde CISO conversa com CISO, onde o problema real entra na mesa sem filtro.\n\n🔹 Uma edição em BH. Uma em SP.\n🔹 Vagas por curadoria.\n\n✅ Faça parte: [link]\n\n#CyberSecFest #CISO #CyberSecurity #Networking #Identity #CLevel #DevSecOps #CloudSecurity #Resilience #Tecnologia",
+    "image_path": "artes/blog-1782058840735/thumb.png",
+    "html_path": "artes/blog-1782058840735/arte.html",
+    "created_at": "2026-06-21T00:00:00Z"
   }
 ]
