@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CybersecFEST — Galeria de Artes</title>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -655,6 +655,20 @@
   .modal-actions {
     display: flex; gap: 8px; flex-wrap: wrap;
   }
+  .btn-download-arte {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #02050A;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    cursor: pointer; transition: all 0.2s; width: 100%;
+    justify-content: center;
+  }
+  .btn-download-arte:hover { background: var(--elec); border-color: var(--elec); }
+  .btn-download-arte:disabled { opacity: 0.6; cursor: wait; }
 
   /* meta */
   .modal-meta-wrap {
@@ -1073,9 +1087,9 @@ function openModal(slug, arte) {
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
+    <button class="btn-action btn-download-arte" id="btn-download-png" onclick="downloadArtePNG('${slug}')">⬇ Baixar Arte Completa</button>
     <button class="btn-action btn-view" id="btn-copy-link" onclick="copyArteLink('${slug}')">🔗 Copiar link</button>
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ HTML</a>
-    <button class="btn-action btn-dl" id="btn-download-png" onclick="downloadArtePNG('${slug}')">↓ PNG</button>
   `;
   const metaEl = document.getElementById('modal-meta');
   const rows = [];
@@ -1127,16 +1141,21 @@ function copyArteLink(slug) {
 
 async function downloadArtePNG(slug) {
   const btn = document.getElementById('btn-download-png');
-  const original = btn.textContent;
-  btn.textContent = '⏳ Gerando...';
+  if (!btn) return;
+  const original = btn.innerHTML;
+  btn.innerHTML = '⏳ Gerando PNG...';
   btn.disabled = true;
 
   try {
+    // garantir que html2canvas está carregado
+    if (typeof html2canvas === 'undefined') throw new Error('html2canvas não carregado');
+
     const iframe = document.getElementById('modal-iframe');
+    if (!iframe || !iframe.contentDocument) throw new Error('iframe indisponível');
+
     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
     const artCanvas = iframeDoc.querySelector('.art-canvas');
-
-    if (!artCanvas) throw new Error('Canvas não encontrado');
+    if (!artCanvas) throw new Error('.art-canvas não encontrado');
 
     const canvas = await html2canvas(artCanvas, {
       useCORS: true,
@@ -1144,19 +1163,30 @@ async function downloadArtePNG(slug) {
       scale: 2,
       backgroundColor: '#02050A',
       logging: false,
+      imageTimeout: 0,
+      removeContainer: true,
     });
 
     const link = document.createElement('a');
     link.download = `cybersecfest_${slug}.png`;
     link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
+
   } catch(e) {
-    console.warn('html2canvas falhou, usando fallback:', e);
-    // fallback: abre arte.html em nova aba para salvar manualmente
-    window.open(`artes/${slug}/arte.html`, '_blank');
-    alert('Para salvar: clique com botão direito na arte e "Salvar imagem como".');
+    console.warn('html2canvas erro:', e.message);
+    // Fallback: abrir arte.html e pedir ao usuário para usar o botão de impressão
+    const win = window.open(`artes/${slug}/arte.html`, '_blank', 'width=700,height=900');
+    if (win) {
+      setTimeout(() => {
+        try { win.print(); } catch(e2) {}
+      }, 1500);
+    } else {
+      alert('Arte aberta em nova aba. Use Ctrl+P para salvar como PDF ou imprimir.');
+    }
   } finally {
-    btn.textContent = original;
+    btn.innerHTML = original;
     btn.disabled = false;
   }
 }
