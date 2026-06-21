@@ -63,47 +63,10 @@ Usar como **referência de contexto** — não como roteiro:
 - `evento` — dados confirmados (cidades, histórico, realizadores)
 - `regras_editoriais` — tom, frases âncora, proibições
 - `patrocinio` — benefícios das cotas (posts de patrocinador)
-- `historico_recente[]` — evitar repetir layouts recentes
+- `historico_recente[]` — evitar repetir ângulos recentes
 - `rotacao_layouts` — qual layout usar
-- `historico_aprovacoes[]` — calibração criativa baseada em aprovações e rejeições reais
-
-**Calibração via historico_aprovacoes:**
-Antes de criar os briefings, analisar as últimas 10 entradas de `historico_aprovacoes`:
-- Entradas com `status: "rejeitado"` → identificar o padrão do ângulo e **não repetir** estrutura similar
-- Entradas com `status: "aprovado"` → reforçar o tipo de gancho, ritmo e abordagem que funcionou
-- Se `motivo` preenchido → considerar como instrução editorial direta
-
-Exemplo de leitura:
-```
-[rejeitado] "ângulo técnico sem conexão emocional" → evitar dados isolados sem tensão humana
-[aprovado]  "contraste antes/depois"               → formato funciona, pode variar o tema
-```
 
 **Os `temas[]` são INSPIRAÇÃO temática. O agente cria ângulos próprios.**
-
-**Mapa de Bloqueio (construir antes do PASSO 4):**
-
-Com os dados já carregados, montar internamente dois mapas:
-
-```
-BLOQUEADOS (não usar):
-  Layouts recentes:  últimos 3 layouts usados para o tipo_post atual (de historico_recente)
-  Ângulos rejeitados: últimas 5 entradas rejeitadas para o tipo_post atual (de historico_aprovacoes)
-                      → extrair padrão do angulo_resumo + motivo
-
-REFORÇAR (padrões que funcionaram):
-  Ângulos aprovados:  últimas 5 entradas aprovadas para o tipo_post atual (de historico_aprovacoes)
-                      → extrair tipo de gancho + estrutura emocional
-```
-
-Exemplo montado:
-```
-[BLOQUEADO] layout M (usado na última postagem blog)
-[BLOQUEADO] ângulo "dado estatístico isolado" (rejeitado em 2026-06-18, motivo: sem tensão humana)
-[REFORÇAR]  gancho de contraste antes/depois (aprovado 2x nos últimos 10 posts)
-```
-
-Este mapa guia diretamente a criação no PASSO 4. Não é opcional.
 
 ### PASSO 2 — Determinar Tipo de Post
 - segunda → blog | quarta → palestrante | sexta → evento | outros → blog
@@ -118,14 +81,7 @@ Este mapa guia diretamente a criação no PASSO 4. Não é opcional.
 
 Processo criativo para cada briefing:
 
-**1. Consultar o Mapa de Bloqueio e escolher um ângulo único**
-
-Antes de escrever qualquer linha, verificar:
-- O layout selecionado não está nos bloqueados
-- A estrutura do ângulo não repete nenhum padrão rejeitado
-- Se houver padrões aprovados → usá-los como ponto de partida, variando o tema
-
-Depois, escolher algo inesperado, que para o scroll, que faz o leitor se reconhecer.
+**1. Escolher um ângulo único** — algo inesperado, que para o scroll, que faz o leitor se reconhecer.
 
 **2. Perguntas internas obrigatórias antes de escrever:**
 - "Essa headline faria um CISO parar o que está fazendo para ler?"
@@ -144,32 +100,26 @@ Depois, escolher algo inesperado, que para o scroll, que faz o leitor se reconhe
 Pessoas em networking real, salas de liderança, ambientes premium escuros, conversas de alto nível.
 Nunca: servidores, telas de hack, código, cadeados.
 
-**Formato de entrega — Card Visual:**
+**Formato de entrega:**
+```
+BRIEFING [N]:
+─────────────────────────────────────────────────
+TIPO DE POST:      <tipo_post>
+LAYOUT SUGERIDO:   <letra> — <nome do layout>
+FOCO DA IMAGEM:    <zona>
 
----
+HEADLINE:          <para o scroll — máx 8 palavras>
+PALAVRAS AZUIS:    <1–3 palavras de impacto>
+SUBTÍTULO:         <complementa com convite — máx 12 palavras>
 
-## 🎨 BRIEFING [N] — `<TIPO_POST>` · Layout `<LETRA>`
+CONTEXTO VISUAL:   <cena aspiracional: quem, onde, atmosfera, iluminação,
+                    posição do sujeito no foco do layout, fundo #02050A>
 
-> **`<HEADLINE COMPLETA>`**
-> *Palavras em azul: <palavras_azuis>*
+LEGENDA:           <gancho → tensão → CybersecFEST como resposta → CTA>
 
-| Campo | Conteúdo |
-|---|---|
-| **Subtítulo** | <subtítulo — máx 12 palavras> |
-| **Layout** | `<Letra>` — <Nome> · Foco: <zona> |
-| **Formato** | <feed_vertical / feed_quadrado / linkedin> |
-| **Cidade** | <cidade ou ambas> |
-
-**📸 Contexto Visual:**
-> <cena aspiracional em 2–3 linhas: quem, onde, atmosfera, iluminação, posição do sujeito no foco do layout, fundo #02050A>
-
-**📝 Legenda:**
-<legenda completa formatada — gancho → tensão → CybersecFEST → CTA → hashtags>
-
-**💡 Por que este ângulo:**
-*<1 frase justificando a escolha criativa e como evita padrões bloqueados>*
-
----
+POR QUÊ ESTE ÂNGULO: <1 frase justificando a escolha criativa>
+─────────────────────────────────────────────────
+```
 
 **Checklist interno antes de entregar:**
 - [ ] Gancho para o scroll — um CISO pararia para ler?
@@ -178,53 +128,10 @@ Nunca: servidores, telas de hack, código, cadeados.
 - [ ] CTA presente e urgente
 - [ ] Sem clichês visuais ou textuais
 - [ ] Ângulo diferente dos últimos publicados (checar historico_recente)
-- [ ] Ângulo não repete padrão rejeitado recentemente (checar historico_aprovacoes)
 - [ ] Patrocinador: benefícios sem preços
 
-### PASSO 5 — Apresentar Preview e Aguardar Aprovação
-
-Apresentar os N cards de briefing (formato acima). Após os cards, exibir painel de decisão unificado:
-
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 DECISÃO — responda com um dos comandos abaixo:
-
-  ✅ aprovar 1         → aprovar briefing 1
-  ✅ aprovar 2         → aprovar briefing 2
-  ✅ aprovar 1 2       → aprovar ambos
-  ❌ rejeitar 1: motivo → rejeitar briefing 1 com motivo
-  🔄 refazer 1         → gerar novo ângulo para o briefing 1
-
-Não avançar para geração sem pelo menos 1 aprovação explícita.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
-### PASSO 5.5 — Registrar Decisão no historico_aprovacoes
-
-Após receber aprovação ou rejeição do usuário, **antes de chamar o Gerador de Artes**, registrar no `historico_aprovacoes` do `temas.json` via GitHub API:
-
-**Estrutura do registro:**
-```json
-{
-  "data": "<ISO-8601 data de hoje>",
-  "tipo_post": "<tipo_post do briefing>",
-  "angulo_resumo": "<1 frase descrevendo o ângulo/gancho usado>",
-  "headline": "<headline exata do briefing>",
-  "status": "aprovado" | "rejeitado",
-  "motivo": "<texto livre do usuário — vazio se aprovado sem comentário>",
-  "slug": "<preencher após geração — deixar null por ora>"
-}
-```
-
-**Procedimento de escrita:**
-1. GET `temas.json` para obter SHA atual
-2. Parsear JSON, adicionar novo objeto ao array `historico_aprovacoes`
-3. Manter máximo de **50 entradas** (remover mais antigas se necessário)
-4. PUT via GitHub API com mensagem: `feat(aprovacoes): registrar [status] briefing [tipo_post] [data]`
-5. Confirmar SHA retornado
-
-**Para cada briefing apresentado** (aprovado OU rejeitado) → registrar separadamente.
-**Se o usuário não der motivo na rejeição** → `motivo: ""` (vazio, não inventar).
+### PASSO 5 — Apresentar e Aguardar Aprovação
+Apresentar os N briefings. **Não avançar sem confirmação explícita.**
 
 ### PASSO 6 — Chamar Gerador de Artes Automaticamente
 ```
