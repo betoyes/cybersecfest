@@ -797,7 +797,7 @@ function renderGrid(artes) {
         <div class="card-meta">
           <span class="card-date">${date}</span>
           <div class="card-actions">
-            <a class="btn-action btn-view" href="artes/${arte.slug}/arte.html" target="_blank" onclick="event.stopPropagation()">Ver</a>
+            <a class="btn-action btn-view" href="artes/${arte.slug}/" target="_blank" onclick="event.stopPropagation()">Ver</a>
             <a class="btn-action btn-dl" href="artes/${arte.slug}/arte.html" download onclick="event.stopPropagation()">↓ HTML</a>
           </div>
         </div>
@@ -822,7 +822,7 @@ function openModal(slug, arte) {
   document.getElementById('modal-iframe').src = 'artes/' + slug + '/arte.html';
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
-    <a class="btn-action btn-view" href="artes/${slug}/arte.html" target="_blank">↗ Abrir em nova aba</a>
+    <a class="btn-action btn-view" href="artes/${slug}/" target="_blank">↗ Página da arte</a>
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ Download HTML</a>
     ${arte.image_path ? '<a class="btn-action btn-dl" href="'+arte.image_path+'" download="cybersecfest_'+slug+'.png">↓ Download PNG</a>' : ''}
   `;
