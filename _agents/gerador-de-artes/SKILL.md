@@ -43,7 +43,18 @@ Verificar:
 - [ ] Se existir: JSON válido e array parseável
 - [ ] Se existir: nenhum registro duplicado de slug nas últimas 3 entradas
 
-**3. Reportar resultado da pré-validação:**
+**3. Exibir últimos 5 commits do repo (protocolo multi-agente):**
+```
+GET https://api.github.com/repos/betoyes/cybersecfest/commits?per_page=5
+```
+Exibir em formato compacto:
+```
+📋 Últimos commits:
+  [SHA7] mensagem — autor (data)
+  ...
+```
+
+**4. Reportar resultado da pré-validação:**
 
 Se tudo OK:
 ```
@@ -214,17 +225,353 @@ Construir prompt seguindo o foco do layout:
 
 Logos ecossistema: `filter: brightness(0) invert(1)`
 
-Estrutura do `arte.html`:
+**Estrutura obrigatória do arte.html (TODOS os layouts):**
 ```
 .art-canvas (540×675px feed_vertical)
-  ├── .art-bg (imagem base64)
-  ├── .art-overlay (gradiente)
-  ├── .art-content (logo + headline + subtítulo)
-  ├── .ecosystem (logos ecossistema)
-  └── .toolbar (botão print)
+  ├── img.art-bg  id="art-bg"   ← imagem IA como base64 (background)
+  ├── div.art-overlay  id="art-overlay"  ← gradiente/overlay CSS
+  ├── div.art-content             ← logo + headline + subtítulo + ecosystem
+  └── div.badge-layout            ← "LAYOUT X" (canto inferior esquerdo)
 ```
+⚠️ A imagem gerada no PASSO 2 vai SEMPRE no `img.art-bg` como base64. O texto e o overlay são aplicados via CSS sobre a imagem. Esta é a estrutura obrigatória — nunca gerar um arte.html que seja apenas uma `<img>` sem `.art-overlay` e `.art-content`.
 
 **Palavras azuis:** `<span style="color:#14A8F4">palavra</span>`
+
+---
+
+### EDITOR VISUAL — Template obrigatório (incluir em TODOS os arte.html a partir de v2.6.0)
+
+Após a `.art-canvas`, o `arte.html` deve incluir um **painel lateral de edição visual** que permite ajustes em tempo real antes do export. O painel desaparece no print/PDF via `@media print`.
+
+**Layout do body:** dois blocos side-by-side — `#canvas-col` (esquerda) + `#editor-panel` (direita, 260px fixo).
+
+**CSS do Editor Panel (adicionar dentro do `<style>`):**
+```css
+/* ═══ EDITOR VISUAL ═══════════════════════════════════════ */
+body { flex-direction: row !important; align-items: flex-start !important; gap: 0; padding: 0; min-height: 100vh; }
+#canvas-col { display: flex; flex-direction: column; align-items: center; padding: 40px 24px 40px 40px; flex-shrink: 0; }
+#editor-panel {
+  width: 260px; min-width: 260px; min-height: 100vh;
+  background: #0c0c18; border-left: 1px solid rgba(255,255,255,.07);
+  padding: 0; overflow-y: auto; display: flex; flex-direction: column;
+  font-family: 'Montserrat', sans-serif; flex-shrink: 0;
+}
+.ep-header {
+  background: #070710; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10;
+}
+.ep-logo { color: #14A8F4; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.ep-badge { background: rgba(20,168,244,.12); border: 1px solid rgba(20,168,244,.25); color: #14A8F4; font-size: 9px; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; text-transform: uppercase; }
+.ep-section { padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.ep-section-title { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 14px; }
+.ep-control { margin-bottom: 13px; }
+.ep-control label { display: block; font-size: 10.5px; color: rgba(255,255,255,.45); margin-bottom: 5px; font-weight: 600; letter-spacing: .02em; }
+.ep-control input[type=range] { width: 100%; accent-color: #14A8F4; height: 4px; cursor: pointer; margin-bottom: 2px; }
+.ep-val { font-size: 10px; color: rgba(255,255,255,.3); float: right; margin-top: -18px; }
+.ep-toggle { display: flex; align-items: center; justify-content: space-between; }
+.ep-toggle label { margin-bottom: 0; }
+.ep-btn-toggle {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.4);
+  font-size: 10px; font-weight: 700; padding: 4px 12px; cursor: pointer; border-radius: 4px; font-family: inherit; letter-spacing: .05em;
+  transition: all .15s;
+}
+.ep-btn-toggle.active { background: rgba(20,168,244,.15); border-color: rgba(20,168,244,.4); color: #14A8F4; }
+.ep-color-row { display: flex; gap: 8px; align-items: center; }
+.ep-color-row input[type=color] { width: 36px; height: 30px; border: 1px solid rgba(255,255,255,.1); border-radius: 4px; background: none; cursor: pointer; padding: 0; }
+.ep-color-row input[type=text] { flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: #F6F8FF; padding: 5px 8px; font-size: 12px; font-family: 'Montserrat',monospace; border-radius: 4px; outline: none; }
+.ep-color-row input[type=text]:focus { border-color: #14A8F4; }
+.ep-select { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: #F6F8FF; padding: 6px 8px; font-size: 11px; font-family: inherit; border-radius: 4px; cursor: pointer; outline: none; }
+.ep-select:focus { border-color: #14A8F4; }
+.ep-seg { display: flex; gap: 4px; }
+.ep-seg-btn {
+  flex: 1; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.4);
+  font-size: 11px; font-weight: 700; padding: 6px 4px; cursor: pointer; border-radius: 4px; font-family: inherit; transition: all .15s;
+}
+.ep-seg-btn.active { background: rgba(20,168,244,.15); border-color: rgba(20,168,244,.4); color: #14A8F4; }
+.ep-seg-btn:hover:not(.active) { background: rgba(255,255,255,.09); color: rgba(255,255,255,.7); }
+.ep-actions { display: flex; gap: 8px; flex-direction: column; padding: 16px 18px 24px; margin-top: auto; }
+.ep-btn { width: 100%; padding: 10px; font-family: inherit; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; border-radius: 4px; transition: all .15s; }
+.ep-btn-sec { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.5); }
+.ep-btn-sec:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); }
+.ep-btn-pri { background: rgba(20,168,244,.15); border: 1px solid rgba(20,168,244,.4); color: #14A8F4; }
+.ep-btn-pri:hover { background: rgba(20,168,244,.25); }
+.ep-divider { height: 1px; background: rgba(255,255,255,.05); margin: 4px 0 12px; }
+@media print {
+  #editor-panel { display: none !important; }
+  #canvas-col { padding: 0 !important; }
+  body { flex-direction: column !important; }
+}
+```
+
+**HTML do Editor Panel (inserir após `#canvas-col`):**
+```html
+<div id="editor-panel">
+  <div class="ep-header">
+    <span class="ep-logo">⚡ Editor Visual</span>
+    <span class="ep-badge">v2.6</span>
+  </div>
+
+  <!-- BLOCO 1: Imagem de Fundo -->
+  <div class="ep-section">
+    <div class="ep-section-title">Imagem de Fundo</div>
+
+    <div class="ep-control">
+      <label>Posição ←→</label>
+      <input type="range" id="bgPosX" min="0" max="100" value="50">
+      <span class="ep-val" id="bgPosX-val">50%</span>
+    </div>
+
+    <div class="ep-control">
+      <label>Posição ↑↓</label>
+      <input type="range" id="bgPosY" min="0" max="100" value="50">
+      <span class="ep-val" id="bgPosY-val">50%</span>
+    </div>
+
+    <div class="ep-control">
+      <label>Zoom</label>
+      <input type="range" id="bgZoom" min="100" max="300" value="100">
+      <span class="ep-val" id="bgZoom-val">100%</span>
+    </div>
+
+    <div class="ep-control">
+      <label>Opacidade da imagem</label>
+      <input type="range" id="bgOpacity" min="0" max="100" value="100">
+      <span class="ep-val" id="bgOpacity-val">100%</span>
+    </div>
+
+    <div class="ep-control ep-toggle">
+      <label>Espelhar horizontalmente</label>
+      <button id="btnFlip" class="ep-btn-toggle">OFF</button>
+    </div>
+  </div>
+
+  <!-- BLOCO 2: Overlay e Fundo -->
+  <div class="ep-section">
+    <div class="ep-section-title">Overlay e Fundo</div>
+
+    <div class="ep-control">
+      <label>Opacidade do overlay</label>
+      <input type="range" id="overlayOpacity" min="0" max="100" value="100">
+      <span class="ep-val" id="overlayOpacity-val">100%</span>
+    </div>
+
+    <div class="ep-control">
+      <label>Cor de fundo do canvas</label>
+      <div class="ep-color-row">
+        <input type="color" id="bgColor" value="#02050A">
+        <input type="text" id="bgColorHex" value="#02050A" maxlength="7" placeholder="#02050A">
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Estilo do overlay</label>
+      <select id="overlayStyle" class="ep-select">
+        <option value="original">Original (gerado)</option>
+        <option value="dark">Escuro uniforme</option>
+        <option value="light">Claro (vinheta)</option>
+        <option value="accent">Acento azul</option>
+        <option value="none">Sem overlay</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- BLOCO 3: Tipografia -->
+  <div class="ep-section">
+    <div class="ep-section-title">Tipografia</div>
+
+    <div class="ep-control">
+      <label>Peso da fonte (headline)</label>
+      <div class="ep-seg" id="fontWeightSeg">
+        <button class="ep-seg-btn" data-val="400">400</button>
+        <button class="ep-seg-btn" data-val="500">500</button>
+        <button class="ep-seg-btn active" data-val="700">700</button>
+      </div>
+    </div>
+
+    <div class="ep-control">
+      <label>Alinhamento do texto</label>
+      <div class="ep-seg" id="textAlignSeg">
+        <button class="ep-seg-btn active" data-val="left" title="Esquerda">◀ Esq</button>
+        <button class="ep-seg-btn" data-val="center" title="Centro">— Ctr</button>
+        <button class="ep-seg-btn" data-val="right" title="Direita">Dir ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AÇÕES -->
+  <div class="ep-actions">
+    <button id="btnReset" class="ep-btn ep-btn-sec">↺ Resetar tudo</button>
+    <button id="btnPrint" class="ep-btn ep-btn-pri">🖨 Exportar / PDF</button>
+  </div>
+</div>
+```
+
+**JavaScript do Editor (inserir antes de `</body>`):**
+```html
+<script>
+(function(){
+  var bg      = document.getElementById('art-bg');
+  var ol      = document.getElementById('art-overlay');
+  var canvas  = document.querySelector('.art-canvas');
+  var content = document.querySelector('.art-content');
+
+  /* Estado inicial */
+  var state = {
+    posX:50, posY:50, zoom:100, opacity:100, flip:false,
+    overlayOpacity:100, bgColor:'#02050A',
+    overlayStyle:'original', fontWeight:'700', textAlign:'left'
+  };
+
+  /* Gradientes para cada estilo de overlay */
+  var OL_STYLES = {
+    'original': null,
+    'dark'    : 'rgba(2,5,10,0.92)',
+    'light'   : 'radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, rgba(2,5,10,0.80) 100%)',
+    'accent'  : 'linear-gradient(135deg, rgba(20,168,244,0.40) 0%, rgba(2,5,10,0.85) 100%)',
+    'none'    : 'rgba(0,0,0,0)'
+  };
+
+  /* ── Atualizar imagem de fundo ── */
+  function updateBg(){
+    if(!bg) return;
+    bg.style.objectPosition = state.posX+'% '+state.posY+'%';
+    var flip = state.flip ? -1 : 1;
+    bg.style.transform = 'scaleX('+flip+') scale('+(state.zoom/100)+')';
+    bg.style.transformOrigin = 'center center';
+    bg.style.opacity = state.opacity/100;
+  }
+
+  /* ── Atualizar overlay ── */
+  function updateOverlay(){
+    if(!ol) return;
+    ol.style.opacity = state.overlayOpacity/100;
+    if(state.overlayStyle === 'original'){
+      ol.style.background = '';
+    } else {
+      ol.style.background = OL_STYLES[state.overlayStyle] || '';
+    }
+  }
+
+  /* ── Atualizar cor de fundo do canvas ── */
+  function updateCanvas(){
+    if(canvas) canvas.style.backgroundColor = state.bgColor;
+  }
+
+  /* ── Atualizar tipografia ── */
+  function updateText(){
+    var targets = document.querySelectorAll('.headline, .art-content h1, .art-content h2, .art-content .title');
+    targets.forEach(function(el){
+      el.style.fontWeight = state.fontWeight;
+      el.style.textAlign  = state.textAlign;
+    });
+    if(content) content.style.textAlign = state.textAlign;
+  }
+
+  function syncAll(){ updateBg(); updateOverlay(); updateCanvas(); updateText(); }
+
+  /* ── Helper: bind slider ── */
+  function bindRange(id, key, suffix){
+    var el  = document.getElementById(id);
+    var val = document.getElementById(id+'-val');
+    if(!el) return;
+    el.addEventListener('input', function(){
+      state[key] = parseFloat(this.value);
+      if(val) val.textContent = this.value+suffix;
+      syncAll();
+    });
+  }
+
+  bindRange('bgPosX',          'posX',            '%');
+  bindRange('bgPosY',          'posY',            '%');
+  bindRange('bgZoom',          'zoom',            '%');
+  bindRange('bgOpacity',       'opacity',         '%');
+  bindRange('overlayOpacity',  'overlayOpacity',  '%');
+
+  /* ── Flip ── */
+  var btnFlip = document.getElementById('btnFlip');
+  if(btnFlip) btnFlip.addEventListener('click', function(){
+    state.flip = !state.flip;
+    this.textContent = state.flip ? 'ON' : 'OFF';
+    this.classList.toggle('active', state.flip);
+    updateBg();
+  });
+
+  /* ── Cor de fundo ── */
+  var bgColorEl  = document.getElementById('bgColor');
+  var bgColorHex = document.getElementById('bgColorHex');
+  if(bgColorEl) bgColorEl.addEventListener('input', function(){
+    state.bgColor = this.value;
+    if(bgColorHex) bgColorHex.value = this.value;
+    updateCanvas();
+  });
+  if(bgColorHex) bgColorHex.addEventListener('input', function(){
+    var v = this.value.trim();
+    if(/^#[0-9a-fA-F]{6}$/.test(v)){
+      state.bgColor = v;
+      if(bgColorEl) bgColorEl.value = v;
+      updateCanvas();
+    }
+  });
+
+  /* ── Estilo overlay ── */
+  var olSel = document.getElementById('overlayStyle');
+  if(olSel) olSel.addEventListener('change', function(){
+    state.overlayStyle = this.value;
+    updateOverlay();
+  });
+
+  /* ── Peso da fonte ── */
+  document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      state.fontWeight = this.getAttribute('data-val');
+      updateText();
+    });
+  });
+
+  /* ── Alinhamento ── */
+  document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      state.textAlign = this.getAttribute('data-val');
+      updateText();
+    });
+  });
+
+  /* ── Resetar ── */
+  var btnReset = document.getElementById('btnReset');
+  if(btnReset) btnReset.addEventListener('click', function(){
+    state = {posX:50,posY:50,zoom:100,opacity:100,flip:false,overlayOpacity:100,bgColor:'#02050A',overlayStyle:'original',fontWeight:'700',textAlign:'left'};
+    /* Sliders */
+    ['bgPosX','bgPosY','bgZoom','bgOpacity','overlayOpacity'].forEach(function(id){
+      var defaults = {bgPosX:50,bgPosY:50,bgZoom:100,bgOpacity:100,overlayOpacity:100};
+      var el = document.getElementById(id); if(el) el.value = defaults[id];
+      var vl = document.getElementById(id+'-val'); if(vl) vl.textContent = defaults[id]+'%';
+    });
+    /* Flip */
+    if(btnFlip){ btnFlip.textContent='OFF'; btnFlip.classList.remove('active'); }
+    /* Cor */
+    if(bgColorEl) bgColorEl.value='#02050A';
+    if(bgColorHex) bgColorHex.value='#02050A';
+    /* Overlay */
+    if(olSel) olSel.value='original';
+    /* Segmented */
+    document.querySelectorAll('#fontWeightSeg .ep-seg-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-val')==='700'); });
+    document.querySelectorAll('#textAlignSeg .ep-seg-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-val')==='left'); });
+    syncAll();
+  });
+
+  /* ── Exportar / PDF ── */
+  var btnPrint = document.getElementById('btnPrint');
+  if(btnPrint) btnPrint.addEventListener('click', function(){ window.print(); });
+
+  /* Inicializar */
+  syncAll();
+})();
+</script>
+```
 
 ---
 
@@ -285,10 +632,17 @@ Criar `artes/{slug}/index.html` com embed do arte.html + metadados + link para g
 
 ### PASSO 6 — Upload GitHub
 
+Fazer fetch fresco do artes.json antes de qualquer escrita:
+```
+GET https://raw.githubusercontent.com/betoyes/cybersecfest/main/artes.json
+```
+
 Upload via GitHub API (GITHUB_TOKEN) de:
 1. `artes/{slug}/arte.html`
 2. `artes/{slug}/thumb.png` (base64)
 3. `artes/{slug}/index.html`
+
+Todos os commits devem ter mensagem assinada: `[SuperAgent] arte: {slug} — Layout {LETRA}`
 
 Registrar o SHA retornado pela API para cada arquivo (usado na pós-validação).
 
@@ -317,9 +671,16 @@ O campo `legenda_variante` registra qual versão (A ou B) foi aprovada.
 
 ### PASSO 7 — Atualizar temas.json (Rotação)
 
+Fazer fetch fresco do temas.json antes de qualquer escrita:
+```
+GET https://raw.githubusercontent.com/betoyes/cybersecfest/main/temas.json
+```
+
 Atualizar `historico_recente` em `temas.json`:
 - Adicionar entrada: tipo_post, layout, slug, data
 - Truncar para máximo 20 entradas
+
+Commit assinado: `[SuperAgent] temas: historico_recente atualizado — {slug}`
 
 ---
 
@@ -357,7 +718,7 @@ Atualizar `historico_recente` em `temas.json`:
 
 ## Output
 Post completo publicado com rastreabilidade total:
-- `artes/{slug}/arte.html` + `thumb.png` + `index.html`
+- `artes/{slug}/arte.html` + `thumb.png` + `index.html` (com Editor Visual v2.6 embutido)
 - `artes.json` com campo `layout`, `legenda` e `legenda_variante` (A ou B)
 - `temas.json` com histórico de rotação atualizado
 - Relatório de validação (pré + pós) em cada execução
