@@ -1118,7 +1118,7 @@ function renderGrid(artes) {
       : '<div class="card-thumb-fallback">✦</div>';
     const date = new Date(arte.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
     return `
-    <div class="card" data-slug="${arte.slug}" onclick="openModalBySlug('${arte.slug}')">
+    <div class="card" data-slug="${arte.slug}" onclick="window.location.href='artes/${arte.slug}/arte.html'" style="cursor:pointer">
       <div class="card-thumb">
         <div class="card-frame-outer">
           ${fallback}
@@ -1130,7 +1130,7 @@ function renderGrid(artes) {
         <div class="card-overlay">
           <div class="overlay-headline">${arte.headline}</div>
           <div class="overlay-actions">
-            <button class="btn-action btn-view" onclick="event.stopPropagation(); openModalBySlug('${arte.slug}')">Ver arte</button>
+            <button class="btn-action btn-view" onclick="event.stopPropagation(); window.location.href='artes/${arte.slug}/arte.html'">✏️ Editar</button>
             <a class="btn-action btn-dl" href="artes/${arte.slug}/arte.html" download onclick="event.stopPropagation()">↓ HTML</a>
           </div>
         </div>
