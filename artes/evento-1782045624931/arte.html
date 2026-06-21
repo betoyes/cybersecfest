@@ -56,7 +56,7 @@ input[type=range]{width:100%;accent-color:#14A8F4;cursor:pointer;height:3px}
 .ci{font-size:7.5px;letter-spacing:.1em;color:rgba(255,255,255,.15);text-align:center;margin-top:9px}
 /* ART CANVAS */
 .art-canvas{position:relative;width:540px;height:675px;overflow:hidden;box-shadow:0 0 0 1px rgba(20,168,244,.12),0 24px 64px rgba(0,0,0,.8);flex-shrink:0;background:#02050A}
-#art-bg{position:absolute;inset:0;background-size:cover;background-position:50% 50%;background-repeat:no-repeat;transition:background-position .05s,background-size .05s,opacity .05s}
+#art-bg{position:absolute;inset:0;background-size:110%;background-position:50% 50%;background-repeat:no-repeat;transition:background-position .08s,background-size .08s,opacity .08s}
 /* PRINT */
 @media print{#topbar,#pl,#pr{display:none!important}#main-area{display:flex!important;align-items:center!important;justify-content:center!important}#ca{flex:1!important;background:none!important;padding:0!important}.cl,.ci{display:none!important}html,body{overflow:visible!important;height:auto!important}}
 
@@ -169,7 +169,7 @@ input[type=range]{width:100%;accent-color:#14A8F4;cursor:pointer;height:3px}
       <div class="ep-st">Imagem de Fundo</div>
       <div class="ep-c"><div class="ep-l">Posição ←→ <em id="vx">50%</em></div><input type="range" id="sx" min="0" max="100" value="50"></div>
       <div class="ep-c"><div class="ep-l">Posição ↑↓ <em id="vy">50%</em></div><input type="range" id="sy" min="0" max="100" value="50"></div>
-      <div class="ep-c"><div class="ep-l">Zoom <em id="vz">100%</em></div><input type="range" id="sz" min="100" max="300" value="100"></div>
+      <div class="ep-c"><div class="ep-l">Zoom <em id="vz">110%</em></div><input type="range" id="sz" min="100" max="300" value="110"></div>
       <div class="ep-c"><div class="ep-l">Opacidade <em id="vbo">100%</em></div><input type="range" id="sbo" min="0" max="100" value="100"></div>
       <div class="ep-c"><div class="ep-tr"><span class="ep-tl">Espelhar horizontal</span><button class="ep-tog" id="btnFlip">OFF</button></div></div>
     </div>
@@ -257,13 +257,13 @@ var OLS={original:null,dark:'rgba(2,5,10,.92)',
   light:'radial-gradient(ellipse at center,rgba(255,255,255,.10) 0%,rgba(2,5,10,.78) 100%)',
   accent:'linear-gradient(135deg,rgba(20,168,244,.40) 0%,rgba(2,5,10,.85) 100%)',
   none:'rgba(0,0,0,0)'};
-var S={x:50,y:50,z:100,bo:100,fl:false,oo:100,bgc:'#02050A',ol:'original',fw:'700',ta:'left',
+var S={x:50,y:50,z:110,bo:100,fl:false,oo:100,bgc:'#02050A',ol:'original',fw:'700',ta:'left',
   lx:0,ly:0,ls:100,lo:100,tx:0,ty:0,ts:100,sx:0,sy:0,ex:0,ey:0,eo:75};
 
 function uBg(){
   if(!BG)return;
   BG.style.backgroundPosition=S.x+'% '+S.y+'%';
-  BG.style.backgroundSize=S.z===100?'cover':S.z+'%';
+  BG.style.backgroundSize=S.z+'%';
   BG.style.opacity=S.bo/100;
   BG.style.transform=S.fl?'scaleX(-1)':'none';
 }
@@ -311,8 +311,8 @@ document.querySelectorAll('#fwseg .ep-sb').forEach(function(b){b.addEventListene
 document.querySelectorAll('#taseg .ep-sb').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('#taseg .ep-sb').forEach(function(x){x.classList.remove('on');});this.classList.add('on');S.ta=this.dataset.v;uTxt();});});
 
 document.getElementById('rstAll').addEventListener('click',function(){
-  S.x=50;S.y=50;S.z=100;S.bo=100;S.fl=false;S.oo=100;S.bgc='#02050A';S.ol='original';S.fw='700';S.ta='left';
-  [['sx',50,'vx','%'],['sy',50,'vy','%'],['sz',100,'vz','%'],['sbo',100,'vbo','%'],['soo',100,'voo','%']].forEach(function(a){var e=document.getElementById(a[0]);if(e)e.value=a[1];var v=document.getElementById(a[2]);if(v)v.textContent=a[1]+a[3];});
+  S.x=50;S.y=50;S.z=110;S.bo=100;S.fl=false;S.oo=100;S.bgc='#02050A';S.ol='original';S.fw='700';S.ta='left';
+  [['sx',50,'vx','%'],['sy',50,'vy','%'],['sz',110,'vz','%'],['sbo',100,'vbo','%'],['soo',100,'voo','%']].forEach(function(a){var e=document.getElementById(a[0]);if(e)e.value=a[1];var v=document.getElementById(a[2]);if(v)v.textContent=a[1]+a[3];});
   if(bf){bf.textContent='OFF';bf.classList.remove('on');}
   if(cp)cp.value='#02050A';if(ch)ch.value='#02050A';
   if(os)os.value='original';
