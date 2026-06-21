@@ -1316,7 +1316,7 @@ function openModal(slug, arte) {
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
-    <button class="btn-arte btn-arte-primary" id="btn-download-png" onclick="downloadArtePNG('${slug}')">↓ Arte Completa</button>
+    <button class="btn-arte btn-arte-primary" onclick="window.location.href='artes/${slug}/arte.html'">✏️ Abrir Editor</button>
     <a class="btn-arte btn-arte-secondary" href="artes/${slug}/thumb.png" download="cybersecfest_${slug}_img.png">↓ Imagem</a>
     <a class="btn-arte btn-arte-secondary" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ HTML</a>
   `;
