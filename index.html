@@ -376,16 +376,39 @@
     position: relative;
     overflow: hidden;
   }
-  .card-thumb img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+
+  /* iframe escalado da arte composta */
+  .card-frame-outer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .card-frame-inner {
+    position: absolute;
+    top: 0; left: 0;
+    width: 540px;
+    height: 675px;
+    transform-origin: top left;
+    /* scale definido por JS */
+  }
+  .card-frame-inner iframe {
+    width: 540px;
+    height: 675px;
+    border: none;
+    pointer-events: none;
     display: block;
   }
-  .card:hover .card-thumb img { transform: scale(1.06); }
-
-  .card-thumb-fallback {
+  /* fallback enquanto iframe não carrega */
+  .card-thumb-img {
+    position: absolute;
+    inset: 0;
     width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s;
+  }
+  .card-thumb-fallback {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -938,14 +961,17 @@ function renderGrid(artes) {
     return;
   }
   grid.innerHTML = artes.map(arte => {
-    const thumb = arte.image_path
-      ? `<img src="${arte.image_path}" alt="${arte.headline}" loading="lazy">`
+    const fallback = arte.image_path
+      ? `<img class="card-thumb-img" src="${arte.image_path}" alt="${arte.headline}" loading="lazy">`
       : '<div class="card-thumb-fallback">✦</div>';
     const date = new Date(arte.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
     return `
     <div class="card" onclick="openModal('${arte.slug}', `+JSON.stringify(arte)+`)">
       <div class="card-thumb">
-        ${thumb}
+        <div class="card-frame-outer">
+          ${fallback}
+          <div class="card-frame-inner" data-src="artes/${arte.slug}/arte.html"></div>
+        </div>
         <div class="card-badge">${TIPO_LABELS[arte.tipo] || arte.tipo}</div>
         <span class="card-date-badge">${date}</span>
         <div class="card-overlay">
@@ -958,6 +984,9 @@ function renderGrid(artes) {
       </div>
     </div>`;
   }).join('');
+
+  // lazy-load iframes escalados
+  setupLazyFrames();
 }
 
 function setFilter(tipo, btn) {
@@ -1017,6 +1046,38 @@ function closeModal(e) {
     document.getElementById('modal').classList.remove('open');
     document.getElementById('modal-iframe').src = '';
   }
+}
+
+function setupLazyFrames() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const inner = entry.target;
+      if (inner.querySelector('iframe')) return; // já carregado
+
+      const outer = inner.parentElement;
+      const cardThumb = outer.parentElement;
+      const containerW = cardThumb.offsetWidth || 260;
+      const scale = containerW / 540;
+
+      inner.style.transform = `scale(${scale})`;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = inner.dataset.src;
+      iframe.setAttribute('loading', 'lazy');
+      iframe.onload = () => {
+        // esconder fallback quando iframe carregou
+        const img = outer.querySelector('.card-thumb-img');
+        if (img) img.style.opacity = '0';
+        const fb = outer.querySelector('.card-thumb-fallback');
+        if (fb) fb.style.opacity = '0';
+      };
+      inner.appendChild(iframe);
+      observer.unobserve(inner);
+    });
+  }, { rootMargin: '200px' });
+
+  document.querySelectorAll('.card-frame-inner[data-src]').forEach(el => observer.observe(el));
 }
 
 loadArtes();
