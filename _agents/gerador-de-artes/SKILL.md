@@ -118,6 +118,8 @@ Manter no máximo os últimos 20 registros.
 
 **Lei de Foco da Imagem:** A imagem IA deve ser gerada com o sujeito principal na zona de foco do layout, garantindo que o texto não sobreponha o sujeito.
 
+**⚠️ REGRA CRÍTICA DE VARIAÇÃO:** Cada layout (A–N) deve gerar um HTML visualmente distinto — estrutura CSS, posicionamento dos elementos e hierarquia devem ser completamente diferentes entre layouts. Nunca usar o mesmo template HTML para layouts diferentes. Ver especificações completas no PASSO 3.
+
 ---
 
 ### PASSO 2 — Geração da Imagem IA
@@ -137,6 +139,92 @@ Construir prompt seguindo o foco do layout:
 - Fundo: `#02050A` | Azul: `#14A8F4` | Branco: `#F6F8FF` | Lavanda: `#D5D8ED` | Muted: `#94A0B8`
 - Headlines: Ubuntu 700 | Subtítulos: Montserrat 400 (nunca itálico)
 - Logo CybersecFEST: colorido, **NUNCA** filter CSS
+- **Logos ecossistema (devops/iam/alcatraz): `height: 33px` — PADRÃO FIXO, não alterar**
+
+**⚠️ OBRIGATÓRIO: Cada layout tem CSS e estrutura únicos. Implementar conforme especificação abaixo.**
+
+---
+
+#### ESPECIFICAÇÕES HTML POR LAYOUT
+
+**LAYOUT C — Subtítulo ao Lado**
+- Imagem cobre 60% direito da tela (object-position: right)
+- Overlay: gradiente horizontal `rgba(2,5,10,0.97) 0% → rgba(2,5,10,0.15) 100%`
+- Conteúdo: coluna esquerda, 52% de largura, centralizado verticalmente
+- Logo cyberfest: 140px, margin-bottom 28px
+- Headline: Ubuntu 700, 32px, line-height 1.18
+- Subtítulo: borda esquerda azul 2px, padding-left 12px, Montserrat 400, 13.5px
+- Ecosistema: bottom 22px, left 42px, height logos **33px**
+
+**LAYOUT M — Pull Quote**
+- Imagem cobre TODA a tela como fundo (object-position: center)
+- Overlay: `rgba(2,5,10,0.88)` uniforme + gradiente de baixo pra cima nos últimos 40%
+- Conteúdo: posicionado no TERÇO INFERIOR da tela, centralizado horizontalmente, text-align center
+- Logo cyberfest: 120px, centrado, margin-bottom 20px
+- Headline: Ubuntu 700, 38px, line-height 1.1, centrada, max-width 80%
+- Barra azul decorativa: `4px × 48px` cor `#14A8F4`, centrada, acima da headline, margin-bottom 16px
+- Subtítulo: Montserrat 400, 14px, cor `#D5D8ED`, centrado, sem borda lateral
+- Ecosistema: bottom 22px, centrado (justify-content: center), height logos **33px**
+
+**LAYOUT N — Acento Diagonal**
+- Imagem cobre TODA a tela (object-position: top right)
+- Overlay: `linear-gradient(160deg, rgba(2,5,10,0.05) 0%, rgba(2,5,10,0.65) 45%, rgba(2,5,10,0.97) 100%)`
+- Barra diagonal decorativa: `div` posicionado absolutely, `width: 3px, height: 180px`, cor `#14A8F4`, `top: 40%, left: 36px`, rotacionado `rotate(-15deg)`
+- Conteúdo: posicionado no TERÇO INFERIOR ESQUERDO, padding: 0 42px 80px
+- Logo cyberfest: 110px, margin-bottom 20px
+- Headline: Ubuntu 700, 30px, line-height 1.2, max-width 60%, alinhado à esquerda
+- Subtítulo: Montserrat 400, 12.5px, cor `#94A0B8`, margin-top 10px, border-bottom 1px solid `#14A8F4`, padding-bottom 8px
+- Ecosistema: bottom 22px, left 42px, height logos **33px**
+
+**LAYOUT E — CTA Pill (evento)**
+- Imagem: 55% direito, object-position right
+- Overlay: gradiente `rgba(2,5,10,0.96) 0% → rgba(2,5,10,0.10) 65%`
+- Conteúdo: coluna esquerda, 50% largura, justify-content: space-between, padding 40px 36px
+- Logo cyberfest: 130px no topo
+- Headline: Ubuntu 700, 28px
+- Pill CTA: `display:inline-block`, background `#14A8F4`, color `#02050A`, font-weight 700, Montserrat, 12px, padding `8px 20px`, border-radius `24px`, margin-top 16px
+- Ecosistema: bottom 22px, left 36px, height logos **33px**
+
+**LAYOUT D — Diagonal (palestrante)**
+- Imagem: posicionada no CENTRO-DIREITA, object-position: 70% center
+- Overlay: `linear-gradient(125deg, rgba(2,5,10,0.98) 0%, rgba(2,5,10,0.80) 45%, rgba(2,5,10,0.05) 100%)`
+- Linha diagonal decorativa: `div` 100% width, 1px, `#14A8F4`, opacity 0.4, rotacionado `rotate(-12deg)`, posicionado no terço superior
+- Conteúdo: coluna esquerda-centro, 55% largura, padding 40px
+- Nome do palestrante: se fornecido, exibir em Montserrat 600, 12px, `#14A8F4`, uppercase, letter-spacing 2px, acima da headline
+- Headline: Ubuntu 700, 30px
+- Cargo/empresa: Montserrat 400, 11px, `#94A0B8`, margin-top 10px
+- Ecosistema: bottom 22px, left 40px, height logos **33px**
+
+**LAYOUT F — Coluna Lateral Sólida (patrocinador)**
+- Coluna sólida esquerda: `width: 38%`, background `#14A8F4`, position absolute, height 100%, left 0
+- Imagem: cobre apenas a área direita (left: 38%, width: 62%), object-position: center
+- Overlay na imagem: `rgba(2,5,10,0.4)` apenas na área direita
+- Conteúdo na coluna azul: display flex, flex-direction column, justify-content center, padding 32px 28px, color `#02050A`
+- Logo cyberfest: 120px COM filter `brightness(0)` (para aparecer escuro no fundo azul)
+- Headline: Ubuntu 700, 26px, color `#02050A`, line-height 1.2
+- Nome parceiro/cota: Montserrat 600, 11px, uppercase, letter-spacing 1.5px, margin-top 12px
+- Ecosistema: bottom 22px, LEFT 62% (na área da imagem), filter invert, height logos **33px**
+
+**LAYOUT A — Banda Superior (cidade)**
+- Imagem: cobre 65% INFERIOR da tela
+- Banda sólida no TOPO: `height: 35%`, background `#02050A`, border-bottom `3px solid #14A8F4`
+- Conteúdo na banda: display flex, align-items center, padding 0 40px, gap 24px
+- Logo cyberfest: 130px, na banda superior
+- Headline: Ubuntu 700, 28px, na banda superior, flex-grow 1
+- Overlay sobre imagem: gradiente de cima pra baixo `rgba(2,5,10,0.7) → rgba(2,5,10,0.1)`
+- Subtítulo sobreposto à imagem: posição absolute, bottom 80px, left 40px, Montserrat 400, 14px, cor branca
+- Ecosistema: bottom 20px, left 40px, height logos **33px**
+
+**LAYOUT L — L Invertido + Traços (evento)**
+- Imagem: cobre TODA a tela
+- Overlay: `rgba(2,5,10,0.82)` uniforme
+- Barra horizontal azul: `height: 3px`, width 100%, cor `#14A8F4`, posicionada a 38% do topo
+- Barra vertical azul: `width: 3px`, height 38% do topo, cor `#14A8F4`, posicionada a left 44px
+- Conteúdo ACIMA da barra: logo cyberfest 110px, padding left 60px, centrado verticalmente no terço superior
+- Conteúdo ABAIXO da barra: headline Ubuntu 700 34px, subtítulo, padding 20px 44px
+- Ecosistema: bottom 20px, right 44px, height logos **33px**
+
+---
 - Logos ecossistema: `filter: brightness(0) invert(1)`
 
 Estrutura do `arte.html`:
