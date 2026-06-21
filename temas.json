@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "versao": "1.0.0",
+    "descricao": "Banco de temas pré-aprovados do CybersecFEST com histórico de uso e regras de rotação",
+    "atualizado_em": "2026-06-21"
+  },
+
+  "temas": [
+    {
+      "id": "zero-trust",
+      "nome": "Zero Trust",
+      "descricao": "Arquitetura de confiança zero — nunca confie, sempre verifique",
+      "angulacoes": [
+        "Por que 'nunca confiar' é a única política segura",
+        "Zero Trust não é produto, é filosofia",
+        "Como implementar Zero Trust sem parar o negócio",
+        "Zero Trust além do perímetro: identidade como novo firewall",
+        "Maturidade Zero Trust: onde sua empresa está?"
+      ],
+      "tags": ["arquitetura", "identidade", "perimetro", "politica"],
+      "tipo_post_recomendado": ["blog", "palestrante"],
+      "historico": []
+    },
+    {
+      "id": "ia-generativa",
+      "nome": "IA Generativa",
+      "descricao": "Oportunidades e riscos da IA generativa em segurança corporativa",
+      "angulacoes": [
+        "IA generativa: aliada ou vetor de ataque?",
+        "Como atacantes usam LLMs para escalar phishing",
+        "Governança de IA: quem controla os modelos controla o risco",
+        "SOC aumentado por IA: triagem em segundos, não horas",
+        "Deepfakes corporativos: o novo vetor de engenharia social"
+      ],
+      "tags": ["ia", "llm", "phishing", "soc", "deepfake"],
+      "tipo_post_recomendado": ["blog", "evento"],
+      "historico": []
+    },
+    {
+      "id": "identidade",
+      "nome": "Identidade",
+      "descricao": "Gestão de identidade e acesso como pilar central da segurança",
+      "angulacoes": [
+        "Identidade é o novo perímetro — e está sob ataque",
+        "MFA não é suficiente: o que vem depois",
+        "Gestão de identidades privilegiadas (PAM) na prática",
+        "Como o roubo de credenciais derruba empresas Fortune 500",
+        "Identidade descentralizada: o futuro do IAM"
+      ],
+      "tags": ["iam", "mfa", "pam", "credenciais", "acesso"],
+      "tipo_post_recomendado": ["blog", "palestrante", "patrocinador"],
+      "historico": []
+    },
+    {
+      "id": "resiliencia",
+      "nome": "Resiliência",
+      "descricao": "Continuidade de negócios, resposta a incidentes e recuperação de desastres",
+      "angulacoes": [
+        "Resiliência cibernética não é backup — é cultura",
+        "Quanto tempo sua empresa sobrevive após um ransomware?",
+        "Simulação de crise: por que os exercícios de tabletop salvam empresas",
+        "RTO e RPO na era do ransomware moderno",
+        "De vítima a sobrevivente: lições de quem passou por um ataque"
+      ],
+      "tags": ["continuidade", "ransomware", "incidente", "backup", "rto"],
+      "tipo_post_recomendado": ["blog", "evento", "palestrante"],
+      "historico": []
+    },
+    {
+      "id": "governanca",
+      "nome": "Governança",
+      "descricao": "Frameworks, compliance, regulação e maturidade de segurança",
+      "angulacoes": [
+        "NIST, ISO 27001 ou CIS Controls: qual framework escolher?",
+        "LGPD + segurança: o que o board precisa saber",
+        "Métricas que o C-level entende (e que importam de verdade)",
+        "Red tape ou proteção real? Repensando o compliance",
+        "Como construir um programa de segurança do zero"
+      ],
+      "tags": ["compliance", "nist", "iso27001", "lgpd", "framework"],
+      "tipo_post_recomendado": ["blog", "palestrante"],
+      "historico": []
+    },
+    {
+      "id": "cloud-security",
+      "nome": "Cloud Security",
+      "descricao": "Segurança em ambientes cloud — AWS, Azure, GCP e multi-cloud",
+      "angulacoes": [
+        "Misconfiguration: o maior vetor de ataque em cloud",
+        "CSPM vs CWPP: qual cobre seu ambiente?",
+        "Segurança em Kubernetes: containers não são virtuais",
+        "Responsabilidade compartilhada: o que a cloud não protege",
+        "Multi-cloud security: complexidade dobrada, risco triplicado"
+      ],
+      "tags": ["cloud", "aws", "kubernetes", "cspm", "misconfiguration"],
+      "tipo_post_recomendado": ["blog", "evento", "patrocinador"],
+      "historico": []
+    },
+    {
+      "id": "risco-corporativo",
+      "nome": "Risco Corporativo",
+      "descricao": "Gestão de risco cibernético no contexto executivo e de negócios",
+      "angulacoes": [
+        "Cibersegurança como vantagem competitiva, não custo",
+        "Como apresentar risco cibernético ao conselho de administração",
+        "Seguro cibernético: o que cobre e o que deixa descoberto",
+        "Terceiros e cadeia de suprimentos: o elo mais fraco",
+        "Quantificando risco: do CVSS ao impacto financeiro real"
+      ],
+      "tags": ["risco", "board", "seguro", "terceiros", "impacto"],
+      "tipo_post_recomendado": ["blog", "palestrante", "evento"],
+      "historico": []
+    }
+  ],
+
+  "rotacao_layouts": {
+    "blog":        ["C", "M", "N"],
+    "evento":      ["E", "L", "J"],
+    "palestrante": ["D", "G", "K"],
+    "patrocinador":["F", "I", "B"],
+    "cidade":      ["A", "H", "J"]
+  },
+
+  "calendario_editorial": {
+    "segunda": { "tipo_post": "blog",        "observacao": "Conteúdo educativo semanal" },
+    "quarta":  { "tipo_post": "palestrante", "observacao": "Destaque de speaker ou conteúdo técnico" },
+    "sexta":   { "tipo_post": "evento",      "observacao": "Aquecimento de fim de semana / CTA" }
+  },
+
+  "historico_recente": []
+}
