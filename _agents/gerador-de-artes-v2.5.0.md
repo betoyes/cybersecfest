@@ -19,27 +19,6 @@ Gerar posts completos para o CybersecFEST: imagem IA + HTML final + legenda exec
 
 ## Procedure
 
-### PROTOCOLO MULTI-AGENTE — Fetch Fresco Obrigatório
-
-> ⚠️ Este repositório pode receber commits de outros agentes ou da IA parceira a qualquer momento.
-> **Nunca use dados de leitura anterior para escrever.** Antes de qualquer PUT/criação no GitHub API,
-> sempre execute um GET fresh do arquivo para obter o SHA atual. Dados lidos no PASSO -1 são
-> válidos apenas para leitura inicial — NUNCA para base de escrita nos PASSOs 6 e 7.
-
-**Regra de identificação de commits:**
-Todo commit feito por este agente DEVE usar a mensagem no formato:
-```
-[SuperAgent] <tipo>: <descrição curta>
-```
-Exemplos:
-- `[SuperAgent] feat: adiciona arte blog-1782xxxxxx — Layout N, tema IAM`
-- `[SuperAgent] update: temas.json — historico_recente +1 entrada`
-- `[SuperAgent] update: artes.json — registro slug patrocinador-xxxxxxx`
-
-Isso permite que qualquer agente parceiro identifique mudanças do SuperAgent via `git log`.
-
----
-
 ### PASSO -1 — Pré-Validação (EXECUTAR ANTES DE QUALQUER COISA)
 
 Antes de iniciar a geração, validar o estado do ecossistema. Se qualquer item falhar, **parar e reportar o erro** — não prosseguir.
@@ -64,24 +43,13 @@ Verificar:
 - [ ] Se existir: JSON válido e array parseável
 - [ ] Se existir: nenhum registro duplicado de slug nas últimas 3 entradas
 
-**3. Verificar AGENTS.md (detecção de mudanças de parceiros):**
-```
-GET https://api.github.com/repos/betoyes/cybersecfest/commits?path=AGENTS.md&per_page=1
-```
-E também o log recente geral:
-```
-GET https://api.github.com/repos/betoyes/cybersecfest/commits?per_page=5
-```
-Exibir os últimos 5 commits com autor e mensagem para que o usuário veja o que outros agentes fizeram recentemente. Destacar qualquer commit que NÃO comece com `[SuperAgent]` como sendo de origem externa.
-
-**4. Reportar resultado da pré-validação:**
+**3. Reportar resultado da pré-validação:**
 
 Se tudo OK:
 ```
 ✅ PRÉ-VALIDAÇÃO OK
    temas.json: acessível (N temas, M entradas no histórico)
    artes.json: acessível (N artes registradas)
-   Commits recentes: [lista dos últimos 5 com autor]
    Prosseguindo para geração...
 ```
 
@@ -317,28 +285,14 @@ Criar `artes/{slug}/index.html` com embed do arte.html + metadados + link para g
 
 ### PASSO 6 — Upload GitHub
 
-**⚠️ FETCH FRESCO OBRIGATÓRIO:** Antes de qualquer PUT no GitHub API, sempre fazer GET do arquivo atual para obter o SHA vigente. NUNCA usar SHA de leituras anteriores (do PASSO -1 ou de qualquer cache). O repo pode ter recebido commits de outro agente entre o início e este passo.
-
-```
-# Para cada arquivo que vai ser atualizado (artes.json, temas.json):
-GET https://api.github.com/repos/betoyes/cybersecfest/contents/<arquivo>
-→ extrair sha atual
-→ usar esse sha no PUT imediatamente seguinte
-```
-
 Upload via GitHub API (GITHUB_TOKEN) de:
 1. `artes/{slug}/arte.html`
 2. `artes/{slug}/thumb.png` (base64)
 3. `artes/{slug}/index.html`
 
-**Mensagem de commit obrigatória:**
-```
-[SuperAgent] feat: adiciona arte {slug} — Layout {letra}, tipo {tipo_post}
-```
-
 Registrar o SHA retornado pela API para cada arquivo (usado na pós-validação).
 
-**Atualizar `artes.json`** (fetch fresco → parse → append → PUT):
+Atualizar `artes.json` adicionando:
 ```json
 {
   "slug": "...",
@@ -359,30 +313,13 @@ Registrar o SHA retornado pela API para cada arquivo (usado na pós-validação)
 
 O campo `legenda_variante` registra qual versão (A ou B) foi aprovada.
 
-**Commit artes.json:**
-```
-[SuperAgent] update: artes.json — adiciona registro {slug}
-```
-
 ---
 
 ### PASSO 7 — Atualizar temas.json (Rotação)
 
-**⚠️ FETCH FRESCO OBRIGATÓRIO:** Fazer GET de temas.json imediatamente antes do PUT para obter SHA atual. Outro agente pode ter modificado o arquivo desde o PASSO -1.
-
-```
-GET https://api.github.com/repos/betoyes/cybersecfest/contents/temas.json
-→ sha atual → parse → append historico_recente → PUT com sha
-```
-
-Atualizar `historico_recente`:
+Atualizar `historico_recente` em `temas.json`:
 - Adicionar entrada: tipo_post, layout, slug, data
 - Truncar para máximo 20 entradas
-
-**Commit temas.json:**
-```
-[SuperAgent] update: temas.json — historico_recente +1 ({tipo_post}/{layout})
-```
 
 ---
 
