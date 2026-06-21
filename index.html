@@ -460,6 +460,57 @@
     padding: 10px 0;
   }
 
+  /* ── MODAL META INFO ── */
+  .modal-meta-wrap {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .modal-meta-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .modal-meta-key {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 90px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .modal-meta-val {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--lavanda);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .modal-meta-val .palavra-azul {
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .modal-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(20,168,244,0.08);
+    border: 1px solid rgba(20,168,244,0.2);
+    color: var(--blue);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+  }
+  .modal-divider {
+    height: 1px;
+    background: rgba(20,168,244,0.07);
+    margin: 14px 0 0;
+  }
+
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid rgba(20,168,244,0.08);
@@ -557,6 +608,7 @@
     <iframe id="modal-iframe" src=""></iframe>
     <div class="modal-body">
       <div class="modal-headline" id="modal-headline"></div>
+      <div class="modal-meta-wrap" id="modal-meta"></div>
       <div class="modal-actions" id="modal-actions"></div>
       <div class="modal-caption-wrap" id="modal-caption-wrap">
         <div class="modal-caption-header">
@@ -699,7 +751,39 @@ function openModal(slug, arte) {
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ Download HTML</a>
     ${arte.image_path ? '<a class="btn-action btn-dl" href="'+arte.image_path+'" download="cybersecfest_'+slug+'.png">↓ Download PNG</a>' : ''}
   `;
-  // Caption / Legenda
+  // ── META INFO (subtítulo, palavras em azul, cidade, formato) ──
+  const metaEl = document.getElementById('modal-meta');
+  const metaRows = [];
+  if (arte.subtitulo) {
+    metaRows.push(`<div class="modal-meta-row">
+      <span class="modal-meta-key">Subtítulo</span>
+      <span class="modal-meta-val">${arte.subtitulo}</span>
+    </div>`);
+  }
+  if (arte.palavras_azuis) {
+    const highlighted = arte.palavras_azuis.split(',').map(p => `<span class="palavra-azul">${p.trim()}</span>`).join(', ');
+    metaRows.push(`<div class="modal-meta-row">
+      <span class="modal-meta-key">Palavras em azul</span>
+      <span class="modal-meta-val">${highlighted}</span>
+    </div>`);
+  }
+  if (arte.cidade) {
+    metaRows.push(`<div class="modal-meta-row">
+      <span class="modal-meta-key">Cidade</span>
+      <span class="modal-meta-val"><span class="modal-meta-badge">🏙️ ${arte.cidade}</span></span>
+    </div>`);
+  }
+  if (arte.formato) {
+    const fmtLabel = { feed_vertical: 'Feed Vertical', feed_quadrado: 'Feed Quadrado', stories: 'Stories', linkedin: 'LinkedIn' }[arte.formato] || arte.formato;
+    metaRows.push(`<div class="modal-meta-row">
+      <span class="modal-meta-key">Formato</span>
+      <span class="modal-meta-val">${fmtLabel}</span>
+    </div>`);
+  }
+  metaEl.innerHTML = metaRows.length
+    ? metaRows.join('') + '<div class="modal-divider"></div>'
+    : '';
+  // ── CAPTION / LEGENDA ──
   const captionEl = document.getElementById('modal-caption-text');
   const wrapEl = document.getElementById('modal-caption-wrap');
   const copyBtn = document.getElementById('btn-copy');
