@@ -1,17 +1,24 @@
 {
   "_meta": {
-    "versao": "2.0.0",
-    "descricao": "Banco de temas do CybersecFEST 2026 — contexto real do evento, temas alinhados à grade programática, cotas de patrocínio com benefícios",
+    "versao": "3.0.0",
+    "descricao": "Banco de temas do CybersecFEST 2026 — tom aspiracional, FOMO, comunidade exclusiva, gatilhos de pertencimento",
     "atualizado_em": "2026-06-21",
     "fonte": "Mídia Kit oficial CybersecFEST 2026"
   },
-
   "evento": {
     "nome": "CybersecFEST 2026",
     "posicionamento": "A Principal Confraria de Cibersegurança e Identidade do Brasil",
     "formato": "Presencial & Executivo",
     "horario": "8h às 21h",
-    "publico_alvo": ["CISOs", "CIOs", "CTOs", "Diretores", "C-Level", "HEADs", "Gerentes Sênior"],
+    "publico_alvo": [
+      "CISOs",
+      "CIOs",
+      "CTOs",
+      "Diretores",
+      "C-Level",
+      "HEADs",
+      "Gerentes Sênior"
+    ],
     "edicoes_2026": [
       {
         "cidade": "Belo Horizonte",
@@ -31,16 +38,52 @@
       }
     ],
     "historico": [
-      { "edicao": "CyberFest BH 2024",       "palestras": 21,  "parceiros": 20, "participantes": 160  },
-      { "edicao": "CyberSecFest BH 2025",     "palestras": 30,  "parceiros": 27, "participantes": 200  },
-      { "edicao": "IAM Tech Day SP 2023",      "palestras": 45,  "parceiros": 20, "participantes": 360  },
-      { "edicao": "IAM Tech Day SP 2024",      "palestras": 60,  "parceiros": 25, "participantes": 1600 },
-      { "edicao": "IAM Tech Day SP 2025",      "palestras": 120, "parceiros": 30, "participantes": 2200 }
+      {
+        "edicao": "CyberFest BH 2024",
+        "palestras": 21,
+        "parceiros": 20,
+        "participantes": 160
+      },
+      {
+        "edicao": "CyberSecFest BH 2025",
+        "palestras": 30,
+        "parceiros": 27,
+        "participantes": 200
+      },
+      {
+        "edicao": "IAM Tech Day SP 2023",
+        "palestras": 45,
+        "parceiros": 20,
+        "participantes": 360
+      },
+      {
+        "edicao": "IAM Tech Day SP 2024",
+        "palestras": 60,
+        "parceiros": 25,
+        "participantes": 1600
+      },
+      {
+        "edicao": "IAM Tech Day SP 2025",
+        "palestras": 120,
+        "parceiros": 30,
+        "participantes": 2200
+      }
     ],
     "marcas_participantes_anteriores": [
-      "UnimedBH", "Drogaria Araujo", "Localiza & Co", "Natura", "Itaú", "XP",
-      "AeC", "Stellantis", "Grupo Sada", "VLI Logística", "Grupo Casas Bahia",
-      "Banco Inter", "Rede MaterDei Saúde", "Gerdau"
+      "UnimedBH",
+      "Drogaria Araujo",
+      "Localiza & Co",
+      "Natura",
+      "Itaú",
+      "XP",
+      "AeC",
+      "Stellantis",
+      "Grupo Sada",
+      "VLI Logística",
+      "Grupo Casas Bahia",
+      "Banco Inter",
+      "Rede MaterDei Saúde",
+      "Gerdau"
     ],
     "realizadores": [
       {
@@ -79,12 +122,18 @@
       "Account Takeover — Prevenção de Sequestro de Contas"
     ],
     "experiencia_evento": [
-      "Welcome Coffee", "Almoço de Negócios", "Coffee Break", "Coquetel",
-      "Circuito Gastronômico", "Networking de Alto Nível", "Podcast ao Vivo",
-      "Drink Experience", "Palestras e Keynotes", "Painéis Estratégicos"
+      "Welcome Coffee",
+      "Almoço de Negócios",
+      "Coffee Break",
+      "Coquetel",
+      "Circuito Gastronômico",
+      "Networking de Alto Nível",
+      "Podcast ao Vivo",
+      "Drink Experience",
+      "Palestras e Keynotes",
+      "Painéis Estratégicos"
     ]
   },
-
   "patrocinio": {
     "status_divulgacao": "beneficios_sem_preco",
     "observacao": "Divulgar benefícios e diferenciais de cada cota. NÃO mencionar valores por enquanto.",
@@ -227,136 +276,278 @@
       }
     ]
   },
-
   "temas": [
     {
       "id": "iam-identidade",
       "nome": "IAM & Identidade",
-      "descricao": "Gerenciamento de Identidade e Acessos — o tema central do CybersecFEST",
+      "descricao": "Identidade como tema central do CybersecFEST — o risco mais crítico e menos resolvido",
       "angulacoes": [
-        "Identidade é o novo perímetro — e está sob ataque constante",
-        "MFA não basta: o que vem depois da autenticação multifator",
-        "IAM na prática: como proteger acessos sem travar o negócio",
-        "Account Takeover: o sequestro silencioso que derruba empresas",
-        "ITDR — Detecção de ameaças à identidade em tempo real"
+        "O CISO que ainda não resolveu IAM está gerenciando risco que não consegue ver",
+        "Identidade: o tema que vai dominar as conversas do CybersecFEST 2026",
+        "Quem cuida de quem acessa o quê? Se você hesitou, está na hora de estar aqui",
+        "Os líderes que entendem identidade chegam ao CybersecFEST para ir além",
+        "De IAM a ITDR: a evolução que os melhores CISOs do Brasil já fizeram"
       ],
-      "tags": ["iam", "iag", "identidade", "mfa", "account-takeover", "itdr"],
-      "tipo_post_recomendado": ["blog", "palestrante", "patrocinador"],
+      "tags": [
+        "iam",
+        "identidade",
+        "acesso",
+        "liderança",
+        "ciso"
+      ],
+      "tipo_post_recomendado": [
+        "blog",
+        "palestrante",
+        "patrocinador"
+      ],
       "historico": []
     },
     {
       "id": "pam-acessos-privilegiados",
       "nome": "PAM & Acessos Privilegiados",
-      "descricao": "Gerenciamento de Acessos Privilegiados — proteção dos usuários e sistemas mais críticos",
+      "descricao": "Acessos privilegiados — o ponto cego que transforma incidentes em catástrofes",
       "angulacoes": [
-        "PAM: por que as contas privilegiadas são o alvo número 1 dos atacantes",
-        "Como um único acesso privilegiado comprometido derruba uma empresa",
-        "PAM além do cofre de senhas: o que maturidade real significa",
-        "Acessos privilegiados em cloud: o desafio que a maioria ignora",
-        "Gestão de acessos de terceiros — o elo mais fraco da cadeia"
+        "Uma credencial privilegiada mal gerida já derrubou empresas maiores que a sua",
+        "Os líderes que perderam o controle dos acessos privilegiados só descobriram tarde demais",
+        "PAM não é produto. É maturidade. E os melhores do Brasil vão debater isso no CybersecFEST",
+        "Quem gerencia seus acessos de terceiros? Se a resposta demorou, reserve seu lugar",
+        "O elo mais fraco da sua cadeia não é tecnologia — é o acesso que você esqueceu de revogar"
       ],
-      "tags": ["pam", "privilegiado", "credencial", "cofre", "terceiros"],
-      "tipo_post_recomendado": ["blog", "palestrante", "patrocinador"],
+      "tags": [
+        "pam",
+        "privilegiado",
+        "maturidade",
+        "terceiros",
+        "risco"
+      ],
+      "tipo_post_recomendado": [
+        "blog",
+        "palestrante",
+        "patrocinador"
+      ],
       "historico": []
     },
     {
       "id": "devsecops-apis",
       "nome": "DevSecOps & APIs",
-      "descricao": "Segurança integrada ao desenvolvimento e proteção de APIs",
+      "descricao": "Segurança integrada ao negócio — onde líderes de produto e segurança finalmente se entendem",
       "angulacoes": [
-        "DevSecOps: quando segurança entra no pipeline antes do deploy",
-        "APIs são a nova superfície de ataque — e maioria das empresas ignora",
-        "Shift-left security: como os times de engenharia estão assumindo o risco",
-        "Controle de acesso a APIs: o que o OWASP API Top 10 nos ensina",
-        "Segurança sem atrito: como integrar AppSec sem parar o time de produto"
+        "O time de produto entrega rápido. A segurança chega depois. Esse modelo acabou.",
+        "APIs são a superfície de ataque que seu time ainda não mapeou completamente",
+        "Os líderes técnicos que entendem DevSecOps já chegam ao CybersecFEST um passo à frente",
+        "Segurança sem atrito: o desafio que vai dominar as conversas de 2026",
+        "Quem ainda trata segurança como etapa final do desenvolvimento está atrasado"
       ],
-      "tags": ["devsecops", "api", "pipeline", "shift-left", "appsec"],
-      "tipo_post_recomendado": ["blog", "palestrante", "evento"],
+      "tags": [
+        "devsecops",
+        "api",
+        "produto",
+        "velocidade",
+        "inovação"
+      ],
+      "tipo_post_recomendado": [
+        "blog",
+        "palestrante",
+        "evento"
+      ],
       "historico": []
     },
     {
       "id": "cloud-security",
       "nome": "Cloud Security",
-      "descricao": "Segurança em ambientes cloud — AWS, Azure, GCP e multi-cloud",
+      "descricao": "Cloud como vetor de risco — e como os líderes mais maduros estão navegando isso",
       "angulacoes": [
-        "Misconfiguration: o maior vetor de ataque em cloud que ninguém fala",
-        "CIEM: quem realmente tem acesso à sua infraestrutura cloud?",
-        "Responsabilidade compartilhada: o que a cloud não protege por você",
-        "Multi-cloud security: complexidade dobrada, risco triplicado",
-        "Segurança em Kubernetes: containers não são ambientes virtuais"
+        "Sua empresa está na cloud. Mas quem realmente controla quem acessa o quê?",
+        "Multi-cloud não é estratégia — é complexidade. Os melhores CISOs sabem disso.",
+        "Os incidentes de cloud que ninguém conta publicamente: essa é a conversa do CybersecFEST",
+        "Cloud security é o tema que separa quem gerencia risco de quem apenas reage",
+        "Você sabe o que está exposto no seu ambiente cloud agora? Os líderes no CybersecFEST sabem."
       ],
-      "tags": ["cloud", "aws", "ciem", "kubernetes", "misconfiguration"],
-      "tipo_post_recomendado": ["blog", "evento", "patrocinador"],
+      "tags": [
+        "cloud",
+        "risco",
+        "maturidade",
+        "exposição",
+        "liderança"
+      ],
+      "tipo_post_recomendado": [
+        "blog",
+        "evento",
+        "patrocinador"
+      ],
       "historico": []
     },
     {
       "id": "lgpd-privacidade",
-      "nome": "LGPD & Privacidade",
-      "descricao": "Conformidade, privacidade de dados e governança regulatória",
+      "nome": "LGPD, IA & Riscos Emergentes",
+      "descricao": "Conformidade, IA generativa e os riscos que os boards ainda não entendem bem",
       "angulacoes": [
-        "LGPD na prática: o que o board precisa saber agora",
-        "Privacidade by design: como construir produtos que respeitam dados",
-        "CIAM e LGPD: como gerir identidade de clientes com conformidade",
-        "Prevenção a fraudes sem violar privacidade — o equilíbrio possível",
-        "Da multa à reputação: o custo real de ignorar a LGPD"
+        "O board pergunta sobre LGPD. O CISO responde sobre risco. Essa tradução acontece no CybersecFEST.",
+        "IA generativa chegou antes da governança — e agora os líderes estão correndo atrás",
+        "Os riscos que vão dominar os próximos 24 meses: IA, privacidade e supply chain",
+        "Regulação não é burocracia — é vantagem competitiva para quem chega preparado",
+        "Quem está moldando o futuro da governança em segurança está no CybersecFEST"
       ],
-      "tags": ["lgpd", "gdpr", "privacidade", "conformidade", "ciam"],
-      "tipo_post_recomendado": ["blog", "palestrante"],
+      "tags": [
+        "lgpd",
+        "ia",
+        "risco",
+        "board",
+        "governança"
+      ],
+      "tipo_post_recomendado": [
+        "blog",
+        "palestrante"
+      ],
       "historico": []
     },
     {
       "id": "patrocinio-visibilidade",
-      "nome": "Patrocínio & Visibilidade",
-      "descricao": "Conteúdo para atrair patrocinadores — benefícios de cotas, posicionamento e networking",
+      "nome": "Patrocínio & Posicionamento",
+      "descricao": "Para empresas: posicionamento real diante de quem decide compra de tecnologia no Brasil",
       "angulacoes": [
-        "Sua marca diante dos CISOs, CTOs e decisores de segurança do Brasil",
-        "Patrocinar o CybersecFEST: muito além de um banner no evento",
-        "Como gerar pipeline real patrocinando o encontro certo",
-        "Networking de alto nível: o que acontece entre as palestras do CybersecFEST",
-        "Visibilidade de marca para quem decide compra de tecnologia no Brasil"
+        "Visibilidade qualquer evento oferece. Posicionamento só o CybersecFEST entrega.",
+        "Sua marca diante dos CISOs, CTOs e decisores que compram tecnologia no Brasil",
+        "Patrocinar o CybersecFEST não é investimento em marketing — é investimento em pipeline",
+        "As empresas que já estiveram aqui sabem: o ROI começa nas conversas do networking",
+        "Onde sua marca estará quando os líderes de segurança se reunirem em BH e SP em 2026?"
       ],
-      "tags": ["patrocinio", "cota", "visibilidade", "networking", "b2b"],
-      "tipo_post_recomendado": ["patrocinador", "evento"],
+      "tags": [
+        "patrocinio",
+        "posicionamento",
+        "pipeline",
+        "b2b",
+        "decisores"
+      ],
+      "tipo_post_recomendado": [
+        "patrocinador",
+        "evento"
+      ],
       "historico": []
     },
     {
       "id": "cybersecfest-evento",
-      "nome": "CybersecFEST — O Evento",
-      "descricao": "Divulgação direta do evento — datas, formato, público e proposta de valor",
+      "nome": "CybersecFEST — O Encontro",
+      "descricao": "O evento em si — FOMO, comunidade, exclusividade, chamada para participar",
       "angulacoes": [
-        "BH e SP em 2026: o CybersecFEST chega onde os decisores estão",
-        "O que é a Confraria de Cibersegurança e por que ela importa",
-        "De 160 para 200 participantes: como o CybersecFEST cresce a cada edição",
-        "Itaú, Gerdau, Natura, XP — quem já esteve no CybersecFEST",
-        "CybersecFEST 2026: duas cidades, uma comunidade, um propósito"
+        "Conversas viram estratégia. Conexões viram negócios. Líderes viram referência. CybersecFEST 2026.",
+        "BH em Novembro. SP em 2026. Se você ainda não garantiu seu lugar, está demorando.",
+        "O encontro mais estratégico para líderes de Cyber Security do Brasil está chegando",
+        "Não é sobre palestras. É sobre as conversas que acontecem entre elas.",
+        "Quem esteve nas edições anteriores voltou. Quem ficou fora entendeu o que perdeu."
       ],
-      "tags": ["evento", "cybersecfest", "bh", "sp", "confraria", "2026"],
-      "tipo_post_recomendado": ["evento", "cidade", "blog"],
+      "tags": [
+        "evento",
+        "fomo",
+        "comunidade",
+        "liderança",
+        "networking"
+      ],
+      "tipo_post_recomendado": [
+        "evento",
+        "cidade",
+        "blog"
+      ],
       "historico": []
     }
   ],
-
   "rotacao_layouts": {
-    "blog":        ["C", "M", "N"],
-    "evento":      ["E", "L", "J"],
-    "palestrante": ["D", "G", "K"],
-    "patrocinador":["F", "I", "B"],
-    "cidade":      ["A", "H", "J"]
+    "blog": [
+      "C",
+      "M",
+      "N"
+    ],
+    "evento": [
+      "E",
+      "L",
+      "J"
+    ],
+    "palestrante": [
+      "D",
+      "G",
+      "K"
+    ],
+    "patrocinador": [
+      "F",
+      "I",
+      "B"
+    ],
+    "cidade": [
+      "A",
+      "H",
+      "J"
+    ]
   },
-
   "calendario_editorial": {
-    "segunda": { "tipo_post": "blog",        "observacao": "Conteúdo técnico-educativo alinhado à grade programática do evento" },
-    "quarta":  { "tipo_post": "palestrante", "observacao": "Destaque de speaker, advisor ou case técnico" },
-    "sexta":   { "tipo_post": "evento",      "observacao": "Divulgação do evento, cotas, chamada para inscrição ou patrocínio" }
+    "segunda": {
+      "tipo_post": "blog",
+      "observacao": "Conteúdo técnico-educativo alinhado à grade programática do evento"
+    },
+    "quarta": {
+      "tipo_post": "palestrante",
+      "observacao": "Destaque de speaker, advisor ou case técnico"
+    },
+    "sexta": {
+      "tipo_post": "evento",
+      "observacao": "Divulgação do evento, cotas, chamada para inscrição ou patrocínio"
+    }
   },
-
   "regras_editoriais": {
-    "tom": "Executivo, direto e estratégico. Fala com CISOs e C-Level — sem jargão vazio, sem clichê.",
-    "anti_cliche": ["cadeado", "hacker encapuzado", "código verde", "escudo genérico", "transformação digital", "num mundo cada vez mais digital"],
+    "tom_principal": "Aspiracional, exclusivo, FOMO. Faz o leitor sentir que estar fora do CybersecFEST é estar fora do mercado.",
+    "pilares_de_mensagem": [
+      "FOMO — quem não está, está perdendo as conversas que importam",
+      "Comunidade exclusiva — o lugar onde líderes se encontram",
+      "Transformação — conversas viram estratégia, conexões viram negócios, líderes viram referência",
+      "Networking de alto nível — não é evento, é encontro estratégico",
+      "Para empresas: visibilidade não basta, posicionamento sim"
+    ],
+    "gatilhos_obrigatorios": [
+      "Pertencimento: 'Este é o lugar onde os melhores estão'",
+      "Exclusividade: 'Nem todo mundo entende — você entende'",
+      "FOMO: 'Quem ficou de fora, ficou fora da conversa'",
+      "Chamada à ação: 'Garanta seu acesso', 'Reserve seu lugar', 'Faça parte'"
+    ],
+    "publico_primario": [
+      "CISOs",
+      "CIOs",
+      "CTOs",
+      "CEOs",
+      "VPs de Tecnologia",
+      "Diretores de Segurança"
+    ],
+    "publico_secundario_patrocinio": [
+      "Empresas de tecnologia e segurança que querem posicionamento real no mercado"
+    ],
+    "frases_ancora": [
+      "O encontro mais estratégico para líderes de Tecnologia e Cyber Security do Brasil",
+      "Conversas viram estratégia. Conexões viram negócios. Líderes viram referência.",
+      "Networking de alto nível. Conteúdo estratégico. Experiências reais. Grandes oportunidades.",
+      "Se você é C-Level, líder ou especialista — você já entendeu.",
+      "A Principal Confraria de Cibersegurança e Identidade do Brasil",
+      "Para empresas: visibilidade não é mais suficiente. Posicionamento, sim."
+    ],
+    "proibido": [
+      "Tom técnico-acadêmico sem conexão com negócio ou pertencimento",
+      "Listas de vulnerabilidades sem contexto de comunidade",
+      "Jargão técnico isolado (ITDR, CIEM, PAM) sem traduzir para impacto executivo",
+      "Clichês: cadeados, hackers encapuzados, código verde, escudos",
+      "Aberturas genéricas: 'num mundo cada vez mais digital', 'transformação digital'",
+      "Preços de cotas de patrocínio"
+    ],
+    "estrutura_post_ideal": [
+      "1. Gancho — provoca, desafia ou cria FOMO imediato",
+      "2. Contexto — por que isso importa agora, para quem decide",
+      "3. O evento como resposta — o CybersecFEST é onde isso se resolve",
+      "4. CTA — convidar, reservar lugar, garantir acesso, entrar em contato"
+    ],
     "posicionamento_oficial": "A Principal Confraria de Cibersegurança e Identidade do Brasil",
     "nao_mencionar_precos": true,
-    "nao_inventar": ["datas exatas não confirmadas", "nomes de palestrantes não confirmados", "número de vagas", "local exato"]
+    "nao_inventar": [
+      "datas exatas não confirmadas",
+      "nomes de palestrantes não confirmados",
+      "número de vagas",
+      "local exato"
+    ]
   },
-
   "historico_recente": []
 }
