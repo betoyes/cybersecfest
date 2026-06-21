@@ -536,15 +536,16 @@
   /* ══════════════════════════════════
      MODAL — dois painéis no desktop
   ══════════════════════════════════ */
+  /* ══ MODAL ══ */
   .modal-overlay {
     display: none;
     position: fixed; inset: 0;
-    background: rgba(2,5,10,0.94);
-    backdrop-filter: blur(10px);
+    background: rgba(2,5,10,0.96);
+    backdrop-filter: blur(12px);
     z-index: 300;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 20px;
   }
   .modal-overlay.open { display: flex; }
 
@@ -552,86 +553,103 @@
     background: var(--navy);
     border: 1px solid rgba(20,168,244,0.18);
     width: 100%;
-    max-width: 900px;
-    max-height: 88vh;
+    max-width: 1160px;
+    height: calc(100vh - 40px);
+    max-height: 860px;
     display: grid;
-    grid-template-columns: 340px 1fr;
+    grid-template-columns: auto 1fr;
     overflow: hidden;
     position: relative;
   }
 
+  /* painel esquerdo — só a arte */
   .modal-preview {
-    background: var(--black);
+    background: #000;
     border-right: 1px solid var(--border);
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
     flex-shrink: 0;
   }
 
-  .modal iframe {
-    flex: 1;
-    width: 100%;
-    border: none;
-    display: block;
-    min-height: 0;
+  /* container proporcional 4:5 que cresce até preencher a altura */
+  .modal-art-box {
+    position: relative;
+    height: 100%;
+    max-height: 720px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--black);
+    flex-shrink: 0;
   }
 
+  /* iframe ocupa 540×675, escalonado por JS */
+  .modal-art-scaler {
+    position: absolute;
+    top: 0; left: 0;
+    width: 540px;
+    height: 675px;
+    transform-origin: top left;
+    /* transform: scale(X) definido por JS */
+  }
+
+  .modal-art-scaler iframe {
+    width: 540px;
+    height: 675px;
+    border: none;
+    display: block;
+    pointer-events: none;
+  }
+
+  /* painel direito */
   .modal-info {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    max-height: 88vh;
+    overflow: hidden;
+    min-width: 0;
   }
 
   .modal-info-header {
-    padding: 22px 24px 16px;
+    padding: 24px 28px 18px;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
     position: relative;
   }
 
   .modal-close {
     position: absolute;
-    top: 16px; right: 16px;
-    background: rgba(20,168,244,0.08);
-    border: 1px solid rgba(20,168,244,0.18);
+    top: 18px; right: 18px;
+    background: transparent;
+    border: 1px solid rgba(148,160,184,0.2);
     color: var(--muted);
-    width: 28px; height: 28px;
+    width: 30px; height: 30px;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; font-size: 14px;
-    transition: all 0.2s;
+    transition: all 0.2s; border-radius: 2px;
   }
-  .modal-close:hover { color: var(--white); border-color: var(--blue); background: rgba(20,168,244,0.15); }
+  .modal-close:hover { color: var(--white); border-color: var(--white); }
 
   .modal-badge {
     display: inline-flex;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: rgba(20,168,244,0.08);
-    border: 1px solid rgba(20,168,244,0.2);
-    padding: 3px 8px;
-    margin-bottom: 10px;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--blue);
+    background: rgba(20,168,244,0.08); border: 1px solid rgba(20,168,244,0.2);
+    padding: 3px 8px; margin-bottom: 10px;
   }
 
   .modal-headline {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.25;
-    text-transform: uppercase;
-    color: var(--white);
-    padding-right: 36px;
+    font-family: 'Ubuntu', sans-serif; font-weight: 700;
+    font-size: 16px; line-height: 1.25;
+    text-transform: uppercase; color: var(--white);
+    padding-right: 40px;
   }
 
+  /* scroll só no corpo da direita */
   .modal-body {
-    padding: 18px 24px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex: 1;
+    padding: 22px 28px 28px;
+    display: flex; flex-direction: column; gap: 20px;
+    overflow-y: auto; flex: 1;
   }
 
   .modal-actions {
@@ -738,9 +756,11 @@
     .toolbar { padding: 0 28px; }
     .gallery-wrap { padding: 28px 28px 60px; }
     footer { padding: 18px 28px; }
-    .modal { grid-template-columns: 1fr; max-width: 520px; }
-    .modal-preview { height: 340px; border-right: none; border-bottom: 1px solid var(--border); }
-    .modal-info { max-height: 50vh; }
+    .modal { grid-template-columns: 1fr; max-width: 520px; height: auto; max-height: 92vh; }
+    .modal-preview { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .modal-art-box { max-height: 360px; }
+    .modal-info { min-height: 0; }
+    .modal-body { max-height: 42vh; }
   }
 
   @media (max-width: 640px) {
@@ -758,13 +778,13 @@
     .modal {
       grid-template-columns: 1fr;
       max-width: 100%; width: 100%;
-      max-height: 92vh;
-      border-radius: 12px 12px 0 0;
+      height: auto; max-height: 95vh;
+      border-radius: 14px 14px 0 0;
       border-left: none; border-right: none; border-bottom: none;
     }
-    .modal-preview { height: 260px; }
-    .modal-info { max-height: 60vh; }
-    .modal-body { padding: 14px 16px 24px; }
+    .modal-preview { padding: 16px; border-right: none; border-bottom: 1px solid var(--border); }
+    .modal-art-box { max-height: 280px; }
+    .modal-body { padding: 14px 18px 28px; max-height: 45vh; }
   }
 </style>
 </head>
@@ -851,9 +871,17 @@
 <!-- ══ MODAL ══ -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal" id="modal-inner">
+
+    <!-- PAINEL ESQUERDO: arte composta -->
     <div class="modal-preview">
-      <iframe id="modal-iframe" src=""></iframe>
+      <div class="modal-art-box" id="modal-art-box">
+        <div class="modal-art-scaler" id="modal-art-scaler">
+          <iframe id="modal-iframe" src="" scrolling="no"></iframe>
+        </div>
+      </div>
     </div>
+
+    <!-- PAINEL DIREITO: info -->
     <div class="modal-info">
       <div class="modal-info-header">
         <button class="modal-close" onclick="closeModal()">✕</button>
@@ -872,6 +900,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1002,9 +1031,45 @@ function setFilter(tipo, btn) {
   applyFilters();
 }
 
+function scaleModalArt() {
+  const box = document.getElementById('modal-art-box');
+  const scaler = document.getElementById('modal-art-scaler');
+  if (!box || !scaler) return;
+  const boxW = box.offsetWidth || 360;
+  const scale = boxW / 540;
+  scaler.style.transform = `scale(${scale})`;
+}
+
 function openModal(slug, arte) {
   const modal = document.getElementById('modal');
-  document.getElementById('modal-iframe').src = 'artes/' + slug + '/arte.html';
+  const iframe = document.getElementById('modal-iframe');
+
+  // limpar iframe anterior
+  iframe.src = '';
+
+  // escalar art box
+  setTimeout(scaleModalArt, 0);
+
+  // carregar arte e limpar label/toolbar após load
+  iframe.onload = function() {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      // esconder label, toolbar e qualquer elemento fora do canvas
+      ['#toolbar','.toolbar','.label','.download-toolbar','#download-btn','[class*="toolbar"]']
+        .forEach(sel => { try { doc.querySelectorAll(sel).forEach(el => el.style.display='none'); } catch(e){} });
+      // remover padding do body para o canvas ficar no topo
+      if (doc.body) {
+        doc.body.style.padding = '0';
+        doc.body.style.margin = '0';
+        doc.body.style.minHeight = 'unset';
+        doc.body.style.background = '#02050A';
+      }
+      // reescalar após DOM atualizado
+      scaleModalArt();
+    } catch(e) { console.warn('iframe style:', e); }
+  };
+
+  iframe.src = 'artes/' + slug + '/arte.html';
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
