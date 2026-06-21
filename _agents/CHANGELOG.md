@@ -1,5 +1,25 @@
 # CybersecFEST — Agents Changelog
 
+# CybersecFEST — Agents Changelog
+
+## 2026-06-21 (sessão 3)
+
+### Gerador de Artes v2.4.0
+- **#4 Variação A/B de legenda:** PASSO 4 reformulado — gera 2 versões com ângulos distintos (FOMO/urgência vs aspiracional/conquista)
+- Painel de escolha A/B exibido ao usuário com separadores visuais antes do upload — agente pausa e aguarda confirmação
+- Suporte a "editar": ajuste de uma versão sem perder a outra
+- Campo `legenda_variante` ("A" ou "B") adicionado ao registro em artes.json para rastreabilidade de performance
+- Score ≥ 7/10 aplicado individualmente a cada variante antes de apresentar
+
+### Galeria (index.html) — melhorias visuais
+- **#6 Dashboard de métricas:** 4 painéis com barras clicáveis — Por Tipo (azul), Por Layout (ciano), Por Cidade (lilás), Legenda A/B (verde)
+  - Painel Cidade normaliza entradas compostas ("BH e SP" → BH + SP separados)
+  - Painel A/B acumula dados de legenda_variante do artes.json
+- **Fix scroll iframes:** cards da home não exibem mais scrollbar em artes antigas
+- **Toggle modal ◀▶ Legenda:** botão no painel da arte que recolhe/expande o painel de metadados com transição suave; arte reescalada automaticamente
+
+---
+
 ## 2026-06-21 (sessão 2)
 
 ### Pipeline Orquestrador v1.5.2
