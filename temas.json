@@ -1,84 +1,277 @@
 {
   "_meta": {
-    "versao": "1.0.0",
-    "descricao": "Banco de temas pré-aprovados do CybersecFEST com histórico de uso e regras de rotação",
-    "atualizado_em": "2026-06-21"
+    "versao": "2.0.0",
+    "descricao": "Banco de temas do CybersecFEST 2026 — contexto real do evento, temas alinhados à grade programática, cotas de patrocínio com benefícios",
+    "atualizado_em": "2026-06-21",
+    "fonte": "Mídia Kit oficial CybersecFEST 2026"
+  },
+
+  "evento": {
+    "nome": "CybersecFEST 2026",
+    "posicionamento": "A Principal Confraria de Cibersegurança e Identidade do Brasil",
+    "formato": "Presencial & Executivo",
+    "horario": "8h às 21h",
+    "publico_alvo": ["CISOs", "CIOs", "CTOs", "Diretores", "C-Level", "HEADs", "Gerentes Sênior"],
+    "edicoes_2026": [
+      {
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "mes": "Novembro",
+        "ano": 2026,
+        "status": "confirmada",
+        "local": "A definir"
+      },
+      {
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "mes": "A definir",
+        "ano": 2026,
+        "status": "confirmada",
+        "local": "A definir"
+      }
+    ],
+    "historico": [
+      { "edicao": "CyberFest BH 2024",       "palestras": 21,  "parceiros": 20, "participantes": 160  },
+      { "edicao": "CyberSecFest BH 2025",     "palestras": 30,  "parceiros": 27, "participantes": 200  },
+      { "edicao": "IAM Tech Day SP 2023",      "palestras": 45,  "parceiros": 20, "participantes": 360  },
+      { "edicao": "IAM Tech Day SP 2024",      "palestras": 60,  "parceiros": 25, "participantes": 1600 },
+      { "edicao": "IAM Tech Day SP 2025",      "palestras": 120, "parceiros": 30, "participantes": 2200 }
+    ],
+    "marcas_participantes_anteriores": [
+      "UnimedBH", "Drogaria Araujo", "Localiza & Co", "Natura", "Itaú", "XP",
+      "AeC", "Stellantis", "Grupo Sada", "VLI Logística", "Grupo Casas Bahia",
+      "Banco Inter", "Rede MaterDei Saúde", "Gerdau"
+    ],
+    "realizadores": [
+      {
+        "nome": "DevOps Bootcamp",
+        "responsavel": "Amanda Pinto",
+        "cargo": "CEO & Founder",
+        "descricao": "Maior ecossistema de DevOps do Brasil — 120k+ membros globais",
+        "contato": "amanda@devopsbootcamp.net",
+        "telefone": "+55 31 98476 2969"
+      },
+      {
+        "nome": "IAM Tech Day / Alcatraz Security",
+        "responsavel": "Alfredo Santos",
+        "cargo": "IAM Main Advisor",
+        "descricao": "Consultor em Cibersegurança, IAM e Privacidade — 28+ anos de experiência, autor de livros sobre IAM",
+        "contato": "alfredo@astecnologia.org",
+        "telefone": "+351 93444 3547"
+      }
+    ],
+    "grade_programatica": [
+      "IAM — Gerenciamento de Identidade e Acessos",
+      "IAG — Governança de Identidade e Acessos",
+      "PAM — Gerenciamento de Acessos Privilegiados",
+      "MFA — Autenticação Multifator",
+      "CIAM — Gestão de Identidade e Acesso do Cliente",
+      "CIEM — Gestão de Permissões em Infraestruturas Cloud",
+      "ITDR — Detecção e Resposta a Ameaças de Identidade",
+      "DevSecOps — Segurança Integrada ao Desenvolvimento",
+      "APIs — Controle de Acesso a APIs",
+      "LGPD/GDPR/Privacidade",
+      "Prevenção a Fraudes & Modelagem de Ameaças",
+      "Cloud Security — AWS, Azure, GCP",
+      "Pentesting — Testes de Invasão",
+      "Proteção de Dados",
+      "Segurança de Infraestrutura",
+      "Account Takeover — Prevenção de Sequestro de Contas"
+    ],
+    "experiencia_evento": [
+      "Welcome Coffee", "Almoço de Negócios", "Coffee Break", "Coquetel",
+      "Circuito Gastronômico", "Networking de Alto Nível", "Podcast ao Vivo",
+      "Drink Experience", "Palestras e Keynotes", "Painéis Estratégicos"
+    ]
+  },
+
+  "patrocinio": {
+    "status_divulgacao": "beneficios_sem_preco",
+    "observacao": "Divulgar benefícios e diferenciais de cada cota. NÃO mencionar valores por enquanto.",
+    "cotas_destaque": [
+      {
+        "nome": "Emerald",
+        "tipo": "destaque",
+        "nivel": 1,
+        "beneficios": [
+          "Keynote exclusivo de 10 minutos no palco principal",
+          "Palestra de 30 minutos",
+          "3 entrevistas ao vivo com C-Levels e especialistas",
+          "7 ingressos para o time + 10 ingressos para clientes",
+          "Espaço Lounge exclusivo de 6m×3m",
+          "Totem vertical com marca do parceiro",
+          "TV e vídeo institucional nos LEDs do evento",
+          "Ativação de marca — Roleta Interativa de Prêmios",
+          "Mídia exclusiva: vídeos e fotos profissionais",
+          "Acesso ao mailing de inscritos do evento"
+        ]
+      },
+      {
+        "nome": "Diamond",
+        "tipo": "destaque",
+        "nivel": 2,
+        "beneficios": [
+          "Palestra de 25 minutos",
+          "2 entrevistas ao vivo",
+          "5 ingressos para o time + 7 ingressos para clientes",
+          "Espaço Lounge de 3m×3m",
+          "Totem vertical com marca do parceiro",
+          "TV e vídeo institucional nos LEDs",
+          "Ativação de marca — Roleta Interativa de Prêmios",
+          "Mídia exclusiva: vídeos e fotos",
+          "Acesso ao mailing de inscritos"
+        ]
+      },
+      {
+        "nome": "Gold",
+        "tipo": "destaque",
+        "nivel": 3,
+        "beneficios": [
+          "Palestra de 20 minutos",
+          "1 entrevista ao vivo",
+          "3 ingressos para o time + 5 ingressos para clientes",
+          "Espaço Lounge de 3m×3m",
+          "Totem vertical com marca do parceiro",
+          "TV e vídeo institucional nos LEDs",
+          "Ativação de marca — Roleta Interativa de Prêmios",
+          "Mídia exclusiva: vídeos e fotos",
+          "Acesso ao mailing de inscritos"
+        ]
+      }
+    ],
+    "cotas_tematicas": [
+      {
+        "nome": "Podcast",
+        "beneficios": [
+          "Naming Rights exclusivo: 'Apresentado por [Empresa]'",
+          "Entrevistas ao vivo com C-Levels e especialistas da indústria",
+          "Logo em destaque em todos os assets visuais",
+          "Menções verbais no início, meio e fim de cada episódio",
+          "Executivo da empresa como convidado especial",
+          "Direitos completos do conteúdo — áudio e vídeo",
+          "Social clips personalizados para LinkedIn e Instagram",
+          "7 ingressos para o time + 10 para clientes"
+        ]
+      },
+      {
+        "nome": "Happy Hour",
+        "beneficios": [
+          "Naming Rights exclusivo do Happy Hour",
+          "Produção completa do circuito gastronômico",
+          "Cenografia temática dedicada à marca",
+          "DJ e solução audiovisual completa",
+          "Ativação de marca — Roleta Interativa de Prêmios",
+          "2 entrevistas ao vivo",
+          "5 ingressos para o time + 10 para clientes",
+          "Mídia exclusiva e mailing"
+        ]
+      },
+      {
+        "nome": "Drink Experience",
+        "beneficios": [
+          "Bar interativo com mixologista — drinks em copos personalizados",
+          "Ponto de interação e conexão entre os convidados",
+          "Exposição de marca no espaço dedicado",
+          "Vídeo institucional nos LEDs do evento",
+          "2 entrevistas ao vivo",
+          "5 ingressos para o time + 10 para clientes",
+          "Mídia exclusiva e mailing"
+        ]
+      },
+      {
+        "nome": "Lunch",
+        "beneficios": [
+          "Naming Rights do Almoço de Negócios",
+          "Produção e cenografia temática completa",
+          "Exposição de marca em mesas e materiais",
+          "Vídeo institucional nos LEDs",
+          "2 entrevistas ao vivo",
+          "Ativação de marca — Roleta Interativa de Prêmios",
+          "5 ingressos para o time",
+          "Mídia exclusiva e mailing"
+        ]
+      },
+      {
+        "nome": "Welcome Coffee",
+        "beneficios": [
+          "Naming Rights do Welcome Coffee — primeiro contato dos participantes",
+          "Vídeo da marca em LED durante todo o evento",
+          "Cenografia temática dedicada",
+          "Produção gastronômica completa",
+          "2 ingressos para o time",
+          "Mídia exclusiva e mailing"
+        ]
+      },
+      {
+        "nome": "Coffee Break",
+        "beneficios": [
+          "Naming Rights do Coffee Break",
+          "Vídeo institucional nos LEDs",
+          "Cenografia e produção gastronômica temática",
+          "2 ingressos para o time",
+          "Mídia exclusiva e mailing"
+        ]
+      },
+      {
+        "nome": "Catering",
+        "beneficios": [
+          "Estação Full-Time no Foyer durante todo o evento",
+          "Estação de Café Executivo Nespresso com branding exclusivo",
+          "Personalização gastronômica completa com a marca",
+          "Branding personalizado no café",
+          "Vídeo institucional nos LEDs",
+          "5 ingressos para o time + 10 para clientes",
+          "2 entrevistas ao vivo",
+          "Mídia exclusiva e mailing"
+        ]
+      }
+    ]
   },
 
   "temas": [
     {
-      "id": "zero-trust",
-      "nome": "Zero Trust",
-      "descricao": "Arquitetura de confiança zero — nunca confie, sempre verifique",
+      "id": "iam-identidade",
+      "nome": "IAM & Identidade",
+      "descricao": "Gerenciamento de Identidade e Acessos — o tema central do CybersecFEST",
       "angulacoes": [
-        "Por que 'nunca confiar' é a única política segura",
-        "Zero Trust não é produto, é filosofia",
-        "Como implementar Zero Trust sem parar o negócio",
-        "Zero Trust além do perímetro: identidade como novo firewall",
-        "Maturidade Zero Trust: onde sua empresa está?"
+        "Identidade é o novo perímetro — e está sob ataque constante",
+        "MFA não basta: o que vem depois da autenticação multifator",
+        "IAM na prática: como proteger acessos sem travar o negócio",
+        "Account Takeover: o sequestro silencioso que derruba empresas",
+        "ITDR — Detecção de ameaças à identidade em tempo real"
       ],
-      "tags": ["arquitetura", "identidade", "perimetro", "politica"],
-      "tipo_post_recomendado": ["blog", "palestrante"],
-      "historico": []
-    },
-    {
-      "id": "ia-generativa",
-      "nome": "IA Generativa",
-      "descricao": "Oportunidades e riscos da IA generativa em segurança corporativa",
-      "angulacoes": [
-        "IA generativa: aliada ou vetor de ataque?",
-        "Como atacantes usam LLMs para escalar phishing",
-        "Governança de IA: quem controla os modelos controla o risco",
-        "SOC aumentado por IA: triagem em segundos, não horas",
-        "Deepfakes corporativos: o novo vetor de engenharia social"
-      ],
-      "tags": ["ia", "llm", "phishing", "soc", "deepfake"],
-      "tipo_post_recomendado": ["blog", "evento"],
-      "historico": []
-    },
-    {
-      "id": "identidade",
-      "nome": "Identidade",
-      "descricao": "Gestão de identidade e acesso como pilar central da segurança",
-      "angulacoes": [
-        "Identidade é o novo perímetro — e está sob ataque",
-        "MFA não é suficiente: o que vem depois",
-        "Gestão de identidades privilegiadas (PAM) na prática",
-        "Como o roubo de credenciais derruba empresas Fortune 500",
-        "Identidade descentralizada: o futuro do IAM"
-      ],
-      "tags": ["iam", "mfa", "pam", "credenciais", "acesso"],
+      "tags": ["iam", "iag", "identidade", "mfa", "account-takeover", "itdr"],
       "tipo_post_recomendado": ["blog", "palestrante", "patrocinador"],
       "historico": []
     },
     {
-      "id": "resiliencia",
-      "nome": "Resiliência",
-      "descricao": "Continuidade de negócios, resposta a incidentes e recuperação de desastres",
+      "id": "pam-acessos-privilegiados",
+      "nome": "PAM & Acessos Privilegiados",
+      "descricao": "Gerenciamento de Acessos Privilegiados — proteção dos usuários e sistemas mais críticos",
       "angulacoes": [
-        "Resiliência cibernética não é backup — é cultura",
-        "Quanto tempo sua empresa sobrevive após um ransomware?",
-        "Simulação de crise: por que os exercícios de tabletop salvam empresas",
-        "RTO e RPO na era do ransomware moderno",
-        "De vítima a sobrevivente: lições de quem passou por um ataque"
+        "PAM: por que as contas privilegiadas são o alvo número 1 dos atacantes",
+        "Como um único acesso privilegiado comprometido derruba uma empresa",
+        "PAM além do cofre de senhas: o que maturidade real significa",
+        "Acessos privilegiados em cloud: o desafio que a maioria ignora",
+        "Gestão de acessos de terceiros — o elo mais fraco da cadeia"
       ],
-      "tags": ["continuidade", "ransomware", "incidente", "backup", "rto"],
-      "tipo_post_recomendado": ["blog", "evento", "palestrante"],
+      "tags": ["pam", "privilegiado", "credencial", "cofre", "terceiros"],
+      "tipo_post_recomendado": ["blog", "palestrante", "patrocinador"],
       "historico": []
     },
     {
-      "id": "governanca",
-      "nome": "Governança",
-      "descricao": "Frameworks, compliance, regulação e maturidade de segurança",
+      "id": "devsecops-apis",
+      "nome": "DevSecOps & APIs",
+      "descricao": "Segurança integrada ao desenvolvimento e proteção de APIs",
       "angulacoes": [
-        "NIST, ISO 27001 ou CIS Controls: qual framework escolher?",
-        "LGPD + segurança: o que o board precisa saber",
-        "Métricas que o C-level entende (e que importam de verdade)",
-        "Red tape ou proteção real? Repensando o compliance",
-        "Como construir um programa de segurança do zero"
+        "DevSecOps: quando segurança entra no pipeline antes do deploy",
+        "APIs são a nova superfície de ataque — e maioria das empresas ignora",
+        "Shift-left security: como os times de engenharia estão assumindo o risco",
+        "Controle de acesso a APIs: o que o OWASP API Top 10 nos ensina",
+        "Segurança sem atrito: como integrar AppSec sem parar o time de produto"
       ],
-      "tags": ["compliance", "nist", "iso27001", "lgpd", "framework"],
-      "tipo_post_recomendado": ["blog", "palestrante"],
+      "tags": ["devsecops", "api", "pipeline", "shift-left", "appsec"],
+      "tipo_post_recomendado": ["blog", "palestrante", "evento"],
       "historico": []
     },
     {
@@ -86,29 +279,59 @@
       "nome": "Cloud Security",
       "descricao": "Segurança em ambientes cloud — AWS, Azure, GCP e multi-cloud",
       "angulacoes": [
-        "Misconfiguration: o maior vetor de ataque em cloud",
-        "CSPM vs CWPP: qual cobre seu ambiente?",
-        "Segurança em Kubernetes: containers não são virtuais",
-        "Responsabilidade compartilhada: o que a cloud não protege",
-        "Multi-cloud security: complexidade dobrada, risco triplicado"
+        "Misconfiguration: o maior vetor de ataque em cloud que ninguém fala",
+        "CIEM: quem realmente tem acesso à sua infraestrutura cloud?",
+        "Responsabilidade compartilhada: o que a cloud não protege por você",
+        "Multi-cloud security: complexidade dobrada, risco triplicado",
+        "Segurança em Kubernetes: containers não são ambientes virtuais"
       ],
-      "tags": ["cloud", "aws", "kubernetes", "cspm", "misconfiguration"],
+      "tags": ["cloud", "aws", "ciem", "kubernetes", "misconfiguration"],
       "tipo_post_recomendado": ["blog", "evento", "patrocinador"],
       "historico": []
     },
     {
-      "id": "risco-corporativo",
-      "nome": "Risco Corporativo",
-      "descricao": "Gestão de risco cibernético no contexto executivo e de negócios",
+      "id": "lgpd-privacidade",
+      "nome": "LGPD & Privacidade",
+      "descricao": "Conformidade, privacidade de dados e governança regulatória",
       "angulacoes": [
-        "Cibersegurança como vantagem competitiva, não custo",
-        "Como apresentar risco cibernético ao conselho de administração",
-        "Seguro cibernético: o que cobre e o que deixa descoberto",
-        "Terceiros e cadeia de suprimentos: o elo mais fraco",
-        "Quantificando risco: do CVSS ao impacto financeiro real"
+        "LGPD na prática: o que o board precisa saber agora",
+        "Privacidade by design: como construir produtos que respeitam dados",
+        "CIAM e LGPD: como gerir identidade de clientes com conformidade",
+        "Prevenção a fraudes sem violar privacidade — o equilíbrio possível",
+        "Da multa à reputação: o custo real de ignorar a LGPD"
       ],
-      "tags": ["risco", "board", "seguro", "terceiros", "impacto"],
-      "tipo_post_recomendado": ["blog", "palestrante", "evento"],
+      "tags": ["lgpd", "gdpr", "privacidade", "conformidade", "ciam"],
+      "tipo_post_recomendado": ["blog", "palestrante"],
+      "historico": []
+    },
+    {
+      "id": "patrocinio-visibilidade",
+      "nome": "Patrocínio & Visibilidade",
+      "descricao": "Conteúdo para atrair patrocinadores — benefícios de cotas, posicionamento e networking",
+      "angulacoes": [
+        "Sua marca diante dos CISOs, CTOs e decisores de segurança do Brasil",
+        "Patrocinar o CybersecFEST: muito além de um banner no evento",
+        "Como gerar pipeline real patrocinando o encontro certo",
+        "Networking de alto nível: o que acontece entre as palestras do CybersecFEST",
+        "Visibilidade de marca para quem decide compra de tecnologia no Brasil"
+      ],
+      "tags": ["patrocinio", "cota", "visibilidade", "networking", "b2b"],
+      "tipo_post_recomendado": ["patrocinador", "evento"],
+      "historico": []
+    },
+    {
+      "id": "cybersecfest-evento",
+      "nome": "CybersecFEST — O Evento",
+      "descricao": "Divulgação direta do evento — datas, formato, público e proposta de valor",
+      "angulacoes": [
+        "BH e SP em 2026: o CybersecFEST chega onde os decisores estão",
+        "O que é a Confraria de Cibersegurança e por que ela importa",
+        "De 160 para 200 participantes: como o CybersecFEST cresce a cada edição",
+        "Itaú, Gerdau, Natura, XP — quem já esteve no CybersecFEST",
+        "CybersecFEST 2026: duas cidades, uma comunidade, um propósito"
+      ],
+      "tags": ["evento", "cybersecfest", "bh", "sp", "confraria", "2026"],
+      "tipo_post_recomendado": ["evento", "cidade", "blog"],
       "historico": []
     }
   ],
@@ -122,9 +345,17 @@
   },
 
   "calendario_editorial": {
-    "segunda": { "tipo_post": "blog",        "observacao": "Conteúdo educativo semanal" },
-    "quarta":  { "tipo_post": "palestrante", "observacao": "Destaque de speaker ou conteúdo técnico" },
-    "sexta":   { "tipo_post": "evento",      "observacao": "Aquecimento de fim de semana / CTA" }
+    "segunda": { "tipo_post": "blog",        "observacao": "Conteúdo técnico-educativo alinhado à grade programática do evento" },
+    "quarta":  { "tipo_post": "palestrante", "observacao": "Destaque de speaker, advisor ou case técnico" },
+    "sexta":   { "tipo_post": "evento",      "observacao": "Divulgação do evento, cotas, chamada para inscrição ou patrocínio" }
+  },
+
+  "regras_editoriais": {
+    "tom": "Executivo, direto e estratégico. Fala com CISOs e C-Level — sem jargão vazio, sem clichê.",
+    "anti_cliche": ["cadeado", "hacker encapuzado", "código verde", "escudo genérico", "transformação digital", "num mundo cada vez mais digital"],
+    "posicionamento_oficial": "A Principal Confraria de Cibersegurança e Identidade do Brasil",
+    "nao_mencionar_precos": true,
+    "nao_inventar": ["datas exatas não confirmadas", "nomes de palestrantes não confirmados", "número de vagas", "local exato"]
   },
 
   "historico_recente": []
