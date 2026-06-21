@@ -81,6 +81,30 @@ Exemplo de leitura:
 
 **Os `temas[]` são INSPIRAÇÃO temática. O agente cria ângulos próprios.**
 
+**Mapa de Bloqueio (construir antes do PASSO 4):**
+
+Com os dados já carregados, montar internamente dois mapas:
+
+```
+BLOQUEADOS (não usar):
+  Layouts recentes:  últimos 3 layouts usados para o tipo_post atual (de historico_recente)
+  Ângulos rejeitados: últimas 5 entradas rejeitadas para o tipo_post atual (de historico_aprovacoes)
+                      → extrair padrão do angulo_resumo + motivo
+
+REFORÇAR (padrões que funcionaram):
+  Ângulos aprovados:  últimas 5 entradas aprovadas para o tipo_post atual (de historico_aprovacoes)
+                      → extrair tipo de gancho + estrutura emocional
+```
+
+Exemplo montado:
+```
+[BLOQUEADO] layout M (usado na última postagem blog)
+[BLOQUEADO] ângulo "dado estatístico isolado" (rejeitado em 2026-06-18, motivo: sem tensão humana)
+[REFORÇAR]  gancho de contraste antes/depois (aprovado 2x nos últimos 10 posts)
+```
+
+Este mapa guia diretamente a criação no PASSO 4. Não é opcional.
+
 ### PASSO 2 — Determinar Tipo de Post
 - segunda → blog | quarta → palestrante | sexta → evento | outros → blog
 
@@ -94,7 +118,14 @@ Exemplo de leitura:
 
 Processo criativo para cada briefing:
 
-**1. Escolher um ângulo único** — algo inesperado, que para o scroll, que faz o leitor se reconhecer.
+**1. Consultar o Mapa de Bloqueio e escolher um ângulo único**
+
+Antes de escrever qualquer linha, verificar:
+- O layout selecionado não está nos bloqueados
+- A estrutura do ângulo não repete nenhum padrão rejeitado
+- Se houver padrões aprovados → usá-los como ponto de partida, variando o tema
+
+Depois, escolher algo inesperado, que para o scroll, que faz o leitor se reconhecer.
 
 **2. Perguntas internas obrigatórias antes de escrever:**
 - "Essa headline faria um CISO parar o que está fazendo para ler?"
@@ -113,26 +144,32 @@ Processo criativo para cada briefing:
 Pessoas em networking real, salas de liderança, ambientes premium escuros, conversas de alto nível.
 Nunca: servidores, telas de hack, código, cadeados.
 
-**Formato de entrega:**
-```
-BRIEFING [N]:
-─────────────────────────────────────────────────
-TIPO DE POST:      <tipo_post>
-LAYOUT SUGERIDO:   <letra> — <nome do layout>
-FOCO DA IMAGEM:    <zona>
+**Formato de entrega — Card Visual:**
 
-HEADLINE:          <para o scroll — máx 8 palavras>
-PALAVRAS AZUIS:    <1–3 palavras de impacto>
-SUBTÍTULO:         <complementa com convite — máx 12 palavras>
+---
 
-CONTEXTO VISUAL:   <cena aspiracional: quem, onde, atmosfera, iluminação,
-                    posição do sujeito no foco do layout, fundo #02050A>
+## 🎨 BRIEFING [N] — `<TIPO_POST>` · Layout `<LETRA>`
 
-LEGENDA:           <gancho → tensão → CybersecFEST como resposta → CTA>
+> **`<HEADLINE COMPLETA>`**
+> *Palavras em azul: <palavras_azuis>*
 
-POR QUÊ ESTE ÂNGULO: <1 frase justificando a escolha criativa>
-─────────────────────────────────────────────────
-```
+| Campo | Conteúdo |
+|---|---|
+| **Subtítulo** | <subtítulo — máx 12 palavras> |
+| **Layout** | `<Letra>` — <Nome> · Foco: <zona> |
+| **Formato** | <feed_vertical / feed_quadrado / linkedin> |
+| **Cidade** | <cidade ou ambas> |
+
+**📸 Contexto Visual:**
+> <cena aspiracional em 2–3 linhas: quem, onde, atmosfera, iluminação, posição do sujeito no foco do layout, fundo #02050A>
+
+**📝 Legenda:**
+<legenda completa formatada — gancho → tensão → CybersecFEST → CTA → hashtags>
+
+**💡 Por que este ângulo:**
+*<1 frase justificando a escolha criativa e como evita padrões bloqueados>*
+
+---
 
 **Checklist interno antes de entregar:**
 - [ ] Gancho para o scroll — um CISO pararia para ler?
@@ -144,15 +181,22 @@ POR QUÊ ESTE ÂNGULO: <1 frase justificando a escolha criativa>
 - [ ] Ângulo não repete padrão rejeitado recentemente (checar historico_aprovacoes)
 - [ ] Patrocinador: benefícios sem preços
 
-### PASSO 5 — Apresentar e Aguardar Aprovação
-Apresentar os N briefings. **Não avançar sem confirmação explícita.**
+### PASSO 5 — Apresentar Preview e Aguardar Aprovação
 
-Ao apresentar cada briefing, incluir bloco de aprovação:
+Apresentar os N cards de briefing (formato acima). Após os cards, exibir painel de decisão unificado:
+
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ APROVAR este briefing → responda: "aprovar [N]"
-❌ REJEITAR este briefing → responda: "rejeitar [N]: [motivo]"
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 DECISÃO — responda com um dos comandos abaixo:
+
+  ✅ aprovar 1         → aprovar briefing 1
+  ✅ aprovar 2         → aprovar briefing 2
+  ✅ aprovar 1 2       → aprovar ambos
+  ❌ rejeitar 1: motivo → rejeitar briefing 1 com motivo
+  🔄 refazer 1         → gerar novo ângulo para o briefing 1
+
+Não avançar para geração sem pelo menos 1 aprovação explícita.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ### PASSO 5.5 — Registrar Decisão no historico_aprovacoes
