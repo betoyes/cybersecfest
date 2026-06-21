@@ -698,7 +698,7 @@
     cursor: pointer; transition: all 0.2s;
   }
   .btn-copy:hover { background: rgba(20,168,244,0.18); border-color: var(--blue); }
-  .btn-copy.copied { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
+  .btn-copy.copied, .btn-view.copied { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
 
   .modal-caption-text {
     font-size: 11px; font-weight: 400; line-height: 1.75;
@@ -887,6 +887,7 @@
 
 <script>
 let allArtes = [];
+let arteMap = {};
 let currentFilter = 'all';
 let currentCidade = 'all';
 
@@ -901,6 +902,7 @@ async function loadArtes() {
     if (!res.ok) return;
     allArtes = await res.json();
     allArtes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    arteMap = Object.fromEntries(allArtes.map(a => [a.slug, a]));
     renderStats();
     renderCidadeFilters();
     renderGrid(allArtes);
@@ -967,7 +969,7 @@ function renderGrid(artes) {
       : '<div class="card-thumb-fallback">✦</div>';
     const date = new Date(arte.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
     return `
-    <div class="card" onclick="openModal('${arte.slug}', `+JSON.stringify(arte)+`)">
+    <div class="card" data-slug="${arte.slug}" onclick="openModalBySlug('${arte.slug}')">
       <div class="card-thumb">
         <div class="card-frame-outer">
           ${fallback}
@@ -978,7 +980,7 @@ function renderGrid(artes) {
         <div class="card-overlay">
           <div class="overlay-headline">${arte.headline}</div>
           <div class="overlay-actions">
-            <a class="btn-action btn-view" href="artes/${arte.slug}/" target="_blank" onclick="event.stopPropagation()">↗ Ver</a>
+            <button class="btn-action btn-view" onclick="event.stopPropagation(); openModalBySlug('${arte.slug}')">Ver arte</button>
             <a class="btn-action btn-dl" href="artes/${arte.slug}/arte.html" download onclick="event.stopPropagation()">↓ HTML</a>
           </div>
         </div>
@@ -1006,7 +1008,7 @@ function openModal(slug, arte) {
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
-    <a class="btn-action btn-view" href="artes/${slug}/" target="_blank">↗ Página da arte</a>
+    <button class="btn-action btn-view" id="btn-copy-link" onclick="copyArteLink('${slug}')">🔗 Copiar link</button>
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ HTML</a>
     <button class="btn-action btn-dl" id="btn-download-png" onclick="downloadArtePNG('${slug}')">↓ PNG</button>
   `;
@@ -1039,6 +1041,22 @@ function copyCaption() {
     const btn = document.getElementById('btn-copy');
     btn.classList.add('copied'); btn.textContent = '✓ Copiado!';
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘ Copiar'; }, 2000);
+  });
+}
+
+function openModalBySlug(slug) {
+  const arte = arteMap[slug];
+  if (arte) openModal(slug, arte);
+}
+
+function copyArteLink(slug) {
+  const url = `${location.origin}/artes/${slug}/`;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('btn-copy-link');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Link copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
   });
 }
 
