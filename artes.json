@@ -24,5 +24,19 @@
     "image_path": "artes/evento-1782045624931/thumb.png",
     "html_path": "artes/evento-1782045624931/arte.html",
     "created_at": "2026-06-21T12:40:27.598Z"
+  },
+  {
+    "slug": "blog-1782058741657",
+    "tipo": "blog",
+    "headline": "Você gerencia risco. Ou só reage a ele?",
+    "palavras_azuis": "GERENCIA RISCO",
+    "subtitulo": "O CISO que lidera o futuro está nessa sala.",
+    "cidade": "BH e SP",
+    "formato": "feed_vertical",
+    "layout": "C",
+    "legenda": "Tem uma diferença enorme entre gerenciar risco e reagir a ele.\n\nA maioria das empresas ainda reage.\nEspera o incidente. Monta o comitê de crise. Aprende tarde demais.\n\nOs líderes que chegam ao CybersecFEST já decidiram:\nsegurança é vantagem competitiva, não custo de conformidade.\n\n🔹 BH — 05 de novembro.\n🔹 SP — Outubro.\n🔹 Vagas limitadas por curadoria.\n\n✅ Garanta sua cadeira: [link]\n\n#CyberSecFest #CISO #CyberSecurity #Liderança #CyberRisk #Identity #CloudSecurity #DevSecOps #ZeroTrust #Resilience #CLevel #Tecnologia",
+    "image_path": "artes/blog-1782058741657/thumb.png",
+    "html_path": "artes/blog-1782058741657/arte.html",
+    "created_at": "2026-06-21T00:00:00Z"
   }
 ]
