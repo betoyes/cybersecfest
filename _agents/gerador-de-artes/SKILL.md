@@ -168,8 +168,8 @@ Construir prompt seguindo o foco do layout:
 
 **LAYOUT N — Acento Diagonal**
 - Imagem cobre TODA a tela (object-position: top right)
-- Overlay: `linear-gradient(160deg, rgba(2,5,10,0.05) 0%, rgba(2,5,10,0.65) 45%, rgba(2,5,10,0.97) 100%)`
-- Barra diagonal decorativa: `div` posicionado absolutely, `width: 3px, height: 180px`, cor `#14A8F4`, `top: 40%, left: 36px`, rotacionado `rotate(-15deg)`
+- Overlay (5 paradas, médio): `linear-gradient(155deg, rgba(2,5,10,0.05) 0%, rgba(2,5,10,0.35) 30%, rgba(2,5,10,0.72) 55%, rgba(2,5,10,0.94) 80%, rgba(2,5,10,0.97) 100%)` — topo direito visível, escurece progressivamente até inferior esquerdo
+- **Sem barra decorativa** — o próprio gradiente diagonal é o acento visual do layout
 - Conteúdo: posicionado no TERÇO INFERIOR ESQUERDO, padding: 0 42px 80px
 - Logo cyberfest: 110px, margin-bottom 20px
 - Headline: Ubuntu 700, 30px, line-height 1.2, max-width 60%, alinhado à esquerda
