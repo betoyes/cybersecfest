@@ -313,5 +313,24 @@
       "data": "2026-06-21"
     }
   ],
-  "historico_aprovacoes": []
+  "historico_aprovacoes": [
+    {
+      "data": "2026-06-21",
+      "tipo_post": "blog",
+      "angulo_resumo": "[TESTE] CISO como gestor de risco financeiro, não de firewalls",
+      "headline": "[TESTE] O risco não é técnico. É financeiro.",
+      "status": "aprovado",
+      "motivo": "",
+      "slug": null
+    },
+    {
+      "data": "2026-06-21",
+      "tipo_post": "blog",
+      "angulo_resumo": "[TESTE] Ângulo técnico sobre vulnerabilidades de rede",
+      "headline": "[TESTE] 73% das empresas têm brechas no firewall",
+      "status": "rejeitado",
+      "motivo": "Tom técnico demais, sem gatilho emocional",
+      "slug": null
+    }
+  ]
 }
