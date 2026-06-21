@@ -1,5 +1,19 @@
 # CybersecFEST — Changelog dos Agentes
 
+## [2.6.0] — 2026-06-21 — Gerador de Artes (Editor Visual)
+### Adicionado
+- Editor Visual embutido em todos os arte.html gerados
+  - 10 controles em tempo real: pos X/Y da imagem, zoom, opacidade da imagem,
+    espelhar horizontal, opacidade do overlay, cor de fundo (picker+hex),
+    estilo do overlay (5 opcoes), peso da fonte, alinhamento do texto
+  - Painel lateral 260px dark UI com secoes por grupo
+  - Oculto no print via @media print
+  - Botoes: Resetar tudo | Exportar / PDF
+- Estrutura CSS-layered obrigatoria: img.art-bg + div.art-overlay + div.art-content
+- Fetch fresco obrigatorio nos PASSOs 6 e 7 antes de qualquer escrita
+- Commit assinado [SuperAgent] em todos os uploads
+
+
 ## [1.0.0] — 2026-06-21 — Guardian (NOVO)
 ### Adicionado
 - Agente Guardian criado do zero (id: 5843f2bd)
