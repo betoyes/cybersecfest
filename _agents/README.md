@@ -1,32 +1,20 @@
-# CybersecFEST — Backup de Agentes
+# CybersecFEST — Índice de Agentes
 
-Backup automático dos skills e configurações dos agentes CREAO.
-**Última atualização:** 2026-06-21
-
----
+**Último backup:** 2026-06-21 19:49 UTC  
+**Motivo:** atualizacao — galeria fix + embed mode arte.html  
 
 ## Agentes Ativos
 
-| Agente | Versão | Camada | Skill | Config |
-|--------|--------|--------|-------|--------|
-| Gerador de Artes | v2.2.0 | Produção | [SKILL.md](gerador-de-artes/SKILL.md) | [config.json](gerador-de-artes/config.json) |
-| Pipeline Orquestrador | v1.1.0 | Operacional | [SKILL.md](pipeline-orquestrador/SKILL.md) | [config.json](pipeline-orquestrador/config.json) |
-| Campaign Planner | v1.0.0 | Estratégica | [SKILL.md](campaign-planner/SKILL.md) | [config.json](campaign-planner/config.json) |
-| Backup de Agentes | v1.0.0 | Infraestrutura | — | — |
+| Agente | ID | SKILL.md | Config |
+|---|---|---|---|
+| Gerador de Artes | 3ae0829d | [SKILL.md](gerador-de-artes/SKILL.md) | [config.json](gerador-de-artes/config.json) |
+| Campaign Planner | e4b59707 | [SKILL.md](campaign-planner/SKILL.md) | [config.json](campaign-planner/config.json) |
+| Pipeline Orquestrador | 86597381 | [SKILL.md](pipeline-orquestrador/SKILL.md) | [config.json](pipeline-orquestrador/config.json) |
 
-## Arquitetura
+## Sessão 2026-06-21 noite
+- Galeria corrigida: iframes com arte.html?embed nos cards e modal
+- arte.html: suporte a modo embed (esconde editor e topbar)
+- Diagnóstico: thumb.png = apenas fundo IA (pendência v2.7.0)
 
-```
-Campaign Planner v1.0   →   Orquestrador v1.1   →   Gerador de Artes v2.2
-  (Camada Estratégica)       (Camada Operacional)     (Camada de Produção)
-  planeja o mês              executa por post          publica a arte
-       │                           │                         │
-       └──── alimenta ────► temas.json ◄──── atualiza ───────┘
-```
-
-## Histórico de versões
-
+## Changelog
 Ver [CHANGELOG.md](CHANGELOG.md)
-
----
-*Gerado automaticamente pelo Backup de Agentes*
