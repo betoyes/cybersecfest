@@ -391,20 +391,7 @@
     transition: opacity 0.4s;
   }
 
-  /* iframe composto escalado no card */
-  .card-iframe-wrap {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .card-iframe-wrap iframe {
-    width: 540px;
-    height: 675px;
-    border: none;
-    pointer-events: none;
-    transform-origin: top left;
-    display: block;
-  }
+
   .card-thumb-fallback {
     position: absolute;
     inset: 0;
@@ -1017,7 +1004,7 @@
       <button class="btn-toggle-panel" id="btn-toggle-panel" onclick="toggleModalPanel()" title="Expandir / recolher painel">◀ Legenda</button>
       <div class="modal-art-box" id="modal-art-box">
         <div class="modal-art-scaler" id="modal-art-scaler">
-          <iframe id="modal-iframe" src="" scrolling="no" tabindex="-1" style="width:540px;height:675px;border:none;display:block;pointer-events:none;"></iframe>
+          <img id="modal-img" src="" alt="Arte" style="width:100%;height:100%;object-fit:contain;display:block;">
         </div>
       </div>
     </div>
@@ -1174,7 +1161,7 @@ function renderGrid(artes) {
     return `
     <div class="card" data-slug="${arte.slug}" onclick="window.location.href='artes/${arte.slug}/arte.html'" style="cursor:pointer">
       <div class="card-thumb" data-card-thumb>
-        <div class="card-iframe-wrap"><iframe src="artes/${arte.slug}/arte.html" loading="lazy" scrolling="no" tabindex="-1"></iframe></div>
+        <img class="card-thumb-img" src="artes/${arte.slug}/thumb.png" alt="${arte.headline}" loading="lazy" onerror="this.style.opacity=0">
         <div class="card-badge">${TIPO_LABELS[arte.tipo] || arte.tipo}</div>
         ${arte.layout ? `<div class="card-layout-badge">${arte.layout}</div>` : ''}
         <span class="card-date-badge">${date}</span>
@@ -1189,37 +1176,6 @@ function renderGrid(artes) {
     </div>`;
   }).join('');
 
-  // escalar iframes dos cards
-  requestAnimationFrame(scaleAllCardIframes);
-}
-
-const EMBED_CSS = '.ep,.badge-layout,.ci,.toolbar{display:none!important}body,html{overflow:hidden;background:transparent}';
-
-function hideEditorPanel(iframe) {
-  try {
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    if (!doc || !doc.head) return;
-    if (doc.querySelector('#__embed_css')) return;
-    const s = doc.createElement('style');
-    s.id = '__embed_css';
-    s.textContent = EMBED_CSS;
-    doc.head.appendChild(s);
-  } catch(e) {}
-}
-
-function scaleAllCardIframes() {
-  document.querySelectorAll('[data-card-thumb]').forEach(thumb => {
-    const iframe = thumb.querySelector('iframe');
-    if (!iframe) return;
-    const w = thumb.offsetWidth || thumb.getBoundingClientRect().width;
-    if (w > 0) iframe.style.transform = `scale(${w / 540})`;
-    // injetar CSS se já carregou
-    if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
-      hideEditorPanel(iframe);
-    } else {
-      iframe.addEventListener('load', () => { hideEditorPanel(iframe); const ww = thumb.offsetWidth || thumb.getBoundingClientRect().width; if (ww>0) iframe.style.transform=`scale(${ww/540})`; }, { once: true });
-    }
-  });
 }
 
 
@@ -1365,12 +1321,11 @@ function scaleModalArt() {
 
 function openModal(slug, arte) {
   const modal = document.getElementById('modal');
-  const iframe = document.getElementById('modal-iframe');
+  const img = document.getElementById('modal-img');
 
-  // Carregar arte.html composto no modal
-  iframe.src = '';
-  iframe.onload = () => { hideEditorPanel(iframe); scaleModalArt(); };
-  setTimeout(() => { iframe.src = 'artes/' + slug + '/arte.html'; }, 10);
+  // Usar thumb.png (render composto: fundo + overlay + texto)
+  img.src = '';
+  setTimeout(() => { img.src = 'artes/' + slug + '/thumb.png'; scaleModalArt(); }, 10);
   document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
@@ -1483,12 +1438,12 @@ async function downloadArtePNG(slug) {
 function closeModal(e) {
   if (!e || e.target === document.getElementById('modal')) {
     document.getElementById('modal').classList.remove('open');
-    var mif=document.getElementById('modal-iframe'); if(mif) mif.src='';
+    var mi=document.getElementById('modal-img'); if(mi) mi.src='';
   }
 }
 
 loadArtes();
-window.addEventListener('resize', () => { scaleModalArt(); scaleAllCardIframes(); });
+window.addEventListener('resize', () => { scaleModalArt(); });
 </script>
 </body>
 </html>
