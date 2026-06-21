@@ -1,7 +1,7 @@
 {
   "id": "3ae0829d-a05d-471a-aace-7af889c28ccb",
   "name": "CybersecFEST — Gerador de Artes",
-  "version": "2.4.0",
-  "description": "Gera posts completos: imagem IA + HTML + legenda A/B (escolha antes do upload) + publicação GitHub com rotação de layouts e rastreabilidade total.",
+  "version": "2.6.0",
+  "description": "Gera posts completos: imagem IA + HTML com Editor Visual embutido (10 controles) + legenda A/B (escolha antes do upload) + publicacao GitHub com rotacao de layouts e rastreabilidade total.",
   "updatedAt": "2026-06-21"
 }
