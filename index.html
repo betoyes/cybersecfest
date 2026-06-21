@@ -534,10 +534,85 @@
     text-transform: uppercase;
   }
 
+  /* ── TABLET ── */
+  @media (max-width: 900px) {
+    header { padding: 20px 28px; }
+    .hero { padding: 48px 28px 28px; }
+    .filters-row, .stats, .gallery-section, footer { padding-left: 28px; padding-right: 28px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  }
+
+  /* ── MOBILE ── */
   @media (max-width: 640px) {
-    header, .hero, .filters-row, .stats, .gallery-section, footer { padding-left: 20px; padding-right: 20px; }
-    .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .stats { gap: 16px; }
+    /* layout base */
+    header { padding: 16px 18px; }
+    .logo-top { font-size: 12px; }
+    .logo-fest { font-size: 17px; }
+    .header-right { display: none; }
+
+    .hero { padding: 36px 18px 20px; }
+    .hero h1 { font-size: clamp(22px, 7vw, 30px); }
+    .hero-sub { font-size: 13px; }
+
+    .filters-row, .stats, .gallery-section, footer { padding-left: 18px; padding-right: 18px; }
+
+    /* stats: empilha em 2 colunas */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .stat-sep { display: none; }
+    .stat-num { font-size: 22px; }
+
+    /* filtros: scroll horizontal sem quebrar linha */
+    .filters-group {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .filters-group::-webkit-scrollbar { display: none; }
+    .filter-btn { white-space: nowrap; flex-shrink: 0; }
+
+    /* grid: 1 coluna em tela muito pequena, 2 em normal */
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 380px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* card body menor */
+    .card-body { padding: 10px 12px 12px; }
+    .card-headline { font-size: 11px; -webkit-line-clamp: 2; }
+    .btn-action { font-size: 8px; padding: 4px 8px; }
+
+    /* modal full-screen */
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal {
+      max-width: 100%;
+      width: 100%;
+      max-height: 92vh;
+      border-radius: 12px 12px 0 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+    }
+    .modal iframe { height: 320px; }
+    .modal-body { padding: 16px 18px 28px; }
+    .modal-headline { font-size: 13px; }
+    .modal-actions { gap: 8px; }
+    .btn-action { padding: 6px 10px; }
+    .modal-meta-key { min-width: 72px; font-size: 8px; }
+    .modal-meta-val { font-size: 11px; }
+    .modal-caption-text { font-size: 11px; max-height: 140px; }
+
+    /* footer simplificado */
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 18px; }
+    .footer-eco { justify-content: center; flex-wrap: wrap; gap: 12px; }
   }
 </style>
 </head>
