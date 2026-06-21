@@ -1,40 +1,63 @@
 # CybersecFEST — Changelog dos Agentes
 
+## [1.0.0] — 2026-06-21 — Guardian (NOVO)
+### Adicionado
+- Agente Guardian criado do zero (id: 5843f2bd)
+- Agendado diariamente às 07h BRT (1h antes do Orquestrador)
+- Verificação de integridade: artes.json, temas.json, index.html, AGENTS.md
+- Auditoria de commits: classifica SuperAgent vs agentes externos vs manuais
+- Backup INTEGRAL do repo primário em betoyes/cybersecfest-backup (privado)
+  - Estratégia por SHA: só envia arquivos novos ou modificados
+  - Cria repo de backup automaticamente se não existir
+- Relatório de saúde 🟢/🟡/🔴 a cada execução
+- Log histórico persistido em _guardian/health-log.json (últimas 30 execuções)
+
 ## [2.5.0] — 2026-06-21 — Gerador de Artes
 ### Adicionado
-- PROTOCOLO MULTI-AGENTE: fetch fresco obrigatório nos PASSOs 6 e 7 (GET SHA antes de qualquer PUT)
-- Prefixo `[SuperAgent]` em todas as mensagens de commit
-- PASSO -1 agora exibe os últimos 5 commits do repo para detectar mudanças de agentes parceiros
-- AGENTS.md criado no repo com protocolo completo de colaboração
+- Protocolo Multi-Agente: fetch fresco obrigatório nos PASSOs 6 e 7
+- Commits assinados com prefixo [SuperAgent]
+- PASSO -1 exibe últimos 5 commits do repo (detecta agentes externos)
+- AGENTS.md publicado no repo com protocolo completo
 
 ## [2.4.0] — 2026-06-21 — Gerador de Artes
 ### Adicionado
 - Variação A/B de legenda (FOMO vs aspiracional) com pausa antes do upload
-- Campo `legenda_variante` em artes.json
-- Botão toggle ◀▶ Legenda no modal da galeria
+- Campo legenda_variante em artes.json
+- Botão toggle Legenda no modal da galeria
 
 ## [1.5.2] — 2026-06-21 — Pipeline Orquestrador
 ### Adicionado
-- Preview ao vivo (card visual markdown com tabela + painel unificado de decisão)
+- Preview ao vivo (card visual markdown + painel unificado de decisão)
 
 ## [1.5.1] — 2026-06-21 — Pipeline Orquestrador
 ### Adicionado
 - Histórico de aprovações (temas.json v3.1.0 com historico_aprovacoes[])
-- PASSO 5.5 no Orquestrador
 
 ## [1.5.0] — 2026-06-21 — Pipeline Orquestrador
 ### Adicionado
-- Filtro anti-repetição (Mapa de Bloqueio no PASSO 1, consulta no PASSO 4)
+- Filtro anti-repetição (Mapa de Bloqueio PASSO 1, consulta PASSO 4)
 
 ## [2.3.0] — 2026-06-21 — Gerador de Artes
 ### Adicionado
-- Layout N (Acento Diagonal) — gradiente 155deg 5 paradas, sem barra diagonal
+- Layout N (Acento Diagonal)
 - Logos ecossistema padronizados em height 33px
 
+---
+
 ## Stack Atual
-| Agente | ID | Versão |
-|--------|-----|--------|
-| Gerador de Artes | 3ae0829d | v2.5.0 |
-| Pipeline Orquestrador | 86597381 | v1.5.2 |
-| Campaign Planner | e4b59707 | v1.0.0 |
-| Protocolo Multi-Agente | AGENTS.md | v1.0.0 |
+
+| Agente | ID | Versão | Agendamento |
+|--------|-----|--------|------------|
+| Guardian | 5843f2bd | v1.0.0 | Diário 07h BRT |
+| Gerador de Artes | 3ae0829d | v2.5.0 | Sob demanda (via Orquestrador) |
+| Pipeline Orquestrador | 86597381 | v1.5.2 | Seg/Qua/Sex 08h BRT |
+| Campaign Planner | e4b59707 | v1.0.0 | Sob demanda |
+
+## Infraestrutura
+
+| Item | Detalhe |
+|------|---------|
+| Repo primário | betoyes/cybersecfest (público, Vercel deploy) |
+| Repo backup | betoyes/cybersecfest-backup (privado, Guardian) |
+| Protocolo multi-agente | AGENTS.md na raiz do repo primário |
+| Schedule IDs | Guardian: fd0b7248 \| Orquestrador: 92a1dbf6 |
