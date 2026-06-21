@@ -63,8 +63,21 @@ Usar como **referência de contexto** — não como roteiro:
 - `evento` — dados confirmados (cidades, histórico, realizadores)
 - `regras_editoriais` — tom, frases âncora, proibições
 - `patrocinio` — benefícios das cotas (posts de patrocinador)
-- `historico_recente[]` — evitar repetir ângulos recentes
+- `historico_recente[]` — evitar repetir layouts recentes
 - `rotacao_layouts` — qual layout usar
+- `historico_aprovacoes[]` — calibração criativa baseada em aprovações e rejeições reais
+
+**Calibração via historico_aprovacoes:**
+Antes de criar os briefings, analisar as últimas 10 entradas de `historico_aprovacoes`:
+- Entradas com `status: "rejeitado"` → identificar o padrão do ângulo e **não repetir** estrutura similar
+- Entradas com `status: "aprovado"` → reforçar o tipo de gancho, ritmo e abordagem que funcionou
+- Se `motivo` preenchido → considerar como instrução editorial direta
+
+Exemplo de leitura:
+```
+[rejeitado] "ângulo técnico sem conexão emocional" → evitar dados isolados sem tensão humana
+[aprovado]  "contraste antes/depois"               → formato funciona, pode variar o tema
+```
 
 **Os `temas[]` são INSPIRAÇÃO temática. O agente cria ângulos próprios.**
 
@@ -128,10 +141,46 @@ POR QUÊ ESTE ÂNGULO: <1 frase justificando a escolha criativa>
 - [ ] CTA presente e urgente
 - [ ] Sem clichês visuais ou textuais
 - [ ] Ângulo diferente dos últimos publicados (checar historico_recente)
+- [ ] Ângulo não repete padrão rejeitado recentemente (checar historico_aprovacoes)
 - [ ] Patrocinador: benefícios sem preços
 
 ### PASSO 5 — Apresentar e Aguardar Aprovação
 Apresentar os N briefings. **Não avançar sem confirmação explícita.**
+
+Ao apresentar cada briefing, incluir bloco de aprovação:
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ APROVAR este briefing → responda: "aprovar [N]"
+❌ REJEITAR este briefing → responda: "rejeitar [N]: [motivo]"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### PASSO 5.5 — Registrar Decisão no historico_aprovacoes
+
+Após receber aprovação ou rejeição do usuário, **antes de chamar o Gerador de Artes**, registrar no `historico_aprovacoes` do `temas.json` via GitHub API:
+
+**Estrutura do registro:**
+```json
+{
+  "data": "<ISO-8601 data de hoje>",
+  "tipo_post": "<tipo_post do briefing>",
+  "angulo_resumo": "<1 frase descrevendo o ângulo/gancho usado>",
+  "headline": "<headline exata do briefing>",
+  "status": "aprovado" | "rejeitado",
+  "motivo": "<texto livre do usuário — vazio se aprovado sem comentário>",
+  "slug": "<preencher após geração — deixar null por ora>"
+}
+```
+
+**Procedimento de escrita:**
+1. GET `temas.json` para obter SHA atual
+2. Parsear JSON, adicionar novo objeto ao array `historico_aprovacoes`
+3. Manter máximo de **50 entradas** (remover mais antigas se necessário)
+4. PUT via GitHub API com mensagem: `feat(aprovacoes): registrar [status] briefing [tipo_post] [data]`
+5. Confirmar SHA retornado
+
+**Para cada briefing apresentado** (aprovado OU rejeitado) → registrar separadamente.
+**Se o usuário não der motivo na rejeição** → `motivo: ""` (vazio, não inventar).
 
 ### PASSO 6 — Chamar Gerador de Artes Automaticamente
 ```
