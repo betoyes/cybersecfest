@@ -1,0 +1,135 @@
+{
+  "id": "86597381-a3ca-4970-ac69-7f84368800cb",
+  "name": "CybersecFEST — Pipeline Orquestrador",
+  "description": "Orquestra o fluxo completo de ponta a ponta: lê calendário + banco de temas, gera briefings, aguarda aprovação humana e chama o Gerador de Artes automaticamente — sem etapa manual de copiar inputs.",
+  "formFields": [
+    {
+      "id": "modo",
+      "name": "Modo de Execução",
+      "type": "select",
+      "options": [
+        {
+          "label": "Automático — usar calendário editorial + banco de temas",
+          "value": "calendario"
+        },
+        {
+          "label": "Manual — eu escolho tema e tipo",
+          "value": "manual"
+        }
+      ],
+      "required": true,
+      "default_value": "calendario"
+    },
+    {
+      "id": "tipo_post_manual",
+      "name": "Tipo de Post (manual)",
+      "type": "select",
+      "options": [
+        {
+          "label": "Conteúdo / Blog",
+          "value": "blog"
+        },
+        {
+          "label": "Campanha / Evento",
+          "value": "evento"
+        },
+        {
+          "label": "Palestrante / Embaixador",
+          "value": "palestrante"
+        },
+        {
+          "label": "Patrocinador",
+          "value": "patrocinador"
+        },
+        {
+          "label": "Cidade / Localidade",
+          "value": "cidade"
+        }
+      ],
+      "required": false
+    },
+    {
+      "id": "tema_manual",
+      "name": "Tema / Assunto (manual)",
+      "type": "textarea",
+      "example": "Zero Trust — por que nunca confiar é a única política segura",
+      "required": false
+    },
+    {
+      "id": "cidade",
+      "name": "Cidade / Edição",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "nome_palestrante",
+      "name": "Nome do Palestrante / Patrocinador",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "cargo_empresa",
+      "name": "Cargo e Empresa",
+      "type": "string",
+      "required": false
+    },
+    {
+      "id": "instrucoes_extras",
+      "name": "Instruções Adicionais",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "id": "quantidade_opcoes",
+      "name": "Variações de Briefing",
+      "type": "select",
+      "options": [
+        {
+          "label": "1 opção",
+          "value": "1"
+        },
+        {
+          "label": "2 opções",
+          "value": "2"
+        },
+        {
+          "label": "3 opções",
+          "value": "3"
+        }
+      ],
+      "required": true,
+      "default_value": "2"
+    },
+    {
+      "id": "formato",
+      "name": "Formato da Arte",
+      "type": "select",
+      "options": [
+        {
+          "label": "Feed Vertical — 1080×1350 (Instagram)",
+          "value": "feed_vertical"
+        },
+        {
+          "label": "Feed Quadrado — 1080×1080",
+          "value": "feed_quadrado"
+        },
+        {
+          "label": "LinkedIn Horizontal — 1200×628",
+          "value": "linkedin"
+        }
+      ],
+      "required": true,
+      "default_value": "feed_vertical"
+    }
+  ],
+  "persistFields": [
+    "modo",
+    "tipo_post_manual",
+    "tema_manual",
+    "cidade",
+    "formato",
+    "briefings_gerados",
+    "layout_selecionado",
+    "tema_usado"
+  ]
+}
