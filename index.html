@@ -815,6 +815,16 @@
     .modal-art-box { max-height: 280px; }
     .modal-body { padding: 14px 18px 28px; max-height: 45vh; }
   }
+
+  /* dashboard — variantes de cor por dimensão */
+  .dash-bar-fill { background: var(--blue); height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+  .dash-bar-fill.layout { background: #37D5FF; }
+  .dash-bar-fill.cidade { background: #A78BFA; }
+  .dash-bar-fill.ab { background: #34D399; }
+  .dash-num { font-size: 11px; font-weight: 700; color: var(--blue); min-width: 18px; text-align: right; }
+  .dash-num.layout { color: #37D5FF; }
+  .dash-num.cidade { color: #A78BFA; }
+  .dash-num.ab { color: #34D399; }
 </style>
 </head>
 <body>
@@ -952,6 +962,14 @@
     <div class="dashboard-panel">
       <div class="dashboard-panel-title">Por Layout</div>
       <div id="dash-layout"></div>
+    </div>
+    <div class="dashboard-panel">
+      <div class="dashboard-panel-title">Por Cidade</div>
+      <div id="dash-cidade"></div>
+    </div>
+    <div class="dashboard-panel">
+      <div class="dashboard-panel-title">Legenda A/B</div>
+      <div id="dash-ab"></div>
     </div>
   </div>
 </div>
@@ -1137,16 +1155,62 @@ function renderDashboard() {
   const layoutMax = layoutEntries.length ? layoutEntries[0][1] : 1;
   if (layoutEntries.length === 0) {
     document.getElementById('dash-layout').innerHTML = '<span style="font-size:11px;color:var(--muted);font-style:italic">Nenhuma arte com layout registrado.</span>';
-    return;
+  } else {
+    document.getElementById('dash-layout').innerHTML = layoutEntries
+      .map(([l, n]) => `
+        <div class="dash-row" onclick="setLayoutFilter('${l}', document.querySelector('[data-layout=${l}]') || document.querySelector('[data-layout=all]'))">
+          <span class="dash-label">${l}<span class="dash-label-sub">${LAYOUT_NAMES[l] || ''}</span></span>
+          <div class="dash-bar-wrap">
+            <div class="dash-bar-track"><div class="dash-bar-fill layout" style="width:${Math.round(n/layoutMax*100)}%"></div></div>
+          </div>
+          <span class="dash-num layout">${n}</span>
+        </div>`).join('');
   }
-  document.getElementById('dash-layout').innerHTML = layoutEntries
-    .map(([l, n]) => `
-      <div class="dash-row" onclick="setLayoutFilter('${l}', document.querySelector('[data-layout=${l}]') || document.querySelector('[data-layout=all]'))">
-        <span class="dash-label">${l}<span class="dash-label-sub">${LAYOUT_NAMES[l] || ''}</span></span>
+
+  // por cidade
+  const cidadeFreq = {};
+  allArtes.forEach(a => {
+    const c = (a.cidade || '').trim();
+    if (!c) return;
+    // separar "BH e SP" em entradas individuais
+    c.split(/\s+e\s+/i).map(x => x.trim()).filter(Boolean).forEach(x => {
+      cidadeFreq[x] = (cidadeFreq[x] || 0) + 1;
+    });
+  });
+  const cidadeEntries = Object.entries(cidadeFreq).sort((a,b) => b[1]-a[1]);
+  const cidadeMax = cidadeEntries.length ? cidadeEntries[0][1] : 1;
+  if (cidadeEntries.length === 0) {
+    document.getElementById('dash-cidade').innerHTML = '<span style="font-size:11px;color:var(--muted);font-style:italic">Nenhuma arte com cidade registrada.</span>';
+  } else {
+    document.getElementById('dash-cidade').innerHTML = cidadeEntries
+      .map(([c, n]) => `
+        <div class="dash-row" onclick="setCidadeFilter('${c}', document.querySelector('[data-cidade=\'${c}\']') || document.querySelector('[data-cidade=all]'))">
+          <span class="dash-label">${c}</span>
+          <div class="dash-bar-wrap">
+            <div class="dash-bar-track"><div class="dash-bar-fill cidade" style="width:${Math.round(n/cidadeMax*100)}%"></div></div>
+          </div>
+          <span class="dash-num cidade">${n}</span>
+        </div>`).join('');
+  }
+
+  // por variante A/B
+  const abFreq = { A: 0, B: 0, '—': 0 };
+  allArtes.forEach(a => {
+    const v = a.legenda_variante;
+    if (v === 'A' || v === 'B') abFreq[v]++;
+    else abFreq['—']++;
+  });
+  const abMax = Math.max(abFreq.A, abFreq.B, abFreq['—']) || 1;
+  const AB_LABELS = { A: '🅰️ FOMO / Urgência', B: '🅱️ Aspiracional', '—': 'Sem variante' };
+  document.getElementById('dash-ab').innerHTML = Object.entries(abFreq)
+    .filter(([, n]) => n > 0)
+    .map(([v, n]) => `
+      <div class="dash-row">
+        <span class="dash-label">${AB_LABELS[v]}</span>
         <div class="dash-bar-wrap">
-          <div class="dash-bar-track"><div class="dash-bar-fill layout" style="width:${Math.round(n/layoutMax*100)}%"></div></div>
+          <div class="dash-bar-track"><div class="dash-bar-fill ab" style="width:${Math.round(n/abMax*100)}%"></div></div>
         </div>
-        <span class="dash-num layout">${n}</span>
+        <span class="dash-num ab">${n}</span>
       </div>`).join('');
 }
 
