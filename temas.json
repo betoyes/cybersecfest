@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "versao": "3.0.0",
-    "descricao": "Banco de temas do CybersecFEST 2026 — tom aspiracional, FOMO, gatilhos de pertencimento",
+    "versao": "3.1.0",
+    "descricao": "Banco de temas do CybersecFEST 2026 — tom aspiracional, FOMO, gatilhos de pertencimento. v3.1.0: historico_aprovacoes adicionado.",
     "atualizado_em": "2026-06-21",
     "fonte": "Mídia Kit oficial CybersecFEST 2026"
   },
@@ -312,5 +312,6 @@
       "slug": "blog-1782058840735",
       "data": "2026-06-21"
     }
-  ]
+  ],
+  "historico_aprovacoes": []
 }
