@@ -52,5 +52,35 @@
     "image_path": "artes/blog-1782058840735/thumb.png",
     "html_path": "artes/blog-1782058840735/arte.html",
     "created_at": "2026-06-21T15:45:00.000Z"
+  },
+  {
+    "slug": "blog-1782078052179",
+    "tipo": "blog",
+    "headline": "Segurança não é custo. É posição.",
+    "palavras_azuis": "posição",
+    "subtitulo": "Quem entende isso já reservou o lugar.",
+    "cidade": "",
+    "formato": "feed_vertical",
+    "layout": "N",
+    "legenda": "Enquanto uns ainda debatem, outros já decidiram.\n\nA diferença entre quem lidera e quem acompanha não está no orçamento.\nEstá em quem enxergou segurança como vantagem competitiva antes dos outros.\n\nNo CybersecFEST 2026, essa conversa já foi feita.\nAgora ela vai acontecer de novo — com você ou sem você.\n\n🔹 200+ líderes de cyber, tecnologia e negócios.\n🔹 27 parceiros estratégicos.\n🔹 BH e SP, 2026.\n\nVagas limitadas.\n\n✅ Garanta o seu lugar agora: [link]\n\n#CybersecFEST #CybersecFEST2026 #CyberSecurity #CISO #Liderança #Segurança #IAM #CIO #CTO #EventoExecutivo",
+    "legenda_variante": "A",
+    "image_path": "artes/blog-1782078052179/thumb.png",
+    "html_path": "artes/blog-1782078052179/arte.html",
+    "created_at": "2026-06-21T21:42:41Z"
+  },
+  {
+    "slug": "blog-1782078052229",
+    "tipo": "blog",
+    "headline": "A conversa que muda a estratégia não está no relatório.",
+    "palavras_azuis": "conversa|estratégia",
+    "subtitulo": "Ela acontece numa sala com as pessoas certas.",
+    "cidade": "",
+    "formato": "feed_vertical",
+    "layout": "N",
+    "legenda": "Existe um nível de conversa que nenhum relatório consegue reproduzir.\n\nÉ o que acontece quando um CISO senta com um CIO que enfrentou o mesmo ataque.\nQuando um especialista de IAM compartilha o que nenhum vendor vai te contar.\nQuando 200 líderes do mesmo nível param para debater o que realmente está acontecendo.\n\nEsse é o CybersecFEST.\n\n🔹 Não é evento de palestras. É confraria de líderes.\n🔹 O que transforma não está no palco — está nas margens: o café, o almoço, o fim do dia.\n🔹 São Paulo e Belo Horizonte, 2026.\n\nVagas limitadas.\n\n✅ Faça parte: [link]\n\n#CybersecFEST #CybersecFEST2026 #CyberSecurity #CISO #Networking #CIO #CEO #IAM #Estratégia #ConfrariaCyber",
+    "legenda_variante": "B",
+    "image_path": "artes/blog-1782078052229/thumb.png",
+    "html_path": "artes/blog-1782078052229/arte.html",
+    "created_at": "2026-06-21T21:42:41Z"
   }
 ]
