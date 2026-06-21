@@ -373,6 +373,63 @@
     display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
   }
 
+  /* ── MODAL CAPTION ── */
+  .modal-caption-wrap {
+    margin-top: 20px;
+    border-top: 1px solid rgba(20,168,244,0.1);
+    padding-top: 16px;
+  }
+  .modal-caption-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .modal-caption-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .btn-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(20,168,244,0.08);
+    border: 1px solid rgba(20,168,244,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-copy:hover { background: rgba(20,168,244,0.18); border-color: var(--blue); }
+  .btn-copy.copied { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
+  .modal-caption-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--lavanda);
+    white-space: pre-wrap;
+    background: rgba(6,18,34,0.6);
+    border: 1px solid rgba(20,168,244,0.08);
+    padding: 14px 16px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: 'Montserrat', monospace;
+  }
+  .modal-caption-empty {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--muted);
+    padding: 10px 0;
+  }
+
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid rgba(20,168,244,0.08);
@@ -464,6 +521,13 @@
     <div class="modal-body">
       <div class="modal-headline" id="modal-headline"></div>
       <div class="modal-actions" id="modal-actions"></div>
+      <div class="modal-caption-wrap" id="modal-caption-wrap">
+        <div class="modal-caption-header">
+          <span class="modal-caption-label">📋 Legenda / Caption</span>
+          <button class="btn-copy" id="btn-copy" onclick="copyCaption()">⎘ Copiar</button>
+        </div>
+        <div class="modal-caption-text" id="modal-caption-text"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -562,7 +626,31 @@ function openModal(slug, arte) {
     <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ Download HTML</a>
     ${arte.image_path ? '<a class="btn-action btn-dl" href="'+arte.image_path+'" download="cybersecfest_'+slug+'.png">↓ Download PNG</a>' : ''}
   `;
+  // Caption / Legenda
+  const captionEl = document.getElementById('modal-caption-text');
+  const wrapEl = document.getElementById('modal-caption-wrap');
+  const copyBtn = document.getElementById('btn-copy');
+  copyBtn.classList.remove('copied');
+  copyBtn.textContent = '⎘ Copiar';
+  if (arte.legenda) {
+    captionEl.textContent = arte.legenda;
+    wrapEl.style.display = '';
+  } else {
+    captionEl.innerHTML = '<span class="modal-caption-empty">Legenda não disponível para esta arte.</span>';
+    wrapEl.style.display = '';
+  }
   modal.classList.add('open');
+}
+
+function copyCaption() {
+  const text = document.getElementById('modal-caption-text').textContent;
+  if (!text.trim()) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btn-copy');
+    btn.classList.add('copied');
+    btn.textContent = '✓ Copiado!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘ Copiar'; }, 2000);
+  });
 }
 
 function closeModal(e) {
