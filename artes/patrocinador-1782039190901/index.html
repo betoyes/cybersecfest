@@ -9,6 +9,7 @@
 <meta property="og:image" content="thumb.png">
 <meta property="og:url" content="https://cybersecfest.vercel.app/artes/patrocinador-1782039190901/">
 <meta name="twitter:card" content="summary_large_image">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -78,7 +79,7 @@
     </div>
     <div class="art-downloads">
       <a class="btn btn-primary" href="arte.html" target="_blank">↗ Ver Arte</a>
-      <a class="btn btn-secondary" href="thumb.png" download="cybersecfest-patrocinador.png">↓ PNG</a>
+      <button class="btn btn-secondary" id="btn-dl-png" onclick="downloadArtePNG()">↓ PNG</button>
     </div>
   </div>
   <div class="info-side">
@@ -143,6 +144,36 @@ window.addEventListener('DOMContentLoaded', function() {
     if (fallback) fallback.style.opacity = '0';
   };
 });
+
+async function downloadArtePNG() {
+  const btn = document.getElementById('btn-dl-png');
+  const original = btn.textContent;
+  btn.textContent = '⏳ Gerando...';
+  btn.disabled = true;
+  try {
+    const iframe = document.getElementById('art-iframe');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    const artCanvas = iframeDoc.querySelector('.art-canvas');
+    if (!artCanvas) throw new Error('Canvas não encontrado');
+    const canvas = await html2canvas(artCanvas, {
+      useCORS: true,
+      allowTaint: true,
+      scale: 2,
+      backgroundColor: '#02050A',
+      logging: false,
+    });
+    const link = document.createElement('a');
+    link.download = 'cybersecfest_patrocinador-1782039190901.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    window.open('arte.html', '_blank');
+    alert('Para salvar: clique com botão direito na arte e "Salvar imagem como".');
+  } finally {
+    btn.textContent = original;
+    btn.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
