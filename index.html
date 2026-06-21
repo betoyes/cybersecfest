@@ -1440,40 +1440,6 @@ function closeModal(e) {
   }
 }
 
-function setupLazyFrames() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const inner = entry.target;
-      if (inner.querySelector('iframe')) return; // já carregado
-
-      const outer = inner.parentElement;
-      const cardThumb = outer.parentElement;
-      const containerW = cardThumb.offsetWidth || 260;
-      const scale = containerW / 540;
-
-      inner.style.transform = `scale(${scale})`;
-
-      const iframe = document.createElement('iframe');
-      iframe.src = inner.dataset.src;
-      iframe.setAttribute('loading', 'lazy');
-      iframe.setAttribute('scrolling', 'no');
-      iframe.style.overflow = 'hidden';
-      iframe.onload = () => {
-        // esconder fallback quando iframe carregou
-        const img = outer.querySelector('.card-thumb-img');
-        if (img) img.style.opacity = '0';
-        const fb = outer.querySelector('.card-thumb-fallback');
-        if (fb) fb.style.opacity = '0';
-      };
-      inner.appendChild(iframe);
-      observer.unobserve(inner);
-    });
-  }, { rootMargin: '200px' });
-
-  document.querySelectorAll('.card-frame-inner[data-src]').forEach(el => observer.observe(el));
-}
-
 loadArtes();
 </script>
 </body>
