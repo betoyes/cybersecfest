@@ -17,6 +17,8 @@
     --white:   #F6F8FF;
     --lavanda: #D5D8ED;
     --muted:   #94A0B8;
+    --border:  rgba(20,168,244,0.12);
+    --glow:    rgba(20,168,244,0.07);
   }
 
   body {
@@ -26,211 +28,346 @@
     min-height: 100vh;
   }
 
-  /* ── HEADER ── */
+  /* ══════════════════════════════════
+     HEADER
+  ══════════════════════════════════ */
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28px 48px;
-    border-bottom: 1px solid rgba(20,168,244,0.12);
-    background: rgba(6,18,34,0.6);
-    backdrop-filter: blur(12px);
+    padding: 0 48px;
+    height: 64px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(2,5,10,0.85);
+    backdrop-filter: blur(16px);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
   }
 
-  .logo { display: flex; flex-direction: column; gap: 2px; }
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    text-decoration: none;
+  }
   .logo-top {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.14em;
+    font-size: 15px;
+    letter-spacing: 0.12em;
     color: var(--white);
     text-transform: uppercase;
+  }
+  .logo-divider {
+    width: 1px; height: 16px;
+    background: rgba(20,168,244,0.3);
+    align-self: center;
   }
   .logo-fest {
     font-family: 'Montserrat', sans-serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 20px;
-    letter-spacing: 0.06em;
+    font-size: 15px;
+    letter-spacing: 0.08em;
     color: var(--blue);
+  }
+
+  .header-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 6px var(--blue);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  .live-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .live-count {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    background: rgba(20,168,244,0.1);
+    border: 1px solid rgba(20,168,244,0.2);
+    padding: 2px 8px;
   }
 
   .header-right {
-    font-size: 12px;
+    font-size: 10px;
     color: var(--muted);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  /* ── HERO ── */
+  /* ══════════════════════════════════
+     HERO — dois painéis
+  ══════════════════════════════════ */
   .hero {
-    padding: 64px 48px 40px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
     position: relative;
     overflow: hidden;
   }
-  .hero::before {
+
+  /* glow decorativo */
+  .hero::after {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(20,168,244,0.07) 0%, transparent 70%);
+    top: -80px; right: 320px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(20,168,244,0.055) 0%, transparent 68%);
     pointer-events: none;
   }
 
-  .hero-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    color: var(--blue);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 700;
-    font-size: clamp(28px, 4vw, 48px);
-    line-height: 1.1;
-    color: var(--white);
-    text-transform: uppercase;
-  }
-  .hero h1 span { color: var(--blue); }
-  .hero-sub {
-    margin-top: 16px;
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--lavanda);
-    font-style: italic;
-    max-width: 480px;
-  }
-
-  /* ── FILTERS ── */
-  .filters {
-    padding: 0 48px 32px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filter-label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-right: 4px;
-  }
-  .filter-btn {
-    background: rgba(20,168,244,0.08);
-    border: 1px solid rgba(20,168,244,0.2);
-    color: var(--lavanda);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background: rgba(20,168,244,0.18);
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-
-  /* ── FILTROS CIDADE ── */
-  .filters-row {
-    padding: 0 48px 32px;
+  .hero-left {
+    padding: 56px 56px 48px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  .filters-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filter-sep {
-    width: 100%;
-    height: 1px;
-    background: rgba(20,168,244,0.06);
-    margin: 2px 0;
-  }
-  .filter-btn-cidade {
-    background: rgba(0,183,255,0.06);
-    border-color: rgba(0,183,255,0.18);
-    color: var(--muted);
-  }
-  .filter-btn-cidade:hover, .filter-btn-cidade.active {
-    background: rgba(0,183,255,0.15);
-    border-color: var(--elec);
-    color: var(--elec);
+    justify-content: center;
+    gap: 20px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
 
-  /* ── STATS ── */
-  .stats {
-    padding: 0 48px 40px;
+  .hero-overline {
     display: flex;
-    gap: 32px;
+    align-items: center;
+    gap: 10px;
   }
-  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .hero-overline-line {
+    width: 24px; height: 1px;
+    background: var(--blue);
+  }
+  .hero-overline-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 3.5vw, 52px);
+    line-height: 1.05;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .hero-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 420px;
+    font-style: italic;
+  }
+
+  /* painel de stats */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    background: rgba(6,18,34,0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px 36px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .stat-card:last-child { border-bottom: none; }
+  .stat-card:hover { background: rgba(20,168,244,0.04); }
+
   .stat-num {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 36px;
     color: var(--blue);
     line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
   }
   .stat-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .stat-sub {
+    font-size: 11px;
+    color: var(--lavanda);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* ══════════════════════════════════
+     TOOLBAR DE FILTROS
+  ══════════════════════════════════ */
+  .toolbar {
+    position: sticky;
+    top: 64px;
+    z-index: 150;
+    background: rgba(2,5,10,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+  }
+
+  .toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 52px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toolbar-row::-webkit-scrollbar { display: none; }
+
+  .toolbar-sep-v {
+    width: 1px;
+    height: 20px;
+    background: rgba(246,248,255,0.08);
+    flex-shrink: 0;
+    margin: 0 6px;
+  }
+
+  .toolbar-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    background: transparent;
+    border: 1px solid rgba(20,168,244,0.15);
+    color: var(--muted);
+    font-family: 'Montserrat', sans-serif;
     font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .filter-btn:hover {
+    background: rgba(20,168,244,0.1);
+    border-color: rgba(20,168,244,0.4);
+    color: var(--lavanda);
+  }
+  .filter-btn.active {
+    background: rgba(20,168,244,0.15);
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .filter-btn-cidade { border-color: rgba(0,183,255,0.12); }
+  .filter-btn-cidade:hover { border-color: rgba(0,183,255,0.4); color: var(--elec); background: rgba(0,183,255,0.08); }
+  .filter-btn-cidade.active { border-color: var(--elec); color: var(--elec); background: rgba(0,183,255,0.12); }
+
+  .toolbar-result-count {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 0.15em;
     color: var(--muted);
     text-transform: uppercase;
+    white-space: nowrap;
+    padding-left: 16px;
+    border-left: 1px solid var(--border);
   }
-  .stat-sep {
-    width: 1px;
-    background: rgba(246,248,255,0.08);
-    align-self: stretch;
+  .toolbar-result-count span { color: var(--blue); }
+
+  /* segunda linha de filtros (cidades) */
+  .toolbar-row-2 {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    height: 44px;
+    border-top: 1px solid rgba(20,168,244,0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toolbar-row-2::-webkit-scrollbar { display: none; }
+  .toolbar-row-2.visible { display: flex; }
+
+  /* ══════════════════════════════════
+     GALERIA
+  ══════════════════════════════════ */
+  .gallery-wrap {
+    padding: 36px 48px 80px;
   }
 
-  /* ── GRID ── */
-  .gallery-section { padding: 0 48px 80px; }
-  .section-title {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 11px;
+  .gallery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .gallery-title {
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     color: var(--muted);
     text-transform: uppercase;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(246,248,255,0.06);
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
   }
 
   /* ── CARD ── */
   .card {
     background: var(--navy);
-    border: 1px solid rgba(20,168,244,0.1);
     overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
     cursor: pointer;
-    text-decoration: none;
     display: block;
     position: relative;
+    transition: z-index 0s;
   }
-  .card:hover {
-    border-color: rgba(20,168,244,0.45);
-    transform: translateY(-4px);
-  }
+  .card:hover { z-index: 1; }
 
   .card-thumb {
     width: 100%;
@@ -242,9 +379,10 @@
   .card-thumb img {
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 0.4s;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    display: block;
   }
-  .card:hover .card-thumb img { transform: scale(1.04); }
+  .card:hover .card-thumb img { transform: scale(1.06); }
 
   .card-thumb-fallback {
     width: 100%; height: 100%;
@@ -253,59 +391,52 @@
     justify-content: center;
     background: linear-gradient(135deg, #061222 0%, #062B52 100%);
     color: var(--blue);
-    font-size: 48px;
+    font-size: 40px;
   }
 
-  .card-badge {
+  /* overlay escuro bottom-up ao hover */
+  .card-overlay {
     position: absolute;
-    top: 12px; left: 12px;
-    background: rgba(2,5,10,0.85);
-    border: 1px solid rgba(20,168,244,0.35);
-    color: var(--blue);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    backdrop-filter: blur(4px);
+    inset: 0;
+    background: linear-gradient(to top,
+      rgba(2,5,10,0.96) 0%,
+      rgba(2,5,10,0.5) 40%,
+      rgba(2,5,10,0.0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 18px;
+    gap: 12px;
   }
+  .card:hover .card-overlay { opacity: 1; }
 
-  .card-body { padding: 16px 18px 18px; }
-
-  .card-headline {
+  .overlay-headline {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
     font-size: 13px;
-    line-height: 1.3;
+    line-height: 1.25;
     color: var(--white);
     text-transform: uppercase;
-    margin-bottom: 8px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 12px;
-  }
-  .card-date {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-  .card-actions {
+  .overlay-actions {
     display: flex;
     gap: 8px;
   }
+
   .btn-action {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 4px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-family: 'Montserrat', sans-serif;
     font-size: 9px;
     font-weight: 700;
@@ -316,156 +447,178 @@
     transition: all 0.2s;
     cursor: pointer;
     background: transparent;
+    flex: 1;
   }
   .btn-view {
-    border-color: rgba(20,168,244,0.3);
-    color: var(--blue);
-  }
-  .btn-view:hover {
-    background: rgba(20,168,244,0.12);
     border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(2,5,10,0.6);
   }
+  .btn-view:hover { background: rgba(20,168,244,0.2); }
   .btn-dl {
-    border-color: rgba(246,248,255,0.15);
+    border-color: rgba(246,248,255,0.25);
     color: var(--lavanda);
+    background: rgba(2,5,10,0.6);
   }
-  .btn-dl:hover {
-    background: rgba(246,248,255,0.07);
-    border-color: rgba(246,248,255,0.35);
+  .btn-dl:hover { background: rgba(246,248,255,0.1); }
+
+  /* badge fixo no topo */
+  .card-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(2,5,10,0.8);
+    border: 1px solid rgba(20,168,244,0.3);
+    color: var(--blue);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    backdrop-filter: blur(6px);
+    z-index: 2;
   }
+
+  /* data no canto inferior direito (sem hover) */
+  .card-date-badge {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    font-size: 9px;
+    color: rgba(246,248,255,0.45);
+    letter-spacing: 0.05em;
+    z-index: 2;
+    transition: opacity 0.3s;
+  }
+  .card:hover .card-date-badge { opacity: 0; }
 
   /* ── EMPTY STATE ── */
   .empty {
     grid-column: 1/-1;
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
     color: var(--muted);
   }
-  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
+  .empty-icon { font-size: 44px; margin-bottom: 20px; opacity: 0.3; }
   .empty h3 {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     margin-bottom: 8px;
     color: var(--lavanda);
   }
-  .empty p { font-size: 13px; font-style: italic; }
+  .empty p { font-size: 12px; font-style: italic; }
 
-  /* ── MODAL ── */
+  /* ══════════════════════════════════
+     MODAL — dois painéis no desktop
+  ══════════════════════════════════ */
   .modal-overlay {
     display: none;
     position: fixed; inset: 0;
-    background: rgba(2,5,10,0.92);
-    backdrop-filter: blur(8px);
-    z-index: 200;
+    background: rgba(2,5,10,0.94);
+    backdrop-filter: blur(10px);
+    z-index: 300;
     align-items: center;
     justify-content: center;
     padding: 24px;
   }
   .modal-overlay.open { display: flex; }
+
   .modal {
     background: var(--navy);
-    border: 1px solid rgba(20,168,244,0.2);
-    max-width: 640px;
+    border: 1px solid rgba(20,168,244,0.18);
     width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-width: 900px;
+    max-height: 88vh;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    overflow: hidden;
     position: relative;
   }
-  .modal-close {
-    position: absolute; top: 16px; right: 16px;
-    background: rgba(20,168,244,0.1);
-    border: 1px solid rgba(20,168,244,0.2);
-    color: var(--blue);
-    width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 18px;
-    z-index: 10;
-  }
-  .modal iframe {
-    width: 100%;
-    height: 480px;
-    border: none;
-    display: block;
-  }
-  .modal-body { padding: 20px 24px 24px; }
-  .modal-headline {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-  .modal-actions {
-    display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+
+  .modal-preview {
+    background: var(--black);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
-  /* ── MODAL CAPTION ── */
-  .modal-caption-wrap {
-    margin-top: 20px;
-    border-top: 1px solid rgba(20,168,244,0.1);
-    padding-top: 16px;
+  .modal iframe {
+    flex: 1;
+    width: 100%;
+    border: none;
+    display: block;
+    min-height: 0;
   }
-  .modal-caption-header {
+
+  .modal-info {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 88vh;
   }
-  .modal-caption-label {
-    font-size: 10px;
+
+  .modal-info-header {
+    padding: 22px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(20,168,244,0.08);
+    border: 1px solid rgba(20,168,244,0.18);
+    color: var(--muted);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { color: var(--white); border-color: var(--blue); background: rgba(20,168,244,0.15); }
+
+  .modal-badge {
+    display: inline-flex;
+    font-size: 8px;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--blue);
-  }
-  .btn-copy {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 4px 12px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
     background: rgba(20,168,244,0.08);
-    border: 1px solid rgba(20,168,244,0.25);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-copy:hover { background: rgba(20,168,244,0.18); border-color: var(--blue); }
-  .btn-copy.copied { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
-  .modal-caption-text {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--lavanda);
-    white-space: pre-wrap;
-    background: rgba(6,18,34,0.6);
-    border: 1px solid rgba(20,168,244,0.08);
-    padding: 14px 16px;
-    max-height: 200px;
-    overflow-y: auto;
-    font-family: 'Montserrat', monospace;
-  }
-  .modal-caption-empty {
-    font-size: 11px;
-    font-style: italic;
-    color: var(--muted);
-    padding: 10px 0;
+    border: 1px solid rgba(20,168,244,0.2);
+    padding: 3px 8px;
+    margin-bottom: 10px;
   }
 
-  /* ── MODAL META INFO ── */
-  .modal-meta-wrap {
-    margin-top: 16px;
+  .modal-headline {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.25;
+    text-transform: uppercase;
+    color: var(--white);
+    padding-right: 36px;
+  }
+
+  .modal-body {
+    padding: 18px 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .modal-actions {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+
+  /* meta */
+  .modal-meta-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
   .modal-meta-row {
     display: flex;
@@ -473,229 +626,232 @@
     align-items: flex-start;
   }
   .modal-meta-key {
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--muted);
-    min-width: 90px;
+    min-width: 82px;
     padding-top: 2px;
     flex-shrink: 0;
   }
   .modal-meta-val {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 400;
     color: var(--lavanda);
     line-height: 1.5;
     flex: 1;
   }
-  .modal-meta-val .palavra-azul {
-    color: var(--blue);
-    font-weight: 600;
-  }
+  .modal-meta-val .palavra-azul { color: var(--blue); font-weight: 600; }
   .modal-meta-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(20,168,244,0.08);
-    border: 1px solid rgba(20,168,244,0.2);
-    color: var(--blue);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 3px 8px;
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(20,168,244,0.08); border: 1px solid rgba(20,168,244,0.2);
+    color: var(--blue); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.06em; padding: 2px 7px;
   }
-  .modal-divider {
-    height: 1px;
-    background: rgba(20,168,244,0.07);
-    margin: 14px 0 0;
-  }
+  .modal-divider { height: 1px; background: rgba(20,168,244,0.07); }
 
-  /* ── FOOTER ── */
+  /* caption */
+  .modal-caption-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .modal-caption-header {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-caption-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--blue);
+  }
+  .btn-copy {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+    background: rgba(20,168,244,0.08); border: 1px solid rgba(20,168,244,0.22);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-copy:hover { background: rgba(20,168,244,0.18); border-color: var(--blue); }
+  .btn-copy.copied { color: #4ade80; border-color: #4ade80; background: rgba(74,222,128,0.08); }
+
+  .modal-caption-text {
+    font-size: 11px; font-weight: 400; line-height: 1.75;
+    color: var(--lavanda); white-space: pre-wrap;
+    background: rgba(6,18,34,0.6); border: 1px solid rgba(20,168,244,0.07);
+    padding: 12px 14px; max-height: 180px; overflow-y: auto;
+  }
+  .modal-caption-empty { font-size: 11px; font-style: italic; color: var(--muted); }
+
+  /* ══════════════════════════════════
+     FOOTER
+  ══════════════════════════════════ */
   footer {
-    border-top: 1px solid rgba(20,168,244,0.08);
-    padding: 28px 48px;
+    border-top: 1px solid var(--border);
+    padding: 20px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .footer-text {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-  .footer-eco {
-    display: flex; gap: 20px;
-  }
+  .footer-text { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; }
+  .footer-eco { display: flex; gap: 24px; }
   .footer-eco span {
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: rgba(246,248,255,0.25);
-    text-transform: uppercase;
+    font-size: 8px; letter-spacing: 0.15em;
+    color: rgba(246,248,255,0.2); text-transform: uppercase;
   }
 
-  /* ── TABLET ── */
+  /* ══════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════ */
   @media (max-width: 900px) {
-    header { padding: 20px 28px; }
-    .hero { padding: 48px 28px 28px; }
-    .filters-row, .stats, .gallery-section, footer { padding-left: 28px; padding-right: 28px; }
-    .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    header { padding: 0 28px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 40px 28px 32px; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-right { flex-direction: row; }
+    .stat-card { border-bottom: none; border-right: 1px solid var(--border); }
+    .stat-card:last-child { border-right: none; }
+    .toolbar { padding: 0 28px; }
+    .gallery-wrap { padding: 28px 28px 60px; }
+    footer { padding: 18px 28px; }
+    .modal { grid-template-columns: 1fr; max-width: 520px; }
+    .modal-preview { height: 340px; border-right: none; border-bottom: 1px solid var(--border); }
+    .modal-info { max-height: 50vh; }
   }
 
-  /* ── MOBILE ── */
   @media (max-width: 640px) {
-    /* layout base */
-    header { padding: 16px 18px; }
-    .logo-top { font-size: 12px; }
-    .logo-fest { font-size: 17px; }
-    .header-right { display: none; }
-
-    .hero { padding: 36px 18px 20px; }
-    .hero h1 { font-size: clamp(22px, 7vw, 30px); }
-    .hero-sub { font-size: 13px; }
-
-    .filters-row, .stats, .gallery-section, footer { padding-left: 18px; padding-right: 18px; }
-
-    /* stats: empilha em 2 colunas */
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .stat-sep { display: none; }
-    .stat-num { font-size: 22px; }
-
-    /* filtros: scroll horizontal sem quebrar linha */
-    .filters-group {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-bottom: 4px;
-    }
-    .filters-group::-webkit-scrollbar { display: none; }
-    .filter-btn { white-space: nowrap; flex-shrink: 0; }
-
-    /* grid: 1 coluna em tela muito pequena, 2 em normal */
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    @media (max-width: 380px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    /* card body menor */
-    .card-body { padding: 10px 12px 12px; }
-    .card-headline { font-size: 11px; -webkit-line-clamp: 2; }
-    .btn-action { font-size: 8px; padding: 4px 8px; }
-
-    /* modal full-screen */
+    header { padding: 0 18px; height: 56px; }
+    .header-center { display: none; }
+    .hero-left { padding: 32px 18px 24px; }
+    .hero-right { display: none; }
+    .toolbar { top: 56px; padding: 0 18px; }
+    .toolbar-result-count { display: none; }
+    .gallery-wrap { padding: 20px 18px 56px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    footer { padding: 16px 18px; flex-direction: column; gap: 10px; text-align: center; }
+    .footer-eco { justify-content: center; flex-wrap: wrap; gap: 12px; }
     .modal-overlay { padding: 0; align-items: flex-end; }
     .modal {
-      max-width: 100%;
-      width: 100%;
+      grid-template-columns: 1fr;
+      max-width: 100%; width: 100%;
       max-height: 92vh;
       border-radius: 12px 12px 0 0;
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
+      border-left: none; border-right: none; border-bottom: none;
     }
-    .modal iframe { height: 320px; }
-    .modal-body { padding: 16px 18px 28px; }
-    .modal-headline { font-size: 13px; }
-    .modal-actions { gap: 8px; }
-    .btn-action { padding: 6px 10px; }
-    .modal-meta-key { min-width: 72px; font-size: 8px; }
-    .modal-meta-val { font-size: 11px; }
-    .modal-caption-text { font-size: 11px; max-height: 140px; }
-
-    /* footer simplificado */
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 18px; }
-    .footer-eco { justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .modal-preview { height: 260px; }
+    .modal-info { max-height: 60vh; }
+    .modal-body { padding: 14px 16px 24px; }
   }
 </style>
 </head>
 <body>
 
+<!-- ══ HEADER ══ -->
 <header>
   <div class="logo">
-    <span class="logo-top">cybersec</span>
+    <span class="logo-top">Cybersec</span>
+    <div class="logo-divider"></div>
     <span class="logo-fest">fest</span>
   </div>
-  <span class="header-right">Galeria de Artes · 2026</span>
+  <div class="header-center">
+    <div class="live-dot"></div>
+    <span class="live-label">Ao vivo</span>
+    <span class="live-count" id="header-count">—</span>
+  </div>
+  <span class="header-right">Portal · 2026</span>
 </header>
 
-<section class="hero">
-  <div class="hero-label">Portal Interno</div>
-  <h1>HISTÓRICO DE<br><span>ARTES</span> GERADAS</h1>
-  <p class="hero-sub">Todos os posts criados pelo agente CybersecFEST — visualize, baixe e gerencie.</p>
-</section>
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-overline">
+      <div class="hero-overline-line"></div>
+      <span class="hero-overline-text">Portal Interno de Criação</span>
+    </div>
+    <h1 class="hero-title">Galeria de<br><em>Artes</em> Geradas</h1>
+    <p class="hero-desc">Todos os posts criados pelo agente CybersecFEST — visualize, copie a legenda e compartilhe.</p>
+  </div>
 
-<div class="stats" id="stats-bar">
-  <div class="stat">
-    <span class="stat-num" id="total-count">0</span>
-    <span class="stat-label">Artes Geradas</span>
-  </div>
-  <div class="stat-sep"></div>
-  <div class="stat">
-    <span class="stat-num" id="tipo-count">—</span>
-    <span class="stat-label">Tipo mais comum</span>
-  </div>
-  <div class="stat-sep"></div>
-  <div class="stat">
-    <span class="stat-num" id="last-date">—</span>
-    <span class="stat-label">Última arte</span>
+  <div class="hero-right" id="stats-bar">
+    <div class="stat-card">
+      <div class="stat-num" id="total-count">—</div>
+      <div class="stat-label">Artes Geradas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="tipo-count">—</div>
+      <div class="stat-label">Tipo mais frequente</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="last-date">—</div>
+      <div class="stat-label">Última arte</div>
+    </div>
   </div>
 </div>
 
-<div class="filters-row" id="filters-bar">
-  <div class="filters-group" id="filters-tipo">
-    <span class="filter-label">Tipo:</span>
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Todos</button>
-    <button class="filter-btn" data-filter="blog" onclick="setFilter('blog', this)">Blog</button>
-    <button class="filter-btn" data-filter="evento" onclick="setFilter('evento', this)">Evento</button>
-    <button class="filter-btn" data-filter="palestrante" onclick="setFilter('palestrante', this)">Palestrante</button>
-    <button class="filter-btn" data-filter="patrocinador" onclick="setFilter('patrocinador', this)">Patrocinador</button>
-    <button class="filter-btn" data-filter="cidade" onclick="setFilter('cidade', this)">Cidade</button>
+<!-- ══ TOOLBAR ══ -->
+<div class="toolbar" id="filters-bar">
+  <div class="toolbar-row">
+    <span class="toolbar-label">Tipo</span>
+    <div class="toolbar-sep-v"></div>
+    <div id="filters-tipo" style="display:contents">
+      <button class="filter-btn active" data-filter="all"         onclick="setFilter('all', this)">Todos</button>
+      <button class="filter-btn"        data-filter="blog"        onclick="setFilter('blog', this)">Blog</button>
+      <button class="filter-btn"        data-filter="evento"      onclick="setFilter('evento', this)">Evento</button>
+      <button class="filter-btn"        data-filter="palestrante" onclick="setFilter('palestrante', this)">Palestrante</button>
+      <button class="filter-btn"        data-filter="patrocinador"onclick="setFilter('patrocinador', this)">Patrocinador</button>
+      <button class="filter-btn"        data-filter="cidade"      onclick="setFilter('cidade', this)">Cidade</button>
+    </div>
+    <div class="toolbar-result-count" id="result-count"><span id="result-num">0</span> artes</div>
   </div>
-  <div class="filter-sep"></div>
-  <div class="filters-group" id="filters-cidade" style="display:none">
-    <span class="filter-label">🏙️ Cidade:</span>
+  <div class="toolbar-row-2" id="filters-cidade">
+    <span class="toolbar-label">Cidade</span>
+    <div class="toolbar-sep-v"></div>
     <button class="filter-btn filter-btn-cidade active" data-cidade="all" onclick="setCidadeFilter('all', this)">Todas</button>
   </div>
 </div>
 
-<section class="gallery-section">
-  <div class="section-title">Artes · Mais recentes primeiro</div>
+<!-- ══ GALERIA ══ -->
+<div class="gallery-wrap">
+  <div class="gallery-header">
+    <span class="gallery-title">Mais recentes primeiro</span>
+  </div>
   <div class="grid" id="grid">
     <div class="empty">
-      <div class="empty-icon">🎨</div>
+      <div class="empty-icon">✦</div>
       <h3>Nenhuma arte ainda</h3>
       <p>As artes geradas pelo agente aparecerão aqui automaticamente.</p>
     </div>
   </div>
-</section>
+</div>
 
+<!-- ══ MODAL ══ -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
   <div class="modal" id="modal-inner">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <iframe id="modal-iframe" src=""></iframe>
-    <div class="modal-body">
-      <div class="modal-headline" id="modal-headline"></div>
-      <div class="modal-meta-wrap" id="modal-meta"></div>
-      <div class="modal-actions" id="modal-actions"></div>
-      <div class="modal-caption-wrap" id="modal-caption-wrap">
-        <div class="modal-caption-header">
-          <span class="modal-caption-label">📋 Legenda / Caption</span>
-          <button class="btn-copy" id="btn-copy" onclick="copyCaption()">⎘ Copiar</button>
+    <div class="modal-preview">
+      <iframe id="modal-iframe" src=""></iframe>
+    </div>
+    <div class="modal-info">
+      <div class="modal-info-header">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-badge" id="modal-badge"></div>
+        <div class="modal-headline" id="modal-headline"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-actions" id="modal-actions"></div>
+        <div class="modal-meta-wrap" id="modal-meta"></div>
+        <div class="modal-caption-wrap" id="modal-caption-wrap">
+          <div class="modal-caption-header">
+            <span class="modal-caption-label">📋 Legenda pronta</span>
+            <button class="btn-copy" id="btn-copy" onclick="copyCaption()">⎘ Copiar</button>
+          </div>
+          <div class="modal-caption-text" id="modal-caption-text"></div>
         </div>
-        <div class="modal-caption-text" id="modal-caption-text"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <span class="footer-text">© CybersecFEST 2026 — a maior confraria estratégica de Cyber Security do Brasil</span>
   <div class="footer-eco">
@@ -711,11 +867,8 @@ let currentFilter = 'all';
 let currentCidade = 'all';
 
 const TIPO_LABELS = {
-  blog: 'Blog',
-  evento: 'Evento',
-  palestrante: 'Palestrante',
-  patrocinador: 'Patrocinador',
-  cidade: 'Cidade'
+  blog: 'Blog', evento: 'Evento', palestrante: 'Palestrante',
+  patrocinador: 'Patrocinador', cidade: 'Cidade'
 };
 
 async function loadArtes() {
@@ -732,12 +885,26 @@ async function loadArtes() {
   }
 }
 
+function renderStats() {
+  const total = allArtes.length;
+  document.getElementById('total-count').textContent = total;
+  document.getElementById('header-count').textContent = total + ' arte' + (total !== 1 ? 's' : '');
+  document.getElementById('result-num').textContent = total;
+  if (total > 0) {
+    const freq = {};
+    allArtes.forEach(a => freq[a.tipo] = (freq[a.tipo] || 0) + 1);
+    const top = Object.entries(freq).sort((a,b) => b[1]-a[1])[0];
+    document.getElementById('tipo-count').textContent = TIPO_LABELS[top[0]] || top[0];
+    const d = new Date(allArtes[0].created_at);
+    document.getElementById('last-date').textContent = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+  }
+}
+
 function renderCidadeFilters() {
   const cidades = [...new Set(allArtes.map(a => a.cidade).filter(c => c && c.trim() !== ''))].sort();
   const bar = document.getElementById('filters-cidade');
-  if (cidades.length === 0) { bar.style.display = 'none'; return; }
-  bar.style.display = 'flex';
-  // remove botões velhos exceto o "Todas"
+  if (cidades.length === 0) { bar.classList.remove('visible'); return; }
+  bar.classList.add('visible');
   [...bar.querySelectorAll('[data-cidade]:not([data-cidade="all"])')].forEach(b => b.remove());
   cidades.forEach(cidade => {
     const btn = document.createElement('button');
@@ -760,44 +927,31 @@ function applyFilters() {
   let filtered = allArtes;
   if (currentFilter !== 'all') filtered = filtered.filter(a => a.tipo === currentFilter);
   if (currentCidade !== 'all') filtered = filtered.filter(a => a.cidade === currentCidade);
+  document.getElementById('result-num').textContent = filtered.length;
   renderGrid(filtered);
-}
-
-function renderStats() {
-  document.getElementById('total-count').textContent = allArtes.length;
-  if (allArtes.length > 0) {
-    // most common type
-    const freq = {};
-    allArtes.forEach(a => freq[a.tipo] = (freq[a.tipo] || 0) + 1);
-    const top = Object.entries(freq).sort((a,b) => b[1]-a[1])[0];
-    document.getElementById('tipo-count').textContent = TIPO_LABELS[top[0]] || top[0];
-    // last date
-    const d = new Date(allArtes[0].created_at);
-    document.getElementById('last-date').textContent = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
-  }
 }
 
 function renderGrid(artes) {
   const grid = document.getElementById('grid');
   if (artes.length === 0) {
-    grid.innerHTML = '<div class="empty"><div class="empty-icon">🎨</div><h3>Nenhuma arte encontrada</h3><p>Tente outro filtro.</p></div>';
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">✦</div><h3>Nenhuma arte encontrada</h3><p>Tente outro filtro.</p></div>';
     return;
   }
   grid.innerHTML = artes.map(arte => {
-    const thumb = arte.image_path ? `<img src="${arte.image_path}" alt="${arte.headline}" loading="lazy">` : '<div class="card-thumb-fallback">♔</div>';
+    const thumb = arte.image_path
+      ? `<img src="${arte.image_path}" alt="${arte.headline}" loading="lazy">`
+      : '<div class="card-thumb-fallback">✦</div>';
     const date = new Date(arte.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: '2-digit' });
     return `
     <div class="card" onclick="openModal('${arte.slug}', `+JSON.stringify(arte)+`)">
       <div class="card-thumb">
         ${thumb}
         <div class="card-badge">${TIPO_LABELS[arte.tipo] || arte.tipo}</div>
-      </div>
-      <div class="card-body">
-        <div class="card-headline">${arte.headline}</div>
-        <div class="card-meta">
-          <span class="card-date">${date}</span>
-          <div class="card-actions">
-            <a class="btn-action btn-view" href="artes/${arte.slug}/" target="_blank" onclick="event.stopPropagation()">Ver</a>
+        <span class="card-date-badge">${date}</span>
+        <div class="card-overlay">
+          <div class="overlay-headline">${arte.headline}</div>
+          <div class="overlay-actions">
+            <a class="btn-action btn-view" href="artes/${arte.slug}/" target="_blank" onclick="event.stopPropagation()">↗ Ver</a>
             <a class="btn-action btn-dl" href="artes/${arte.slug}/arte.html" download onclick="event.stopPropagation()">↓ HTML</a>
           </div>
         </div>
@@ -810,67 +964,41 @@ function setFilter(tipo, btn) {
   currentFilter = tipo;
   document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  // mostrar filtro de cidade só quando tipo 'cidade' selecionado, ou sempre se tiver cidades
   const cidadeBar = document.getElementById('filters-cidade');
   const temCidades = allArtes.some(a => a.cidade && a.cidade.trim() !== '');
-  if (temCidades) cidadeBar.style.display = 'flex';
+  if (temCidades) cidadeBar.classList.add('visible');
   applyFilters();
 }
 
 function openModal(slug, arte) {
   const modal = document.getElementById('modal');
   document.getElementById('modal-iframe').src = 'artes/' + slug + '/arte.html';
+  document.getElementById('modal-badge').textContent = TIPO_LABELS[arte.tipo] || arte.tipo;
   document.getElementById('modal-headline').textContent = arte.headline;
   document.getElementById('modal-actions').innerHTML = `
     <a class="btn-action btn-view" href="artes/${slug}/" target="_blank">↗ Página da arte</a>
-    <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ Download HTML</a>
-    ${arte.image_path ? '<a class="btn-action btn-dl" href="'+arte.image_path+'" download="cybersecfest_'+slug+'.png">↓ Download PNG</a>' : ''}
+    <a class="btn-action btn-dl" href="artes/${slug}/arte.html" download="cybersecfest_${slug}.html">↓ HTML</a>
+    ${arte.image_path ? `<a class="btn-action btn-dl" href="${arte.image_path}" download="cybersecfest_${slug}.png">↓ PNG</a>` : ''}
   `;
-  // ── META INFO (subtítulo, palavras em azul, cidade, formato) ──
   const metaEl = document.getElementById('modal-meta');
-  const metaRows = [];
-  if (arte.subtitulo) {
-    metaRows.push(`<div class="modal-meta-row">
-      <span class="modal-meta-key">Subtítulo</span>
-      <span class="modal-meta-val">${arte.subtitulo}</span>
-    </div>`);
-  }
+  const rows = [];
+  if (arte.subtitulo) rows.push(`<div class="modal-meta-row"><span class="modal-meta-key">Subtítulo</span><span class="modal-meta-val">${arte.subtitulo}</span></div>`);
   if (arte.palavras_azuis) {
-    const highlighted = arte.palavras_azuis.split(',').map(p => `<span class="palavra-azul">${p.trim()}</span>`).join(', ');
-    metaRows.push(`<div class="modal-meta-row">
-      <span class="modal-meta-key">Palavras em azul</span>
-      <span class="modal-meta-val">${highlighted}</span>
-    </div>`);
+    const hl = arte.palavras_azuis.split(',').map(p => `<span class="palavra-azul">${p.trim()}</span>`).join(', ');
+    rows.push(`<div class="modal-meta-row"><span class="modal-meta-key">Palavras azuis</span><span class="modal-meta-val">${hl}</span></div>`);
   }
-  if (arte.cidade) {
-    metaRows.push(`<div class="modal-meta-row">
-      <span class="modal-meta-key">Cidade</span>
-      <span class="modal-meta-val"><span class="modal-meta-badge">🏙️ ${arte.cidade}</span></span>
-    </div>`);
-  }
+  if (arte.cidade) rows.push(`<div class="modal-meta-row"><span class="modal-meta-key">Cidade</span><span class="modal-meta-val"><span class="modal-meta-badge">🏙️ ${arte.cidade}</span></span></div>`);
   if (arte.formato) {
-    const fmtLabel = { feed_vertical: 'Feed Vertical', feed_quadrado: 'Feed Quadrado', stories: 'Stories', linkedin: 'LinkedIn' }[arte.formato] || arte.formato;
-    metaRows.push(`<div class="modal-meta-row">
-      <span class="modal-meta-key">Formato</span>
-      <span class="modal-meta-val">${fmtLabel}</span>
-    </div>`);
+    const fmt = {feed_vertical:'Feed Vertical',feed_quadrado:'Feed Quadrado',stories:'Stories',linkedin:'LinkedIn'}[arte.formato] || arte.formato;
+    rows.push(`<div class="modal-meta-row"><span class="modal-meta-key">Formato</span><span class="modal-meta-val">${fmt}</span></div>`);
   }
-  metaEl.innerHTML = metaRows.length
-    ? metaRows.join('') + '<div class="modal-divider"></div>'
-    : '';
-  // ── CAPTION / LEGENDA ──
+  metaEl.innerHTML = rows.length ? rows.join('') + '<div class="modal-divider"></div>' : '';
   const captionEl = document.getElementById('modal-caption-text');
-  const wrapEl = document.getElementById('modal-caption-wrap');
   const copyBtn = document.getElementById('btn-copy');
   copyBtn.classList.remove('copied');
   copyBtn.textContent = '⎘ Copiar';
-  if (arte.legenda) {
-    captionEl.textContent = arte.legenda;
-    wrapEl.style.display = '';
-  } else {
-    captionEl.innerHTML = '<span class="modal-caption-empty">Legenda não disponível para esta arte.</span>';
-    wrapEl.style.display = '';
-  }
+  captionEl.textContent = arte.legenda || '';
+  if (!arte.legenda) captionEl.innerHTML = '<span class="modal-caption-empty">Legenda não disponível para esta arte.</span>';
   modal.classList.add('open');
 }
 
@@ -879,8 +1007,7 @@ function copyCaption() {
   if (!text.trim()) return;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('btn-copy');
-    btn.classList.add('copied');
-    btn.textContent = '✓ Copiado!';
+    btn.classList.add('copied'); btn.textContent = '✓ Copiado!';
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘ Copiar'; }, 2000);
   });
 }
